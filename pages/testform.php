@@ -7,7 +7,7 @@
           	include '../scripts/connection.php';
               
               $sql = ("SELECT * FROM pages WHERE ID = '333'");
-              $result=mysqli_query($db,$sql);
+              $result=mysqli_query($db,$sql) or die("unable to select records");
 
               echo '<form method="post" id="form"><table>';
                              
@@ -15,9 +15,9 @@
                while($row = mysqli_fetch_array($result)){ 
               	$caption = $row['title'];	      
               	$id=$row['ID'];
-                  echo '<tr><td class="label"><span>ID:</span></td><td><input id="id" value="'.$id.'"name="id"/></td></tr>';
+                  echo '<tr><td class="label"><span>ID:</span></td><td><input id="id" value="'.$id.'"name="id" readonly/></td></tr>';
                   echo '<tr><td class="label"><span>Nazov:</span></td><td><input id="title" name="title" value="'.$caption.'"/></td></tr>'; 
-                  echo '<tr><td class="label"><span>Popis:</span></td><td><textarea name="description" id="trumbowyg-demo" cols="30" rows="10" readonly>' . $row['content'] . '</textarea></td></tr>';             
+                  echo '<tr><td class="label"><span>Popis:</span></td><td><textarea name="description" id="trumbowyg-demo" cols="30" rows="10">' . $row['content'] . '</textarea></td></tr>';             
               }
                echo '</table></form>';
                echo '<button id="btn">Send Data</button>';    
