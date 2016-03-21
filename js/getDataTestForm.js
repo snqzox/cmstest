@@ -7,7 +7,7 @@ $(document).ready(function(){
 	alert(vid);
 	alert(vtitle);
 	alert(vdescription);
-	if(vid !='' && vtitle !='' && vdescription !=''){
+	if(vid !='' && (vtitle !='' || vdescription !='')){
 	
 	$.post("scripts/update.php", //Required URL of the page on server
 	{ // Data Sending With Request To Server
@@ -20,6 +20,6 @@ $(document).ready(function(){
 	//$("#form")[0].reset();
 	});
 	}
-	else {alert("data empty")};
+	else {alert("data emptyIIIII")};
 	});
 	});

@@ -15,9 +15,10 @@
                while($row = mysqli_fetch_array($result)){ 
               	$caption = $row['title'];	      
               	$id=$row['ID'];
+
                   echo '<tr><td class="label"><span>IDee:</span></td><td><input id="id" value="'.$id.'"name="id"/></td></tr>';
                   echo '<tr><td class="label"><span>Nazov:</span></td><td><input id="title" name="title" value="'.$caption.'"/></td></tr>'; 
-                  echo '<tr><td class="label"><span>Popis:</span></td><td><textarea name="description" id="trumbowyg-demo" cols="30" rows="10">' . $row['content'] . '</textarea></td></tr>';             
+                  echo '<tr><td class="label"><span>Popis:</span></td><td><div class="content">' . $row['content'] . '</div></td></tr>';             
                   echo '<tr><td class="label"><button id="">Edit</button></td></tr>';             
               	  
               }
