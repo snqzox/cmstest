@@ -4,7 +4,7 @@
 
 
           <?php
-          	include '../scripts/connection.php';
+          	include '../asd/tetetetetete.php';
               
               $sql = ("SELECT * FROM pages");
               $result=mysqli_query($db,$sql);
