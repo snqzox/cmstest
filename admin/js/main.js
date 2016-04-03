@@ -12,12 +12,14 @@ $('ul#menu li').delegate('a', 'click', function() {
 
 $('body').delegate('a', 'click', function() {
 
+if ($(this).hasClass("ajax") ) {  
+
   a = $(this).attr('href');
   window.location.hash = $(this).attr('href');
   console.log(a);
   $( "#content" ).load( a );
   return false;
-});
+}});
 
 var $loading = $('#loading').hide();
 $(document)

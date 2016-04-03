@@ -11,21 +11,28 @@
 </head>
 <body>
 	<h1 style="padding:20px; border-bottom:1px solid #ddd;">Login</h1>
-	<form style="margin:20px;" class="form-basic">
+	<form style="margin:20px;" class="form-basic" action="scripts/authenticate.php" method="POST">
 	<div class="form-group">
 		<label>Meno:</label>
-		<input type="text" class="form-ctrl">
+		<input type="text" class="form-ctrl" name="login">
 	</div>
 	<div class="form-group">
 		<label>Heslo:</label>
-		<input type="password" class="form-ctrl">
+		<input type="password" class="form-ctrl" name="password">
 	</div>
 	<button type="submit" class="btn btn-submit">Login</button>
 	</form>
-
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
 	<script src="js/main.js"></script>
 	<script type="text/javascript" src="js/cs.min.js"></script>
+	<?php
 
+	session_start();
+	if (!empty($_SESSION ['error'])){
+		echo '<span>Nesprávne zadané užívateľské meno alebo heslo!</span>';
+	}
+
+
+	 ?>
 </body>
 </html>
