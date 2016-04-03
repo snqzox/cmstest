@@ -4,7 +4,9 @@
 
 
           <?php
-          	include '../asd/tetetetetete.php';
+
+          	include '../kkksss/45654465.php';
+
               
               $sql = ("SELECT * FROM pages");
               $result=mysqli_query($db,$sql);
