@@ -1,18 +1,16 @@
 <?php 
 			  
  function connect() {
-	$host = "localhost";
-	$username = "root";
-	$password = "";
-	$db_name = "web";
-	$tbl_name = "";
 	
-	$db = @mysql_connect ("$host", "$username", "$password") or die ("cannot connect to DB");
-	@mysql_select_db ("$db_name", $db) or die ("cannot select DB");
+	$user = 'root';
+    $pass = '';
+ 	$db = 'cms';
+    $host = 'localhost';
 
-    mysql_query('SET NAMES \'utf8\'');
-    mysql_query('SET CHARACTER_SET \'utf8\'');
-    return $db;
+   //creating connection do db
+   	$result = new mysqli($host, $user, $pass, $db) or die("Unable to connect to database!");
+ 
+    return $result;
 }
 
 function close_connection($connection, $resultSet){
