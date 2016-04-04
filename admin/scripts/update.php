@@ -53,6 +53,7 @@ switch ($dataid) {
 
 //add codition based on sent data-id attribute from getData.js file
 $result = mysqli_query($resultdb,$sql) or die("Unable to update page ABOUT");
+mysqli_close($resultdb);
 
 /*header('Location: '.$_SERVER['REQUEST_URI']);
 exit();

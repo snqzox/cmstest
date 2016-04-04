@@ -44,5 +44,6 @@ tempor incididunt ut labore.</p>
 					</div>
 					<button class="btn btn-submit" id="btn" data-id="main">Uložit</button>
 				   </form>';
+				   mysqli_close($resultdb);
 
 ?>
