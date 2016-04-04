@@ -25,14 +25,16 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
 	<script src="js/main.js"></script>
 	<script type="text/javascript" src="js/cs.min.js"></script>
-	<?php
+ <div>
+ <?php 
+ session_start();
+ if(!empty($_SESSION['error'])) { echo $_SESSION['error']; }
+	unset($_SESSION['error']);
 
-	session_start();
-	if (!empty($_SESSION ['error'])){
-		echo '<span>Nesprávne zadané užívateľské meno alebo heslo!</span>';
-	}
+ ?>
+
+ </div>
 
 
-	 ?>
 </body>
 </html>
