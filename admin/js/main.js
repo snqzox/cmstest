@@ -20,6 +20,14 @@ if ($(this).hasClass("ajax") ) {
 
 var $loading = $('#loading').hide();
 
+$(document).ready(function(){
+var url      = window.location.href;     // Returns full URL
+var res = url.split("#");
+console.log(res[1]);
+$( "#content" ).load( res[1]);
+  
+});
+
 
 
 $(document)
@@ -44,24 +52,80 @@ $(document)
     $("#btn").click(function(){
      console.log('btn-clicked')
 
+     var vbtnid =  $(this).attr('data-id');
      var vtitle = $("#title").val();
      var vsubtitle = $("#subtitle").val();
      var vcontent = $("#trumbowyg-demo").val();
-     alert(vtitle);
+     var vemail = $("#email").val();
+     var vmobile = $("#mobile").val();
+     var vcompany = $("#company").val();
+     var vaddres = $("#addres").val();
+     var vpsc = $("#psc").val();
+     var vic = $("#ic").val();
+     var vdic = $("#dic").val();
+     
+     /*alert(vtitle);
+     alert(vemail);
+     alert(vmobile);
+     alert(vcompany);
+     alert(vaddres);
+     alert(vpsc);
+     alert(vic);
+     alert(vdic);*/
+
   
-     if(vtitle !='' && (vsubtitle !='' || vcontent !='')){
-     alert(vcontent);
-      //add condition based on data-id button atribute and send id to upload.php file
-     $.post("../admin/scripts/update.php", //Required URL of the page on server
-     { // Data Sending With Request To Server
-     "title2":vtitle,
-     "subtitle2":vsubtitle,        
-     "content2":vcontent,
-     },
-     function(response,status){ // Required Callback Function
-     alert("*----Received Data----*\n\nResponse : " + response+"\n\nStatus : " + status);//"response" receives - whatever written in echo of above PHP script.
-     //$("#form")[0].reset();
-     });
+
+     if(vtitle !='' || vemail !=''){
+   /*  alert(vcontent);  
+     alert(vbtnid);*/
+
+      switch (vbtnid) {
+      case "about":
+          alert('ABOUT PAGE - main.js');
+          $.post("../admin/scripts/update.php", //Required URL of the page on server
+          { // Data Sending With Request To Server
+          "title2":vtitle,
+          "subtitle2":vsubtitle,        
+          "content2":vcontent,
+          "btnid2":vbtnid,
+          },
+         function(response,status){ // Required Callback Function
+         alert("*----Received Data----*\n\nResponse : " + response+"\n\nStatus : " + status);//"response" receives - whatever written in echo of above PHP script.
+         //$("#form")[0].reset();
+         });
+                break;
+      case "main":
+          alert('PAGE MAIN - main.js');
+          $.post("../admin/scripts/update.php", //Required URL of the page on server
+          { // Data Sending With Request To Server
+          "title2":vtitle,
+          "subtitle2":vsubtitle,        
+          "btnid2":vbtnid,
+          },
+         function(response,status){ // Required Callback Function
+         alert("*----Received Data----*\n\nResponse : " + response+"\n\nStatus : " + status);//"response" receives - whatever written in echo of above PHP script.
+         //$("#form")[0].reset();
+         });
+            break;
+      case "contact":
+          alert('PAGE CONTACT - main.js');
+          $.post("../admin/scripts/update.php", //Required URL of the page on server
+          { // Data Sending With Request To Server
+          "email2":vemail,
+          "mobile2":vmobile,        
+          "company2":vcompany,
+          "addres2":vaddres,
+          "psc2":vpsc,
+          "ic2":vic,
+          "dic2":vdic,     
+          "btnid2":vbtnid,    
+          },
+         function(response,status){ // Required Callback Function
+         alert("*----Received Data----*\n\nResponse : " + response+"\n\nStatus : " + status);//"response" receives - whatever written in echo of above PHP script.
+         //$("#form")[0].reset();
+         });
+            break;
+      }
      }
   else {alert("data emptyIIIII")};
   });

@@ -51,7 +51,7 @@ tempor incididunt ut labore.</p>
 						<label>Obsah:</label>
 						<textarea class="form-ctrl" id="trumbowyg-demo" rows="15">' . $content . '</textarea>
 					</div>
-					<button class="btn btn-submit" id="btn">Uložit</button>
+					<button class="btn btn-submit" id="btn" data-id="about">Uložit</button>
 				   </form>';
 
 ?>
