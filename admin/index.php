@@ -13,7 +13,7 @@
 	
 <?php 
 
-	include 'scripts/connect.php';
+	include_once 'scripts/connect.php';
 	if (isLogged()) {
 	echo '<div id="loading">Loading</div>
 	<div id="right-panel">
@@ -77,6 +77,31 @@
 		    btnsAdd: ['|', 'foreColor', 'backColor'],
 		    btns: ['bold', 'italic', 'underline', 'formatting', '|','justifyLeft', 'justifyCenter', 'justifyRight','|', 'link', 'insertImage','|','viewHTML']
 		});
+		$("#btn").click(function(){
+  		console.log('btn-clicked')
+
+  		var vtitle = $("#title").val();
+  		var vsubtitle = $("#subtitle").val();
+  		var vcontent = $("#trumbowyg-demo").val();
+  		alert(vtitle);
+  
+  		if(vtitle !='' && (vsubtitle !='' || vcontent !='')){
+  		alert(vcontent);
+  		//add condition based on data-id button atribute and send id to upload.php file
+ 		 $.post("../admin/scripts/update.php", //Required URL of the page on server
+  		{ // Data Sending With Request To Server
+  		"title2":vtitle,
+  		"subtitle2":vsubtitle,        
+  		"content2":vcontent,
+  		},
+
+  		function(response,status){ // Required Callback Function
+  		alert("*----Received Data----*\n\nResponse : " + response+"\n\nStatus : " + status);//"response" receives - whatever written in echo of above PHP script.
+  //$("#form")[0].reset();
+  		});
+  		}
+  		else {alert("data emptyIIIII")};
+  		});
 	</script>
 </body>
 </html>

@@ -1,6 +1,15 @@
 <?php
 
-include 'connection.php';
+/*include_once $_SERVER['DOCUMENT_ROOT'].'/admin/scripts/connect.php';*/
+ 
+	$user = 'root';
+    $pass = '';
+ 	$db = 'cms';
+    $host = 'localhost';
+
+   //creating connection do db
+   	$resultdb = new mysqli($host, $user, $pass, $db) or die("Unable to connect to database!");
+
 
 function test_input($data) {
    $data = trim($data);
@@ -10,19 +19,19 @@ function test_input($data) {
    return $data;
 }
 
-if($_POST["id2"] && ($_POST["caption2"] || $_POST["description2"])){
+if($_POST["title2"]){
 
-	$id=test_input($_POST['id2']);
-	$title=test_input($_POST['caption2']);
-	$description=test_input($_POST['description2']);
+	$title=test_input($_POST['title2']);
+	$subtitle=test_input($_POST['subtitle2']);
+	$content=test_input($_POST['content2']);
 
 }
 else {
 	die("Can not store values");
 }
-
-$sql = "UPDATE pages SET title = '$title', content = '$description' WHERE ID = $id";
-$result = mysqli_query($db,$sql) or die("unable to editTTTT");
+//add codition based on sent data-id attribute from getData.js file
+$sql = "UPDATE about SET title = '$title', subtitle = '$subtitle', content = '$content' WHERE ID = 5";
+$result = mysqli_query($resultdb,$sql) or die("Unable to update page ABOUT");
 
 ?>
 

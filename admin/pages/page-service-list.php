@@ -9,18 +9,18 @@ tempor incididunt ut labore.</p>
 	</tr>
 	<tr>
 		<td>Granty a dotace</td>
-		<td><a href="pages/page-service-detail.php">Upravit</a></td>
+		<td><a href="pages/page-service-detail.php" class="ajax">Upravit</a></td>
 	</tr>
 	<tr>
 		<td>Projekční ateliér</td>
-		<td><a href="pages/page-service-detail.php">Upravit</a></td>
+		<td><a href="pages/page-service-detail.php" class="ajax">Upravit</a></td>
 	</tr>
 	<tr>
 		<td>Realitní činnost</td>
-		<td><a href="pages/page-service-detail.php">Upravit</a></td>
+		<td><a href="pages/page-service-detail.php" class="ajax">Upravit</a></td>
 	</tr>
 	<tr>
 		<td>Nákladní autodoprava</td>
-		<td><a href="pages/page-service-detail.php">Upravit</a></td>
+		<td><a href="pages/page-service-detail.php" class="ajax">Upravit</a></td>
 	</tr>
 </table>
