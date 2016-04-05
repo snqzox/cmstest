@@ -9,8 +9,28 @@ html, body{
 	color:#fff;
 	float:left;
 	position: fixed;
-	width:200px;
+	width:200px;	
 }
+a.logout{
+	position: absolute;
+	right:20px;
+	top:20px;
+	text-indent: -9999px;
+	width: 40px;
+	height: 40px;
+	background-repeat: no-repeat;
+	background-image: url(../img/logout.svg);
+	background-size: 16px 16px;
+	background-position: center center;
+	.opacity(0.6);
+	.border-radius(20px);
+	border:1px solid #999;
+	background-image:@light;
+	.transition(opacity);
+	&:hover{
+		.opacity(1);
+	}
+} 
 #loading{
 	background-color:red; 
 	position: absolute;
@@ -243,3 +263,27 @@ div#form, form {
 @dark:#2C3238;
 @light:#ECF0F1;
 @green:#27B455;
+
+.transition(@property: all; @timing:.25s; @effect:ease-in-out) {
+	transition: 		@property @timing @effect;
+	-o-transition: 		@property @timing @effect;
+	-ms-transition: 	@property @timing @effect;
+	-moz-transition: 	@property @timing @effect;
+	-webkit-transition: @property @timing @effect;	
+}
+
+.opacity(@opacity: 1) {
+	@ieOpacity: @opacity * 100;
+	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=@{ieOpacity})";
+	filter: ~"alpha(opacity=@{ieOpacity})";	
+	opacity: @opacity;
+}
+.border-radius (@radius: 5px) {
+	-webkit-border-radius: @radius;
+	-moz-border-radius:    @radius;
+	border-radius:         @radius;
+
+	-moz-background-clip:    padding;
+	-webkit-background-clip: padding-box;
+	background-clip:         padding-box;
+}

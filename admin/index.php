@@ -16,7 +16,9 @@
 	include_once 'scripts/connect.php';
 	
 	if (isLogged()) {
-	echo '<div id="loading">Loading</div>
+	echo '
+	<a href="scripts/logout.php" class="logout"></a> 
+	<div id="loading">Loading</div>
 	<div id="right-panel">
 		<div class="logo">
 			CMS
@@ -40,12 +42,11 @@
 				 	<li>
 				 		<a href="pages/page-contact.php" class="ajax">Kontakt</a>
 				 	</li>
-				 	<li>
-						<a href="scripts/logout.php">Odhlásit se</a>		
-				 	</li>
+
 			 	</ul>
 			</li>
 		</ul>
+
 	</div>
 	<div id="content">';
 
