@@ -53,6 +53,7 @@ $(document)
      console.log('btn-clicked')
 
      var vbtnid =  $(this).attr('data-id');
+     var service =  $(this).attr('service-id');
      var vtitle = $("#title").val();
      var vsubtitle = $("#subtitle").val();
      var vcontent = $("#trumbowyg-demo").val();
@@ -63,7 +64,7 @@ $(document)
      var vpsc = $("#psc").val();
      var vic = $("#ic").val();
      var vdic = $("#dic").val();
-     
+         
      /*alert(vtitle);
      alert(vemail);
      alert(vmobile);
@@ -119,6 +120,21 @@ $(document)
           "ic2":vic,
           "dic2":vdic,     
           "btnid2":vbtnid,    
+          },
+         function(response,status){ // Required Callback Function
+         alert("*----Received Data----*\n\nResponse : " + response+"\n\nStatus : " + status);//"response" receives - whatever written in echo of above PHP script.
+         //$("#form")[0].reset();
+         });
+            break;
+      case "service":
+          alert('PAGE SERVICE - main.js');
+          alert(vbtnid);
+           $.post("../admin/scripts/update.php", //Required URL of the page on server
+          { // Data Sending With Request To Server
+          "title2":vtitle,
+          "subtitle2":vsubtitle,        
+          "content2":vcontent,
+          "btnid2":vbtnid,
           },
          function(response,status){ // Required Callback Function
          alert("*----Received Data----*\n\nResponse : " + response+"\n\nStatus : " + status);//"response" receives - whatever written in echo of above PHP script.

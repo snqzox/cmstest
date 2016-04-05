@@ -2,22 +2,6 @@
 <h1>O nás</h1>
 <p class="perex">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
 tempor incididunt ut labore.</p>
-<!-- <form class="form-basic" method="post" id="form">
-	<div class="form-group">
-		<label>Titulek:</label>
-		<input type="text" class="form-ctrl title" value="'.$title.'" name="id">
-	</div>
-	<div class="form-group">
-		<label>Podtitulek:</label>
-		<input type="text" class="form-ctrl subtitle" name="subtitle" value="'.$caption.'">
-	</div>
-	<div class="form-group">
-		<label>Obsah:</label>
-		<textarea class="form-ctrl" id="trumbowyg-demo" rows="15">' . $row['content'] . '</textarea>
-	</div>
-	<button type="submit" class="btn btn-submit">Uložit</button>
-</form>
- -->
 
  <?php
 	$user = 'root';
@@ -25,7 +9,6 @@ tempor incididunt ut labore.</p>
  	$db = 'cms';
     $host = 'localhost';
 
-   //creating connection do db
    	$resultdb = new mysqli($host, $user, $pass, $db) or die("Unable to connect to database!");
 	
 

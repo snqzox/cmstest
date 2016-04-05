@@ -60,6 +60,9 @@ switch ($dataid) {
     case "contact":
           $sql = "UPDATE contact SET email = '$email', mobile = '$mobile', company = '$company', addres = '$addres', psc_city = '$psc', ic = '$ic', dic = '$dic' WHERE ID = 5";
         break;
+    case "service":
+        $sql = "UPDATE services SET title = '$title', subtitle = '$subtitle', content = '$content' WHERE ID = 5";
+        break;
   }
 
 
