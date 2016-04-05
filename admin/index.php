@@ -14,6 +14,7 @@
 <?php 
 
 	include_once 'scripts/connect.php';
+	
 	if (isLogged()) {
 	echo '<div id="loading">Loading</div>
 	<div id="right-panel">
@@ -48,7 +49,6 @@
 	</div>
 	<div id="content">';
 
-	include 'pages/page-about.php';
 	
 	echo '</div>';
 

@@ -2,7 +2,7 @@
 <h1>Upravit službu</h1>
 <p class="perex">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
 tempor incididunt ut labore.</p>
-<form class="form-basic">
+<div class="form-basic" id="form">
 	<div class="form-group">
 		<label>Titulek:</label>
 		<input type="text" class="form-ctrl title">

@@ -25,7 +25,7 @@ tempor incididunt ut labore.</p>
               	$dic =$row['dic'];            	
             }
 
-          	 echo '<form class="form-basic" method="post" id="form">
+          	 echo '<div class="form-basic" id="form">
 					<div class="form-group">
 						<label>E-mail:</label>
 						<input type="text" class="form-ctrl title" value="'.$email.'" name="id" id="email">
@@ -55,7 +55,7 @@ tempor incididunt ut labore.</p>
 						<input type="text" class="form-ctrl subtitle" name="subtitle" value="'.$dic.'" id="dic">
 					</div>
 					<button class="btn btn-submit" id="btn" data-id="contact">Uložit</button>
-				   </form>';
+				   </div>';
 				   mysqli_close($resultdb);
 ?>
 
