@@ -31,6 +31,8 @@ function test_input($data) {
   $psc_set = isset($_POST['psc2']) ? $_POST['psc2'] : '';
   $ic_set = isset($_POST['ic2']) ? $_POST['ic2'] : '';
   $dic_set = isset($_POST['dic2']) ? $_POST['dic2'] : '';
+  $service_set = isset($_POST['service2']) ? $_POST['service2'] : '';
+
 
 
 
@@ -45,6 +47,9 @@ function test_input($data) {
   $psc=test_input($psc_set);
   $ic=test_input($ic_set);
   $dic=test_input($dic_set);
+  $service=test_input($service_set);
+
+echo  $service;
 
 
 
@@ -61,7 +66,7 @@ switch ($dataid) {
           $sql = "UPDATE contact SET email = '$email', mobile = '$mobile', company = '$company', addres = '$addres', psc_city = '$psc', ic = '$ic', dic = '$dic' WHERE ID = 5";
         break;
     case "service":
-        $sql = "UPDATE services SET title = '$title', subtitle = '$subtitle', content = '$content' WHERE ID = 5";
+        $sql = "UPDATE services SET title = '$title', subtitle = '$subtitle', content = '$content' WHERE ID = $service";
         break;
   }
 

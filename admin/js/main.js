@@ -65,6 +65,8 @@ $(document)
      var vic = $("#ic").val();
      var vdic = $("#dic").val();
          
+     alert(service);
+
      /*alert(vtitle);
      alert(vemail);
      alert(vmobile);
@@ -134,6 +136,7 @@ $(document)
           "title2":vtitle,
           "subtitle2":vsubtitle,        
           "content2":vcontent,
+          "service2":service,
           "btnid2":vbtnid,
           },
          function(response,status){ // Required Callback Function
