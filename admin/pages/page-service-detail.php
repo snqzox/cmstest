@@ -12,8 +12,13 @@ tempor incididunt ut labore.</p>
    	$resultdb = new mysqli($host, $user, $pass, $db) or die("Unable to connect to database!");
 	
 	//get ID from URL
-	$service_id = 5;
+	$service_id = 8;
 
+	if (!is_null($_GET["id"])){
+				$service_id = mysqli_real_escape_string($resultdb,$_GET["id"]);
+			}
+
+			echo $service_id;
 	       	$sql = "SELECT * FROM services where ID = $service_id" or die ("Unable to execute query!");
           	$result = mysqli_query($resultdb,$sql) or die ("False connection result!");
 
@@ -38,7 +43,7 @@ tempor incididunt ut labore.</p>
 						<label>Obsah:</label>
 						<textarea class="form-ctrl" id="trumbowyg-demo" rows="15">' . $content . '</textarea>
 					</div>
-					<button class="btn btn-submit" id="btn" data-id="service">Uložit</button>
+					<button class="btn btn-submit" id="btn" service-id="'.$service_id.'" data-id="service">Uložit</button>
 				   </div>';
 				   mysqli_close($resultdb);
 
