@@ -10,6 +10,6 @@ tempor incididunt ut labore.</p>
 	</tr>
 	<tr>
 		<td>Název reference 1</td>
-		<td><a href="pages/page-reference-detail.php">Upravit</a><a href="#">Smazat</a></td>
+		<td><a href="pages/page-reference-detail.php" class="ajax">Upravit</a><a href="#">Smazat</a></td>
 	</tr>
 </table>

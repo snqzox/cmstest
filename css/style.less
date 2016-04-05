@@ -28,24 +28,28 @@ html, body{
 	text-align:center;
 	padding:10px 10px;
 }
-ul#menu{
-	padding:5px 15px;
-	li{
-		margin:10px 0px;
-		span{
-			font-weight:600;
-			color:@light;
-			text-transform: uppercase;
-		}
 
-		ul{
-			padding: 5px 15px;
-			li{
-				span{
-					cursor: pointer;
-					text-transform: inherit;
-					&:hover{
-						text-decoration: underline;
+ul{
+	padding:100px 50px;
+	&#menu{
+		padding:5px 15px;
+		li{
+			margin:10px 0px;
+			span{
+				font-weight:600;
+				color:@light;
+				text-transform: uppercase;
+			}
+
+			ul{
+				padding: 5px 15px;
+				li{
+					span{
+						cursor: pointer;
+						text-transform: inherit;
+						&:hover{
+							text-decoration: underline;
+						}
 					}
 				}
 			}
