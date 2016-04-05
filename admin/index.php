@@ -10,7 +10,12 @@
 	
 </head>
 <body>
-	<div id="loading">Loading</div>
+	
+<?php 
+
+	include 'scripts/connect.php';
+	if (isLogged()) {
+	echo '<div id="loading">Loading</div>
 	<div id="right-panel">
 		<div class="logo">
 			CMS
@@ -20,29 +25,41 @@
 			 	<a>Stránky</a>
 			 	<ul>
 				 	<li>
-				 		<a href="pages/page-main.php">Úvod</a>
+				 		<a href="pages/page-main.php" class="ajax" >Úvod</a>
 				 	</li>
 				 	<li>
-				 		<a href="pages/page-about.php">O nás</a>
+				 		<a href="pages/page-about.php" class="ajax">O nás</a>
 				 	</li>
 				 	<li>
-				 		<a href="pages/page-service-list.php">Služby</a>
+				 		<a href="pages/page-service-list.php" class="ajax">Služby</a>
 				 	</li>
 				 	<li>
-				 		<a href="pages/page-reference-list.php">Reference</a>
+				 		<a href="pages/page-reference-list.php" class="ajax">Reference</a>
 				 	</li>
 				 	<li>
-				 		<a href="pages/page-contact.php">Kontakt</a>
+				 		<a href="pages/page-contact.php" class="ajax">Kontakt</a>
+				 	</li>
+				 	<li>
+						<a href="scripts/logout.php">Odhlásit se</a>		
 				 	</li>
 			 	</ul>
 			</li>
 		</ul>
 	</div>
-	<div id="content">
+	<div id="content">';
 
-	<?php include 'pages/page-about.php';?>
+	include 'pages/page-about.php';
 	
-	</div>
+	echo '</div>';
+
+	}
+	else {
+		//header("Refresh:0; url=login.php");
+		header ( "location:login.php" );	
+
+	}
+
+ ?>
 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
 	<script src="js/main.js"></script>
