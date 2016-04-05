@@ -19,19 +19,32 @@ function test_input($data) {
    return $data;
 }
 
+  
+  $title_set = isset($_POST['title2']) ? $_POST['title2'] : '';
+  $subtitle_set = isset($_POST['subtitle2']) ? $_POST['subtitle2'] : '';
+  $content_set = isset($_POST['content2']) ? $_POST['content2'] : '';
+  $dataid_set = isset($_POST['btnid2']) ? $_POST['btnid2'] : '';
+  $email_set = isset($_POST['email2']) ? $_POST['email2'] : '';
+  $mobile_set = isset($_POST['mobile2']) ? $_POST['mobile2'] : '';
+  $company_set = isset($_POST['company2']) ? $_POST['company2'] : '';
+  $addres_set = isset($_POST['addres2']) ? $_POST['addres2'] : '';
+  $psc_set = isset($_POST['psc2']) ? $_POST['psc2'] : '';
+  $ic_set = isset($_POST['ic2']) ? $_POST['ic2'] : '';
+  $dic_set = isset($_POST['dic2']) ? $_POST['dic2'] : '';
 
 
-	$title=test_input($_POST['title2']);
-	$subtitle=test_input($_POST['subtitle2']);
-	$content=test_input($_POST['content2']);
-  $dataid =test_input($_POST['btnid2']);
-  $email=test_input($_POST['email2']);
-  $mobile=test_input($_POST['mobile2']);
-  $company=test_input($_POST['company2']);
-  $addres=test_input($_POST['addres2']);
-  $psc=test_input($_POST['psc2']);
-  $ic=test_input($_POST['ic2']);
-  $dic=test_input($_POST['dic2']);
+
+	$title=test_input($title_set);
+	$subtitle=test_input($subtitle_set);
+	$content=test_input($content_set);
+  $dataid =test_input($dataid_set);
+  $email=test_input($email_set);
+  $mobile=test_input($mobile_set);
+  $company=test_input($company_set);
+  $addres=test_input($addres_set);
+  $psc=test_input($psc_set);
+  $ic=test_input($ic_set);
+  $dic=test_input($dic_set);
 
 
 
@@ -55,9 +68,9 @@ switch ($dataid) {
 $result = mysqli_query($resultdb,$sql) or die("Unable to update page ABOUT");
 mysqli_close($resultdb);
 
-/*header('Location: '.$_SERVER['REQUEST_URI']);
-exit();
-*/
+/*header('Location: '); 
+exit();*/
+
 ?>
 
 

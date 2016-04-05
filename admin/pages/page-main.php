@@ -33,7 +33,7 @@ tempor incididunt ut labore.</p>
               	$subtitle =$row['subtitle'];            	
             }
 
-          	 echo '<form class="form-basic" method="post" id="form">
+          	 echo '<div class="form-basic" id="form">
 					<div class="form-group">
 						<label>Titulek:</label>
 						<input type="text" class="form-ctrl title" value="'.$title.'" name="id" id="title">
@@ -43,7 +43,7 @@ tempor incididunt ut labore.</p>
 						<input type="text" class="form-ctrl subtitle" name="subtitle" value="'.$subtitle.'" id="subtitle">
 					</div>
 					<button class="btn btn-submit" id="btn" data-id="main">Uložit</button>
-				   </form>';
+				   </div>';
 				   mysqli_close($resultdb);
 
 ?>

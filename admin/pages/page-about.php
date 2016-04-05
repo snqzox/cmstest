@@ -38,7 +38,7 @@ tempor incididunt ut labore.</p>
               	$content =$row['content'];              	
             }
 
-          	 echo '<form class="form-basic" method="post" id="form">
+          	 echo '<div class="form-basic" id="form">
 					<div class="form-group">
 						<label>Titulek:</label>
 						<input type="text" class="form-ctrl title" value="'.$title.'" name="id" id="title">
@@ -52,7 +52,7 @@ tempor incididunt ut labore.</p>
 						<textarea class="form-ctrl" id="trumbowyg-demo" rows="15">' . $content . '</textarea>
 					</div>
 					<button class="btn btn-submit" id="btn" data-id="about">Uložit</button>
-				   </form>';
+				   </div>';
 				   mysqli_close($resultdb);
 
 ?>
