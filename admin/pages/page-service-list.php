@@ -27,7 +27,7 @@ tempor incididunt ut labore.</p>
 			//add id variable to href path
           	 echo      '<tr>
 							<td>' . $title . ' id = ' . $id . '</td>
-							<td><a href="pages/page-service-detail.php" class="ajax" id="btn">Upravit</a></td>
+							<td><a href="pages/page-service-detail.php?id=' . $id . '" class="ajax" id="btn">Upravit</a></td>
 						</tr>';
 	          		}	
 				   mysqli_close($resultdb);

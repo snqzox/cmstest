@@ -31,6 +31,8 @@ function test_input($data) {
   $psc_set = isset($_POST['psc2']) ? $_POST['psc2'] : '';
   $ic_set = isset($_POST['ic2']) ? $_POST['ic2'] : '';
   $dic_set = isset($_POST['dic2']) ? $_POST['dic2'] : '';
+  $service_set = isset($_POST['service2']) ? $_POST['service2'] : '';
+  $service_ref_set = isset($_POST['service_ref']) ? $_POST['service_ref'] : ''; 
 
 
 
@@ -45,6 +47,11 @@ function test_input($data) {
   $psc=test_input($psc_set);
   $ic=test_input($ic_set);
   $dic=test_input($dic_set);
+  $service=test_input($service_set);
+  $service_ref=test_input($service_ref_set);
+
+
+echo  $service;
 
 
 
@@ -61,11 +68,19 @@ switch ($dataid) {
           $sql = "UPDATE contact SET email = '$email', mobile = '$mobile', company = '$company', addres = '$addres', psc_city = '$psc', ic = '$ic', dic = '$dic' WHERE ID = 5";
         break;
     case "service":
-        $sql = "UPDATE services SET title = '$title', subtitle = '$subtitle', content = '$content' WHERE ID = 5";
+        $sql = "UPDATE services SET title = '$title', subtitle = '$subtitle', content = '$content' WHERE ID = $service";
         break;
+    case "refrence":
+      if ($service !=''){
+        $sql = "UPDATE refrences SET title = '$title', content = '$content', service = '$service_ref' WHERE ID = $service";
+        break;
+
+            }
+        else {     
+            $sql = "INSERT INTO refrences (title, content, service) VALUES ('$title', '$content', '$service_ref')";          
+            break;
+        }            
   }
-
-
 
 //add codition based on sent data-id attribute from getData.js file
 $result = mysqli_query($resultdb,$sql) or die("Unable to update page ABOUT");
