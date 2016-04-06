@@ -19,6 +19,7 @@
 	echo '
 	<a href="scripts/logout.php" class="logout"></a> 
 	<div id="loading">Loading</div>
+	<div id="sysmsg">DOBREEEEEEEEEEEEEEEE</div>
 	<div id="right-panel">
 		<div class="logo">
 			CMS

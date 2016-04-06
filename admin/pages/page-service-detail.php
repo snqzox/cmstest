@@ -30,7 +30,7 @@ tempor incididunt ut labore.</p>
           	 echo '<div class="form-basic" id="form">
 					<div class="form-group">
 						<label>Titulek:</label>
-						<input type="text" class="form-ctrl title" value="'.$title.'" name="id" id="title">
+						<input type="text" class="form-ctrl title req" value="'.$title.'" name="id" id="title">
 					</div>
 					<div class="form-group">
 						<label>Podtitulek:</label>
@@ -40,10 +40,9 @@ tempor incididunt ut labore.</p>
 						<label>Obsah:</label>
 						<textarea class="form-ctrl" id="trumbowyg-demo" rows="15">' . $content . '</textarea>
 					</div>
-					<button class="btn btn-submit" id="btn" service-id="'.$service_id.'" data-id="service">Uložit</button>
+					<a class="button ajax formvalidation" href="pages/page-service-list.php" id="btn" service-id="'.$service_id.'" data-id="service">Uložit</a>
 				   </div>';
 			  mysqli_close($resultdb);
-
 ?>
 
 

@@ -1,12 +1,22 @@
+
 var newHash     = '',
    $mainContent = $('#content');
+
+
+//detect content in url on page reload
+$(document).ready(function(){
+var url      = window.location.href;     // Returns full URL
+var res = url.split("#");
+console.log(res[1]);
+$( "#content" ).load( res[1]);  
+});
 
 $('ul#menu li').delegate('a', 'click', function() {
   $('ul#menu li a.active').removeClass('active');
   $(this).addClass('active');
 });
 
-
+//load content from menu item click
 $('body').delegate('a', 'click', function() {
 
 if ($(this).hasClass("ajax") ) {  
@@ -20,16 +30,8 @@ if ($(this).hasClass("ajax") ) {
 
 var $loading = $('#loading').hide();
 
-$(document).ready(function(){
-var url      = window.location.href;     // Returns full URL
-var res = url.split("#");
-console.log(res[1]);
-$( "#content" ).load( res[1]);
-  
-});
 
-
-
+//show and hide ajax loading
 $(document)
   .ajaxStart(function () {
     console.log('ajaxStart');
@@ -49,7 +51,21 @@ $(document)
         btnsAdd: ['|', 'foreColor', 'backColor'],
         btns: ['bold', 'italic', 'underline', 'formatting', '|','justifyLeft', 'justifyCenter', 'justifyRight','|', 'link', 'insertImage','|','viewHTML']
     });
+
+
+
     $("#btn").click(function(){
+      
+
+      if( $(this).hasClass('formvalidation')){
+          var formval = $('.req').val();
+          if(formval == null || formval == ""){
+            updated("vyplnt tomoore");
+            return false;
+          }
+      }
+     console.log(formval);
+
      console.log('btn-clicked')
 
      var vbtnid =  $(this).attr('data-id');
@@ -66,27 +82,11 @@ $(document)
      var vdic = $("#dic").val();
      var vservice_ref = $("#service_ref").val(); //service name in reference
 
-         
-     alert(service);
-
-     /*alert(vtitle);
-     alert(vemail);
-     alert(vmobile);
-     alert(vcompany);
-     alert(vaddres);
-     alert(vpsc);
-     alert(vic);
-     alert(vdic);*/
-
-  
-
      if(vtitle !='' || vemail !=''){
-   /*  alert(vcontent);  
-     alert(vbtnid);*/
 
       switch (vbtnid) {
       case "about":
-          alert('ABOUT PAGE - main.js');
+      //    alert('ABOUT PAGE - main.js');
           $.post("../admin/scripts/update.php", //Required URL of the page on server
           { // Data Sending With Request To Server
           "title2":vtitle,
@@ -95,13 +95,13 @@ $(document)
           "btnid2":vbtnid,
           },
          function(response,status){ // Required Callback Function
-         alert("*----Received Data----*\n\nResponse : " + response+"\n\nStatus : " + status);//"response" receives - whatever written in echo of above PHP script.
-         //$("#form")[0].reset();
+        // alert("*----Received Data----*\n\nResponse : " + response+"\n\nStatus : " + status);//"response" receives - whatever written in echo of above PHP script.
+          checkStatus(status);
          });
                 break;
 
       case "main":
-          alert('PAGE MAIN - main.js');
+          //alert('PAGE MAIN - main.js');
           $.post("../admin/scripts/update.php", //Required URL of the page on server
           { // Data Sending With Request To Server
           "title2":vtitle,
@@ -109,13 +109,13 @@ $(document)
           "btnid2":vbtnid,
           },
          function(response,status){ // Required Callback Function
-         alert("*----Received Data----*\n\nResponse : " + response+"\n\nStatus : " + status);//"response" receives - whatever written in echo of above PHP script.
-         //$("#form")[0].reset();
+         //alert("*----Received Data----*\n\nResponse : " + response+"\n\nStatus : " + status);//"response" receives - whatever written in echo of above PHP script.
+          checkStatus(status);
          });
             break;
 
       case "contact":
-          alert('PAGE CONTACT - main.js');
+          //alert('PAGE CONTACT - main.js');
           $.post("../admin/scripts/update.php", //Required URL of the page on server
           { // Data Sending With Request To Server
           "email2":vemail,
@@ -128,14 +128,13 @@ $(document)
           "btnid2":vbtnid,    
           },
          function(response,status){ // Required Callback Function
-         alert("*----Received Data----*\n\nResponse : " + response+"\n\nStatus : " + status);//"response" receives - whatever written in echo of above PHP script.
-         //$("#form")[0].reset();
-         });
+         //alert("*----Received Data----*\n\nResponse : " + response+"\n\nStatus : " + status);//"response" receives - whatever written in echo of above PHP script.
+          checkStatus(status);
+        });
             break;
 
       case "service":
-          alert('PAGE SERVICE - main.js');
-          alert(vbtnid);
+        //  alert('PAGE SERVICE - main.js');
            $.post("../admin/scripts/update.php", //Required URL of the page on server
           { // Data Sending With Request To Server
           "title2":vtitle,
@@ -145,14 +144,13 @@ $(document)
           "btnid2":vbtnid,
           },
          function(response,status){ // Required Callback Function
-         alert("*----Received Data----*\n\nResponse : " + response+"\n\nStatus : " + status);//"response" receives - whatever written in echo of above PHP script.
-         //$("#form")[0].reset();
+      //alert("*----Received Data----*\n\nResponse : " + response+"\n\nStatus : " + status);//"response" receives - whatever written in echo of above PHP script.
+          checkStatus(status);
          });
             break;
 
       case "refrence":
-          alert('PAGE REFERENCE - main.js');
-          alert(vbtnid);      
+      // alert('PAGE REFERENCE - main.js');
           $.post("../admin/scripts/update.php", //Required URL of the page on server
           { // Data Sending With Request To Server
           "title2":vtitle,
@@ -162,13 +160,17 @@ $(document)
           "btnid2":vbtnid,
           },
          function(response,status){ // Required Callback Function
-         alert("*----Received Data----*\n\nResponse : " + response+"\n\nStatus : " + status);//"response" receives - whatever written in echo of above PHP script.
-         //$("#form")[0].reset();
+   // alert("*----Received Data----*\n\nResponse : " + response+"\n\nStatus : " + status);//"response" receives - whatever written in echo of above PHP script.
+          //alert(status);
+      checkStatus(status);
+
          });
             break;
       }
      }
-  else {alert("data emptyIIIII")};
+  else {
+    alert("data empty")
+  };
   });
   });
 
@@ -185,4 +187,23 @@ function readURL(input) {
 
         reader.readAsDataURL(input.files[0]);
     }
+}
+
+function updated(value){
+    $('#sysmsg').text(value);
+    $('#sysmsg').fadeIn();
+    $('#sysmsg').delay(5000).fadeOut();
+}
+
+function checkStatus(statusValue){
+
+  if (statusValue == 'success'){
+    updated("Saved");
+     
+  } else {
+
+    updated("Data did not save!");
+
+  }
+
 }
