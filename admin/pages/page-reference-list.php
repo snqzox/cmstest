@@ -2,7 +2,7 @@
 <h1>Reference</h1>
 <p class="perex">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
 tempor incididunt ut labore.</p>
-<a class="button" href="pages/page-reference-detail.php">Nová reference</a>
+<a class="button ajax" href="pages/page-reference-detail.php">Nová reference</a>
 <table>
 <tr>
 	<th>Reference</th>

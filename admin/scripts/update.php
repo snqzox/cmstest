@@ -71,8 +71,15 @@ switch ($dataid) {
         $sql = "UPDATE services SET title = '$title', subtitle = '$subtitle', content = '$content' WHERE ID = $service";
         break;
     case "refrence":
+      if ($service !=''){
         $sql = "UPDATE refrences SET title = '$title', content = '$content', service = '$service_ref' WHERE ID = $service";
         break;
+
+            }
+        else {     
+            $sql = "INSERT INTO refrences (title, content, service) VALUES ('$title', '$content', '$service_ref')";          
+            break;
+        }            
   }
 
 //add codition based on sent data-id attribute from getData.js file
