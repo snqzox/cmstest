@@ -11,9 +11,6 @@ tempor incididunt ut labore.</p>
 
    	$resultdb = new mysqli($host, $user, $pass, $db) or die("Unable to connect to database!");
 	
-	//get ID from URL
-	$service_id = 8;
-
 	if (!is_null($_GET["id"])){
 				$service_id = mysqli_real_escape_string($resultdb,$_GET["id"]);
 			}
@@ -45,7 +42,7 @@ tempor incididunt ut labore.</p>
 					</div>
 					<button class="btn btn-submit" id="btn" service-id="'.$service_id.'" data-id="service">Uložit</button>
 				   </div>';
-				   mysqli_close($resultdb);
+			  mysqli_close($resultdb);
 
 ?>
 

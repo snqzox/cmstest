@@ -64,6 +64,8 @@ $(document)
      var vpsc = $("#psc").val();
      var vic = $("#ic").val();
      var vdic = $("#dic").val();
+     var vservice_ref = $("#service_ref").val(); //service name in reference
+
          
      alert(service);
 
@@ -97,6 +99,7 @@ $(document)
          //$("#form")[0].reset();
          });
                 break;
+
       case "main":
           alert('PAGE MAIN - main.js');
           $.post("../admin/scripts/update.php", //Required URL of the page on server
@@ -110,6 +113,7 @@ $(document)
          //$("#form")[0].reset();
          });
             break;
+
       case "contact":
           alert('PAGE CONTACT - main.js');
           $.post("../admin/scripts/update.php", //Required URL of the page on server
@@ -128,6 +132,7 @@ $(document)
          //$("#form")[0].reset();
          });
             break;
+
       case "service":
           alert('PAGE SERVICE - main.js');
           alert(vbtnid);
@@ -136,6 +141,23 @@ $(document)
           "title2":vtitle,
           "subtitle2":vsubtitle,        
           "content2":vcontent,
+          "service2":service,
+          "btnid2":vbtnid,
+          },
+         function(response,status){ // Required Callback Function
+         alert("*----Received Data----*\n\nResponse : " + response+"\n\nStatus : " + status);//"response" receives - whatever written in echo of above PHP script.
+         //$("#form")[0].reset();
+         });
+            break;
+
+      case "refrence":
+          alert('PAGE REFERENCE - main.js');
+          alert(vbtnid);      
+          $.post("../admin/scripts/update.php", //Required URL of the page on server
+          { // Data Sending With Request To Server
+          "title2":vtitle,
+          "content2":vcontent,
+          "service_ref":vservice_ref,
           "service2":service,
           "btnid2":vbtnid,
           },
