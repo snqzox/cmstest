@@ -18,6 +18,11 @@
   $result = mysqli_query($resultdb,$sql) or die("Unable to DELETE RECORD");
 
 //header('Location: http://localhost/cmstest/admin/index.php#pages/page-reference-list.php'); 
+  echo '<span>Reference" . "' . $id . '" . "byla uspesne vymazana!<span>';
+  echo '<a href="pages/page-reference-list.php" class="ajax">Navrat na seznam referenci</a>';
+
 ?>
+	
+
 
 
