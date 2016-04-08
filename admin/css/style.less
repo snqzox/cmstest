@@ -8,6 +8,7 @@ html, body{
 	height:100%;
 	color:#fff;
 	float:left;
+	z-index: 100;
 	position: fixed;
 	width:200px;	
 }
@@ -32,13 +33,17 @@ a.logout{
 	}
 } 
 #loading{
-	background-color:red; 
+	background-color:#fff; 
 	position: absolute;
-	top:50px;
-	padding:40px;
-	right:50px;
-	z-index: 100
-
+	top:0px;
+	width:100%;
+	height: 100%;
+	right:0px;
+	z-index: 50;
+	background-repeat: no-repeat;
+	background-image: url(../img/ripple.gif);
+	background-size: 32px 32px;
+	background-position: center center;
 }
 #sysmsg{
 	background-color:#fff; 
