@@ -17,20 +17,38 @@ tempor incididunt ut labore.</p>
    	$resultdb = new mysqli($host, $user, $pass, $db) or die("Unable to connect to database!");
 	
 
-          	$sql = "SELECT title,id FROM refrences" or die ("Unable to execute query!");
+   	$id = isset($_GET['id']) ? $_GET['id'] : '';
+
+	if ($id != ''){
+				$service_id = mysqli_real_escape_string($resultdb,$_GET["id"]);
+				echo $service_id;
+				$sql = "DELETE refrences where ID = $service_id" or die ("Unable to execute query!");
+          		$result = mysqli_query($resultdb,$sql) or die ("False connection result!");
+            
+			}
+	else {
+		      	/*$title = '' ;	      
+              	$content =''; 
+              	$service ='';              	
+              	$service_id='';*/
+         $sql = "SELECT title,id FROM refrences" or die ("Unable to execute query!");
           	$result = mysqli_query($resultdb,$sql) or die ("False connection resulat!");
 
             while($row = mysqli_fetch_array($result)){ 
               	$title = $row['title'];	
-              	$id = $row['id'];      
-              
-			//add id variable to href path
-          	 echo      '<tr>
+              	$id = $row['id'];  
+		 echo      '<tr>
 							<td>' . $title . ' id = ' . $id . '</td>
-							<td><a href="pages/page-reference-detail.php?id=' . $id . '" class="ajax" id="btn">Upravit</a>-<a href="#">Smazat</a></td>
+							<td><a href="pages/page-reference-detail.php?id=' . $id . '" class="ajax" id="btn">Upravit</a>-
+							<a href="scripts/delete.php?id=' . $id . '"  class="ajax" id="btn" data-id="deleteRef">Smazat</a></td>
 						</tr>';
 	          		}	
-				   mysqli_close($resultdb);
+					
+	}
+       	    
+              
+			//add id variable to href path
+          		   mysqli_close($resultdb);
 
 ?>
 </table>

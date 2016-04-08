@@ -52,10 +52,11 @@ $(document)
         btns: ['bold', 'italic', 'underline', 'formatting', '|','justifyLeft', 'justifyCenter', 'justifyRight','|', 'link', 'insertImage','|','viewHTML']
     });
 
+document.getElementById("btn").onclick = engine; 
+   //$('body').on('click', '#btn' ,function(e){
+   //$("#btn").click(function(){
+function engine() {
 
-
-    $("#btn").click(function(){
-      
 
       if( $(this).hasClass('formvalidation')){
           var formval = $('.req').val();
@@ -68,8 +69,8 @@ $(document)
 
      console.log('btn-clicked')
 
-     var vbtnid =  $(this).attr('data-id');
-     var service =  $(this).attr('service-id');
+     var vbtnid =  $(this).attr('data-id'); //nazov page
+     var service =  $(this).attr('service-id');//id zaznamu v db
      var vtitle = $("#title").val();
      var vsubtitle = $("#subtitle").val();
      var vcontent = $("#trumbowyg-demo").val();
@@ -81,6 +82,9 @@ $(document)
      var vic = $("#ic").val();
      var vdic = $("#dic").val();
      var vservice_ref = $("#service_ref").val(); //service name in reference
+
+     console.log(service);
+
 
      if(vtitle !='' || vemail !=''){
 
@@ -166,12 +170,29 @@ $(document)
 
          });
             break;
+      case "deleteRef":
+          alert('PAGE DELETE - main.js');
+          $.post("../admin/scripts/update.php", //Required URL of the page on server
+          { // Data Sending With Request To Server
+          "title2":vtitle,
+          "content2":vcontent,
+          "service_ref":vservice_ref,
+          "service2":service,
+          "btnid2":vbtnid,
+          },
+         function(response,status){ // Required Callback Function
+         alert("*----Received Data----*\n\nResponse : " + response+"\n\nStatus : " + status);//"response" receives - whatever written in echo of above PHP script.
+          checkStatus(status);
+          ajax("delete",$(this).attr("service"));
+         });
+            break;
+
       }
      }
   else {
     alert("data empty")
   };
-  });
+}
   });
 
 
@@ -192,7 +213,7 @@ function readURL(input) {
 function updated(value){
     $('#sysmsg').text(value);
     $('#sysmsg').fadeIn();
-    $('#sysmsg').delay(5000).fadeOut();
+    $('#sysmsg').delay(500).fadeOut();
 }
 
 function checkStatus(statusValue){

@@ -79,12 +79,17 @@ switch ($dataid) {
         else {     
             $sql = "INSERT INTO refrences (title, content, service) VALUES ('$title', '$content', '$service_ref')";          
             break;
-        }            
+        }
+    case "deleteRef":
+        $sql = "DELETE FROM refrences WHERE ID = '$service'";
+        echo "HURRAY";
+        break;            
   }
+
+
 
 //add codition based on sent data-id attribute from getData.js file
 $result = mysqli_query($resultdb,$sql) or die("Unable to update page ABOUT");
-mysqli_close($resultdb);
 
 /*header('Location: '); 
 exit();*/
