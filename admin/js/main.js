@@ -27,8 +27,8 @@ if ($(this).hasClass("ajax") ) {
   $( "#content" ).load( a );
   return false;
 }});
-
 var $loading = $('#loading').hide();
+
 
 
 //show and hide ajax loading
@@ -38,7 +38,7 @@ $(document)
     $loading.show();
   })
   .ajaxStop(function () {
-    $loading.hide();
+    $(loading).delay(100).fadeOut();
     console.log('ajaxStop');
     $('#trumbowyg-demo').trumbowyg({
         fullscreenable: false,
