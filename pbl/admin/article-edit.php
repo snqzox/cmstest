@@ -1,46 +1,31 @@
 <?php 
-
-require('scripts/config.php'); 
-
-$edit = isset($_GET['edit']) ? $_GET['edit'] : '';
-
-$sql_edit = "SELECT * FROM articles WHERE id = '$edit'" or die ("Unable to join tables!");
-$result_edit = mysqli_query($resultdb,$sql_edit) or die ("Unable to get data for editation!");
-
-while($row = mysqli_fetch_array($result_edit)){ 
-
-	$id = $row['ID'];  	
-	$title = $row['title'];	
-	$content = $row['content'];      
-		
-}
-
 if (isset($_POST['submit'])){
-require('scripts/config.php'); 
-function test_input($data) {
-   $data = trim($data);
-   $data = stripslashes($data);
-   //$data = htmlspecialchars($data);
-   $data = str_replace(array("\r","\n"),"",$data);
-   return $data;
-}
-  $title_set = isset($_POST['title']) ? $_POST['title'] : '';
-  $content_set = isset($_POST['content']) ? $_POST['content'] : '';
-  $id_set = isset($_POST['id']) ? $_POST['id'] : '';
- 
-  $title=test_input($title_set);
-  $content=test_input($content_set);
-  $id=test_input($id_set);
 
-  $sql = "UPDATE articles SET title='$title', content='$content' WHERE ID='$id'";  
-  $result = mysqli_query($resultdb,$sql) or die("Unable to update article");
- 
-  header('Location: http://localhost/cmstest/pbl/admin/page-articles.php'); 
-  mysqli_close($resultdb);
-
+	require_once('scripts/datahandler.php');
+	
+	$name="article";
+	$action="update";
+	data_handler($name,$action,''); 
 
 }
+	else {
+		
+		require_once('scripts/datahandler.php');
+		
+		$name="article";
+		$action="select";
+        $edit = isset($_GET['edit']) ? $_GET['edit'] : '';
 
+		$result_select = data_handler($name,$action,$edit); 
+
+		while($row = mysqli_fetch_array($result_select)){ 
+
+            $id = $row['ID'];   
+            $title = $row['title']; 
+            $content = $row['content'];      
+              
+	    }
+	}
 ?>
 
 <!DOCTYPE html>
@@ -56,7 +41,7 @@ function test_input($data) {
 			<div class="form-group">
 				<label>Titulek:</label>
 				<input type="text" class="form-ctrl" <?php echo 'value="'.$title.'"'; ?> name="title" id="title">
-				<input type="hidden" name="id" <?php echo 'value="'.$id.'"'; ?> />
+				<input type="hidden" name="id" <?php echo 'value="'.$id.'"'; ?> >
 			</div>
 			<div class="form-group">
 				<label>Obsah:</label>
