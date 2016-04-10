@@ -1,17 +1,32 @@
+
 <?php 
+require_once('scripts/datahandler.php'); 
 
-require('scripts/config.php'); 
+$del = isset($_GET['del']) ? $_GET['del'] : 'undefined';
 
-$sql_article_attach1 = "SELECT attachments.id attId, attachments.title attTitle, attachments.article_id attArticle,articles.id artId,articles.title artTitle,articles.subservice_id artSubSer FROM articles LEFT JOIN attachments ON articles.id=attachments.article_id WHERE articles.subservice_id = 6" or die ("Unable to join tables!");
-$sql_article_attach2 = "SELECT attachments.id attId, attachments.title attTitle, attachments.article_id attArticle,articles.id artId,articles.title artTitle,articles.subservice_id artSubSer FROM articles LEFT JOIN attachments ON articles.id=attachments.article_id WHERE articles.subservice_id = 7" or die ("Unable to join tables!");
-$sql_article_attach3 = "SELECT attachments.id attId, attachments.title attTitle, attachments.article_id attArticle,articles.id artId,articles.title artTitle,articles.subservice_id artSubSer FROM articles LEFT JOIN attachments ON articles.id=attachments.article_id WHERE articles.subservice_id = 8" or die ("Unable to join tables!");
+if ($del != 'undefined'){
 
-$result_article_attach1 = mysqli_query($resultdb,$sql_article_attach1) or die ("False connection result on JOIN!");
-$result_article_attach2 = mysqli_query($resultdb,$sql_article_attach2) or die ("False connection result on JOIN!");
-$result_article_attach3 = mysqli_query($resultdb,$sql_article_attach3) or die ("False connection result on JOIN!");
+	data_handler("article","delete",$del);
+}
 
-function getData($result){
+function getSubService($id){
 
+	$result = data_handler("service","select",$id);
+	
+	while($row = mysqli_fetch_array($result)){ 
+
+	  	$title = $row['title'];	
+	 	
+  		echo $title;
+	  	
+	 }
+}
+
+
+function getDataTable($id){
+
+	$result = data_handler("articles_attach","select",$id);
+	
 	while($row = mysqli_fetch_array($result)){ 
 
 	  	$title = $row['artTitle'];	
@@ -33,17 +48,8 @@ function getData($result){
 	         </tr>';
 	 }
 }
-
-$del = isset($_GET['del']) ? $_GET['del'] : 'undefined';
-
-if ($del != 'undefined'){
-
-	$sql_del = "DELETE FROM articles WHERE ID = '$del'";
-	$result_del = mysqli_query($resultdb,$sql_del) or die ("Unable to delete!");
-    header('Location: http://localhost/cmstest/pbl/admin/page-articles.php');
-}
-
 ?>
+
 <!DOCTYPE html>
 <html>
 <?php include 'meta.php'; ?>
@@ -53,7 +59,7 @@ if ($del != 'undefined'){
 
 	<h1>Články</h1>
 	<section>
-		<h2>Subservice 1</h2>
+		<h2><?php  getSubService(6);?></h2>
 		<table>
 			<tr>
 				<th>Title</th>
@@ -61,13 +67,13 @@ if ($del != 'undefined'){
 				<th>Actions</th>
 			</tr>
 			<?php 	
-			   getData($result_article_attach1);
+			   getDataTable(6);
 			?>
 		</table>
 		<a class="button" id="btn" data-id="about" href="http://localhost/cmstest/pbl/admin/article-detail.php?id=6">Add new</a>
 			</section>
 			<section>
-				<h2>Subservice 2</h2>
+				<h2><?php  getSubService(7);?></h2>
 				<table>
 					<tr>
 						<th>Title</th>
@@ -75,13 +81,13 @@ if ($del != 'undefined'){
 						<th>Actions</th>
 					</tr>
 					<?php 	
-					   getData($result_article_attach2);
+					   getDataTable(7);
 					?>
          		</table>
 				<a class="button" id="btn" data-id="about" href="http://localhost/cmstest/pbl/admin/article-detail.php?id=7">Add new</a>
 			</section>
 			<section>
-				<h2>Subservice 3</h2>
+				<h2><?php  getSubService(8);?></h2>
 				<table>
 					<tr>
 						<th>Title</th>
@@ -89,7 +95,7 @@ if ($del != 'undefined'){
 						<th>Actions</th>
 					</tr>
 					<?php 	
-					   getData($result_article_attach3);
+					   getDataTable(8);
 					?>
 				</table>
 				<a class="button" id="btn" data-id="about" href="http://localhost/cmstest/pbl/admin/article-detail.php?id=8">Add new</a>
