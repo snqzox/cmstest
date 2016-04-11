@@ -47,10 +47,11 @@ function getDataTable($id){
 
 			 	while($row2 = mysqli_fetch_array($result_attach)){
 				$article_id = $row2['article_id'];
+				$path = $row2['whole_path'];
 				if ($article_id==$id){
 					
 						$title_attach = $row2['title'];
-				   	 echo   '<a href="#">' . $title_attach . '</a><br>';
+				   	 echo   '<a href=" ' . $path . '" download>' . $title_attach . '</a><br>';
 			       	}
 
 			   	}

@@ -1,6 +1,9 @@
 <?php
+session_start();
 
 function data_handler($page,$dbaction,$dataid){
+
+
   
   require_once('config.php'); 
   
@@ -28,7 +31,7 @@ function data_handler($page,$dbaction,$dataid){
         
           $sql = "UPDATE articles SET title='$title', content='$content' WHERE ID='$id'";  
           $result = mysqli_query($res,$sql) or die("Unable to update article");
-         // fileupload($id);
+          fileupload($id);
           header('Location: http://localhost/cmstest/pbl/admin/page-articles.php');
 
           return $result;
@@ -36,7 +39,7 @@ function data_handler($page,$dbaction,$dataid){
           else if (strcmp($action, "select") == 0){
               if ($dataid != ''){
                     
-                      $sql = "SELECT * FROM articles WHERE id = '$dataid'" or die ("Unable to join tables!");
+                      $sql = "SELECT * FROM articles WHERE ID = '$dataid'" or die ("Unable to join tables!");
             }
             else {
               
@@ -48,10 +51,9 @@ function data_handler($page,$dbaction,$dataid){
             return $result;
             }
               else if (strcmp($action, "delete") == 0){
-                
-                $sql = "DELETE FROM articles WHERE ID = '$dataid'" or die ("Unable to delete articles!");
-                $result = mysqli_query($res,$sql) or die ("Unable to get data for editation!");
-            
+               deleteAttachments($dataid);               
+                $sql = "DELETE FROM articles WHERE ID = '$dataid'" or die ("Unable to delete attachments!");
+                $result = mysqli_query($res,$sql) or die ("Unable to delete attachments!");
                 return $result;
               }
                  else if (strcmp($action, "create") == 0){
@@ -131,13 +133,28 @@ function data_handler($page,$dbaction,$dataid){
       case "attachments":
 
            if (strcmp($action, "select") == 0){
-        
+
               $sql = "SELECT * FROM attachments WHERE article_id = '$dataid'";
               $result = mysqli_query($res,$sql) or die ("Unable to UPLOAD attachments!");
               return $result;
               
               }    
+               else if (strcmp($action, "delete") == 0){
                     
+                    $art = getArtIDfromAttach($dataid);
+                    $title = getTitleAttach($dataid);
+                   /* $id_art = $dataiad;
+                    $articleID = getArtIDfromAttach($id_art);     */   
+                    //$articleID = 87;
+                    echo 'http://localhost/cmstest/pbl/admin/article-edit.php?edit=' . $art . ' <br>IDDEEE:' . $dataid ;
+                    $sql = "DELETE FROM attachments WHERE ID = '$dataid'";
+                    $result = mysqli_query($res,$sql) or die ("Unable to UPLOAD attachments!");
+                    unlink("uploads/" . $title);
+                    header('Location: http://localhost/cmstest/pbl/admin/article-edit.php?edit=' . $art);
+                    
+                    return $result;
+                    
+              }     
          
            break;
   }
@@ -153,31 +170,113 @@ function fileupload($article_id){
     for ($i=0; $i < $total; $i++){
 
       $name = $_FILES['files']['name'][$i];
-      $path = "../uploads/". $name;
+      $path = "uploads/". $name;
       //limit file size on 3 MB
-
-    if ($_FILES['files']['error'][$i] === UPLOAD_ERR_OK) {
-      
       $size = $_FILES['files']['size'][$i];
 
+    if ($_FILES['files']['error'][$i] === UPLOAD_ERR_OK) {
 
-    if($size > 4000000){  
+      
+    if($size > 3000000){  
 
-              $error='Size of file ' . $name . ' must be less than 4MB ';
-              die($error . 'Click <a href="http://localhost/cmstest/pbl/admin/article-edit.php?edit=' . $article_id . '">here</a> to go back.');
-              break;
-         
+              $error='Size of file ' . $name . ' must be less than 3MB ';
+              $_SESSION["error_message"] = $error; 
+              //die($error . 'Click <a href="http://localhost/cmstest/pbl/admin/article-edit.php?edit=' . $article_id . '">here</a> to go back.');      
+              
+              header('Location: http://localhost/cmstest/pbl/admin/article-edit.php?edit=' . $article_id);
+              die();
       }
         else {
               
-              $sql = "INSERT INTO attachments (title, whole_path, article_id,size) VALUES ('$name','$path','$article_id','$size')" or die ('Unable to upload attachments!');
+              $sql = "INSERT INTO attachments (title, whole_path, article_id,size,type) VALUES ('$name','$path','$article_id','$size','TYP')" or die ('Unable to abs(number)ttachments!');
               $result = mysqli_query($res,$sql) or die ("Unable to UPLOAD attachments!");
-              echo 'File ' . $name . ' was sucessfully uploaded!<br>';
-        } 
+              //die ('File ' . $name . ' was sucessfully uploaded!<br> TOTAL:' . $total . '<br>i = '.$i);
+              $file_tmp =$_FILES['files']['tmp_name'][$i];
+              move_uploaded_file($file_tmp,"uploads/".$name);
+              $_SESSION["error_message"] = ''; 
+              //die();
+        }     
+       // echo 'File ' . $name . ' has less than 5MB (server settings)!<br> TOTAL:' . $total . '<br>i = '. $i . '<br>SIZE :' . $size . '<br>ERROR: ' . $error . ' <br><br>';
 
 
-    } else {
-       die("Attachments must be smaller than 4 MB. <br>Upload failed with error code " . $_FILES['files']['error'][$i]);
-    }
+    } 
+
+      else if ($_FILES['files']['error'][$i] === UPLOAD_ERR_INI_SIZE){
+
+             $error='ERROR Size of file ' . $name . ' must be less than 3MB ';
+             $_SESSION["error_message"] = $error; 
+       
+             header('Location: http://localhost/cmstest/pbl/admin/article-edit.php?edit=' . $article_id);
+             die();
+
+      }
+        else {
+             
+           //  echo "Attachments must be smaller than 4 MB. <br>Upload failed with error code " . $_FILES['files']['error'][$i] . '<br> TOTAL:' . $total;
+
+      // die("Attachments must be smaller than 4 MB. <br>Upload failed with error code " . $_FILES['files']['error'][$i] . '<br> TOTAL:' . $total);
+       }
    }
+}
+
+function getArtIDfromAttach ($attach_id){
+
+  require_once('config.php'); 
+  $res  = connect();
+
+
+  $sql = "SELECT article_id FROM attachments WHERE ID = '$attach_id'";
+  $result = mysqli_query($res,$sql) or die ("Unable select article id");
+
+        echo "<br>FUNCTION:<br>";
+
+  while ($row = mysqli_fetch_array($result)){
+
+
+    $article_id2 = $row['article_id'];
+
+    return $article_id2;
+  }
+
+
+}
+
+function getTitleAttach($attach_id){
+
+  require_once('config.php'); 
+  $res  = connect();
+
+  $sql = "SELECT title FROM attachments WHERE ID = '$attach_id'";
+
+   $result = mysqli_query($res,$sql) or die ("Unable select article id");
+
+   echo "<br>TITLEEEEEEEEEEEEE:<br>";
+
+  while ($row = mysqli_fetch_array($result)){
+
+
+    $article_title = $row['title'];
+
+    return $article_title;
+  }
+
+}
+
+function deleteAttachments($article_id){
+
+  require_once('config.php'); 
+  $res  = connect();
+
+  $sql = "SELECT title FROM attachments WHERE article_id = '$article_id'";
+
+  $result = mysqli_query($res,$sql) or die ("Unable select article id");
+
+  while ($row = mysqli_fetch_array($result)){   
+
+
+    $article_title = $row['title'];
+    unlink("uploads/" . $article_title);
+
+    
+  } 
 }
