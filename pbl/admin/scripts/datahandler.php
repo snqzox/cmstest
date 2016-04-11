@@ -28,26 +28,41 @@ function data_handler($page,$dbaction,$dataid){
         
           $sql = "UPDATE articles SET title='$title', content='$content' WHERE ID='$id'";  
           $result = mysqli_query($res,$sql) or die("Unable to update article");
-          fileupload($id);
-        //  
-        header('Location: http://localhost/cmstest/pbl/admin/page-articles.php');
-        echo "ddddd";
+         // fileupload($id);
+          header('Location: http://localhost/cmstest/pbl/admin/page-articles.php');
+
           return $result;
         }
           else if (strcmp($action, "select") == 0){
-            
-            $sql = "SELECT * FROM articles WHERE id = '$dataid'" or die ("Unable to join tables!");
+              if ($dataid != ''){
+                    
+                      $sql = "SELECT * FROM articles WHERE id = '$dataid'" or die ("Unable to join tables!");
+            }
+            else {
+              
+                      $sql = "SELECT * FROM articles" or die ("Unable to join tables!");
+            }    
+
             $result = mysqli_query($res,$sql) or die ("Unable to get data for editation!");
             
             return $result;
             }
               else if (strcmp($action, "delete") == 0){
+                
                 $sql = "DELETE FROM articles WHERE ID = '$dataid'" or die ("Unable to delete articles!");
                 $result = mysqli_query($res,$sql) or die ("Unable to get data for editation!");
             
                 return $result;
               }
-        break;
+                 else if (strcmp($action, "create") == 0){
+                
+                    $sql = "INSERT INTO articles (title, content, subservice_id) VALUES ('$title', '$content', '$dataid')";  
+                    $result = mysqli_query($res,$sql) or die("Unable to create record");
+                    header('Location: http://localhost/cmstest/pbl/admin/page-articles.php'); 
+                    
+                    return $result;
+                  }
+              break;
 
       case "page_main":
 
@@ -86,10 +101,10 @@ function data_handler($page,$dbaction,$dataid){
           }        
         break;
     
-      case "articles_attach":
+      case "articles_sub":
 
         if (strcmp($action, "select") == 0){
-              $sql = "SELECT attachments.id attId, attachments.title attTitle, attachments.article_id attArticle,articles.id artId,articles.title artTitle,articles.subservice_id artSubSer FROM articles LEFT JOIN attachments ON articles.id=attachments.article_id WHERE articles.subservice_id = '$dataid'";
+              $sql = "SELECT * FROM articles WHERE subservice_id = '$dataid' ";
               $result = mysqli_query($res,$sql) or die ("Unable to LOAD data!");
               return $result;
         }          
@@ -112,23 +127,57 @@ function data_handler($page,$dbaction,$dataid){
                 return $result;
           }        
           break;
+      
+      case "attachments":
+
+           if (strcmp($action, "select") == 0){
+        
+              $sql = "SELECT * FROM attachments WHERE article_id = '$dataid'";
+              $result = mysqli_query($res,$sql) or die ("Unable to UPLOAD attachments!");
+              return $result;
+              
+              }    
+                    
+         
+           break;
   }
 }
 
 function fileupload($article_id){
 
-require_once('config.php'); 
-$res  = connect();
+    require_once('config.php'); 
 
-$total = count($_FILES['files']['name']);
+    $res  = connect();
+    $total = count($_FILES['files']['name']);
 
- for ($i=0; $i < $total; $i++){
+    for ($i=0; $i < $total; $i++){
 
-  $name = $_FILES['files']['name'][$i];
-  $path = "../uploads/". $name;
+      $name = $_FILES['files']['name'][$i];
+      $path = "../uploads/". $name;
+      //limit file size on 3 MB
 
-  $sql = "INSERT INTO attachments (title, whole_path, article_id) VALUES ('$name','','$article_id');";
-  $result = mysqli_query($res,$sql) or die ("Unable to UPLOAD attachments!");
+    if ($_FILES['files']['error'][$i] === UPLOAD_ERR_OK) {
+      
+      $size = $_FILES['files']['size'][$i];
 
-}
+
+    if($size > 4000000){  
+
+              $error='Size of file ' . $name . ' must be less than 4MB ';
+              die($error . 'Click <a href="http://localhost/cmstest/pbl/admin/article-edit.php?edit=' . $article_id . '">here</a> to go back.');
+              break;
+         
+      }
+        else {
+              
+              $sql = "INSERT INTO attachments (title, whole_path, article_id,size) VALUES ('$name','$path','$article_id','$size')" or die ('Unable to upload attachments!');
+              $result = mysqli_query($res,$sql) or die ("Unable to UPLOAD attachments!");
+              echo 'File ' . $name . ' was sucessfully uploaded!<br>';
+        } 
+
+
+    } else {
+       die("Attachments must be smaller than 4 MB. <br>Upload failed with error code " . $_FILES['files']['error'][$i]);
+    }
+   }
 }

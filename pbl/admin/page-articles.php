@@ -25,29 +25,42 @@ function getSubService($id){
 
 function getDataTable($id){
 
-	$result = data_handler("articles_attach","select",$id);
+	$result = data_handler("articles_sub","select",$id);
+
 	
 	while($row = mysqli_fetch_array($result)){ 
 
-	  	$title = $row['artTitle'];	
-	  	$id = $row['artId'];      
-	  	$subservice_id = $row['artSubSer'];  
-		$title_attach = $row['attTitle'];
+	  	$title = $row['title'];	
+	  	$id = $row['ID'];      
+	  	$subservice_id = $row['subservice_id'];  
+/*		$title_attach = $row['attTitle'];
 	   	$article_id = $row['attArticle'];  
+*/		$result_attach = data_handler("attachments","select",$id);
+	   	$attach_count = count($result_attach);
 
 	  	echo '<tr>';
 			       echo '<td>' . $title . ' subservice = ' . $subservice_id . '</td>
 			       <td>';
 			  
-			   if ($article_id==$id){
-				   	 echo   '<a href="#">' . $title_attach . '</a>';
-				   }
+			   
+			if ($attach_count > 0){
+
+			 	while($row2 = mysqli_fetch_array($result_attach)){
+				$article_id = $row2['article_id'];
+				if ($article_id==$id){
+					
+						$title_attach = $row2['title'];
+				   	 echo   '<a href="#">' . $title_attach . '</a><br>';
+			       	}
+
+			   	}
+			}   
 			  
 		echo '</td>
 				   <td><a href="http://localhost/cmstest/pbl/admin/article-edit.php?edit='. $id .'">Upravit</a>, <a href=http://localhost/cmstest/pbl/admin/page-articles.php?del='. $id .'>Odstranit</a></td>
 	         </tr>';
-	 }
-}
+		 }
+	}
 ?>
 
 <!DOCTYPE html>
