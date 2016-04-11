@@ -28,8 +28,10 @@ function data_handler($page,$dbaction,$dataid){
         
           $sql = "UPDATE articles SET title='$title', content='$content' WHERE ID='$id'";  
           $result = mysqli_query($res,$sql) or die("Unable to update article");
-          header('Location: http://localhost/cmstest/pbl/admin/page-articles.php');
-        
+          fileupload($id);
+        //  
+        header('Location: http://localhost/cmstest/pbl/admin/page-articles.php');
+        echo "ddddd";
           return $result;
         }
           else if (strcmp($action, "select") == 0){
@@ -111,4 +113,22 @@ function data_handler($page,$dbaction,$dataid){
           }        
           break;
   }
+}
+
+function fileupload($article_id){
+
+require_once('config.php'); 
+$res  = connect();
+
+$total = count($_FILES['files']['name']);
+
+ for ($i=0; $i < $total; $i++){
+
+  $name = $_FILES['files']['name'][$i];
+  $path = "../uploads/". $name;
+
+  $sql = "INSERT INTO attachments (title, whole_path, article_id) VALUES ('$name','','$article_id');";
+  $result = mysqli_query($res,$sql) or die ("Unable to UPLOAD attachments!");
+
+}
 }
