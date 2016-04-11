@@ -118,6 +118,8 @@ CREATE TABLE IF NOT EXISTS `contact` (
         `studio_id` mediumint(9) DEFAULT NULL,
         `activity_id` mediumint(9) DEFAULT NULL,
         `defaultRef_id` mediumint(9)DEFAULT NULL,
+        `size` varchar(20) NOT NULL,
+        `type` varchar(20) NOT NULL,
          PRIMARY KEY (`ID`),
          FOREIGN KEY (`article_id`) REFERENCES articles(`ID`) on delete cascade,               
          FOREIGN KEY (`subsidy_id`) REFERENCES subsidies(`ID`) on delete cascade,
