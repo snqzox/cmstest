@@ -35,8 +35,8 @@ function getDataTable($id){
 		$title_attach = $row['attTitle'];
 	   	$article_id = $row['attArticle'];  
 
-	  	echo '<tr>
-			       <td>' . $title . ' subservice = ' . $subservice_id . '</td>
+	  	echo '<tr>';
+			       echo '<td>' . $title . ' subservice = ' . $subservice_id . '</td>
 			       <td>';
 			  
 			   if ($article_id==$id){

@@ -3,6 +3,8 @@ if (isset($_POST['submit'])){
 
 	require_once('scripts/datahandler.php');
 	
+	$total = count($_FILES['files']['name']);
+
 	$name="article";
 	$action="update";
 	data_handler($name,$action,''); 
@@ -36,7 +38,7 @@ if (isset($_POST['submit'])){
 <div id="content">
 
 	<h1>Upravit/pridat clanok k podsluzbe 1,2 alebo 3?</h1>
-	<form method="POST" action="">
+	<form method="POST" action="" enctype="multipart/form-data">
 		<div class="form-basic" id="form">
 			<div class="form-group">
 				<label>Titulek:</label>
@@ -49,7 +51,7 @@ if (isset($_POST['submit'])){
 			</div>
 			<div class="form-group">
 				<label>Attachment:</label>
-				<input type="file" name="fileToUpload" id="fileToUpload">
+				<input type="file" name="files[]" id="fileToUpload" multiple=""/>
 			</div>
 			<button class="btn btn-submit" id="btn" data-id="about" name="submit" >Save</button>
 		  </div>
