@@ -18,6 +18,17 @@ function data_handler($page,$dbaction,$dataid){
   $subject_set = isset($_POST['subject']) ? $_POST['subject'] : '';
   $client_set = isset($_POST['client']) ? $_POST['client'] : '';
   $price_set = isset($_POST['price']) ? $_POST['price'] : '';
+  $costs_set= isset($_POST['costs']) ? $_POST['costs'] : '';
+  $pd_set = isset($_POST['pd']) ? $_POST['pd'] : '';
+  $investition_set = isset($_POST['investition']) ? $_POST['investition'] : '';
+  $email_set = isset($_POST['email']) ? $_POST['email'] : '';
+  $mobile_set = isset($_POST['mobile']) ? $_POST['mobile'] : '';
+  $company_set = isset($_POST['company']) ? $_POST['company'] : '';
+  $address_set = isset($_POST['address']) ? $_POST['address'] : '';
+  $psc_city_set = isset($_POST['psc_city']) ? $_POST['psc_city'] : '';
+  $ic_set = isset($_POST['ic']) ? $_POST['ic'] : '';
+  $dic_set = isset($_POST['dic']) ? $_POST['dic'] : '';
+  
 
   $page_name = $page;
   $title=test_input($title_set);
@@ -27,6 +38,20 @@ function data_handler($page,$dbaction,$dataid){
   $subject=test_input($subject_set);
   $client=test_input($client_set);
   $price=test_input($price_set);
+  $costs=test_input($costs_set);
+  $pd=test_input($pd_set);
+  $investition=test_input($investition_set);
+  
+  $email=test_input($email_set);
+  $mobile=test_input($mobile_set);
+  $company=test_input($company_set);
+  $address=test_input($address_set);
+  $ic=test_input($ic_set);
+  $dic=test_input($dic_set);
+  $psc_city=test_input($psc_city_set);
+
+
+
 
   switch($page_name){
 
@@ -164,22 +189,18 @@ function data_handler($page,$dbaction,$dataid){
 
            if (strcmp($action, "select") == 0){
           
+                      if ($dataid != ''){
+                              
+                                $sql = "SELECT * FROM subsidies WHERE ID = '$dataid'" or die ("Unable to join tables!");
+                      }
+                      else {
+                        
+                                $sql = "SELECT * FROM subsidies" or die ("Unable to join tables!");
+                      }  
 
-
-            if ($dataid != ''){
-                    
-                      $sql = "SELECT * FROM subsidies WHERE ID = '$dataid'" or die ("Unable to join tables!");
-            }
-            else {
-              
-                      $sql = "SELECT * FROM subsidies" or die ("Unable to join tables!");
-            }  
-
-
-
-             $result = mysqli_query($res,$sql) or die ("Unable to SELECT subsidies records!");
-              return $result;
-          }    
+                       $result = mysqli_query($res,$sql) or die ("Unable to SELECT subsidies records!");
+                        return $result;
+                    }    
             
             else if (strcmp($action, "update") == 0){
            
@@ -188,13 +209,20 @@ function data_handler($page,$dbaction,$dataid){
                 header('Location: http://localhost/cmstest/pbl/admin/page-references.php');
                 return $result;
             }     
-             else if (strcmp($action, "create") == 0){
-           
-                $sql = "INSERT INTO subsidies (title, subject, client, price, content, page_id) VALUES ('$title', '$subject', '$client', '$price', '$content', 5)";
-                $result = mysqli_query($res,$sql) or die ("Unable to UPDATE subsidies!");
-                header('Location: http://localhost/cmstest/pbl/admin/page-references.php');
-                return $result;
-            }
+                 else if (strcmp($action, "create") == 0){
+               
+                    $sql = "INSERT INTO subsidies (title, subject, client, price, content, page_id) VALUES ('$title', '$subject', '$client', '$price', '$content', 5)";
+                    $result = mysqli_query($res,$sql) or die ("Unable to UPDATE subsidies!");
+                    header('Location: http://localhost/cmstest/pbl/admin/page-references.php');
+                    return $result;
+                }
+                      else if (strcmp($action, "delete") == 0){
+                     
+                          $sql = "DELETE FROM subsidies WHERE ID = '$dataid'" or die ("Unable to delete attachments!");
+                          $result = mysqli_query($res,$sql) or die ("Unable to UPDATE subsidies!");
+                         // header('Location: http://localhost/cmstest/pbl/admin/page-references.php');
+                          return $result;
+                      }
 
           break;
       
@@ -202,52 +230,149 @@ function data_handler($page,$dbaction,$dataid){
 
            if (strcmp($action, "select") == 0){
           
-              $sql = "SELECT * FROM activities";
+                if ($dataid != ''){
+                              
+                                $sql = "SELECT * FROM activities WHERE ID = '$dataid'" or die ("Unable to join tables!");
+                      }
+                      else {
+                        
+                                $sql = "SELECT * FROM activities" or die ("Unable to select from activities!");
+                      }
+
+
+
+
               $result = mysqli_query($res,$sql) or die ("Unable to SELECT activities records!");
               return $result;
           }    
             
-            else if (strcmp($action, "update") == 0){
-           
-                $sql = "UPDATE activities SET title='$title' WHERE ID=5";
-                $result = mysqli_query($res,$sql) or die ("Unable to UPDATE page services!");
-                header('Location: http://localhost/cmstest/pbl/admin/page-services.php');
-                return $result;
-          }        
+              else if (strcmp($action, "update") == 0){
+             
+                  $sql = "UPDATE activities SET title='$title',client='$client',investition='$investition',content='$content' WHERE ID=$id";
+                  $result = mysqli_query($res,$sql) or die ("Unable to UPDATE activities!");
+                  header('Location: http://localhost/cmstest/pbl/admin/page-references.php');
+                  return $result;
+              }
+
+                 else if (strcmp($action, "delete") == 0){
+                 
+                      $sql = "DELETE FROM activities WHERE ID = '$dataid'" or die ("Unable to delete activity!");
+                      $result = mysqli_query($res,$sql) or die ("Unable to delete activity!");
+                     // header('Location: http://localhost/cmstest/pbl/admin/page-references.php');
+                      return $result;
+                  } 
+                     else if (strcmp($action, "create") == 0){
+               
+                    $sql = "INSERT INTO activities (title, client, investition, content, page_id) VALUES ('$title', '$client', '$investition', '$content', 5)";
+                    $result = mysqli_query($res,$sql) or die ("Unable to UPDATE activvities!");
+                    header('Location: http://localhost/cmstest/pbl/admin/page-references.php');
+                    return $result;
+                }
           break;
       
      case "studios":
 
            if (strcmp($action, "select") == 0){
           
-              $sql = "SELECT * FROM studios";
+                    if ($dataid != ''){
+                              
+                                $sql = "SELECT * FROM studios WHERE ID = '$dataid'" or die ("Unable to join tables!");
+                      }
+                      else {
+                        
+                                $sql = "SELECT * FROM studios" or die ("Unable select from studios!");
+                      }  
+
+
               $result = mysqli_query($res,$sql) or die ("Unable to SELECT studios records!");
               return $result;
           }    
             
             else if (strcmp($action, "update") == 0){
            
-                $sql = "UPDATE activities SET title='$title' WHERE ID=5";
+                $sql = "UPDATE studios SET title='$title', client='$client', costs='$costs', pd='$pd', content='$content'  WHERE ID=$id";
                 $result = mysqli_query($res,$sql) or die ("Unable to UPDATE page services!");
-                header('Location: http://localhost/cmstest/pbl/admin/page-services.php');
+                header('Location: http://localhost/cmstest/pbl/admin/page-references.php');
                 return $result;
-          }        
+          }     
+
+
+           else if (strcmp($action, "delete") == 0){
+           
+                $sql = "DELETE FROM studios WHERE ID = '$dataid'" or die ("Unable to delete activity!");
+                $result = mysqli_query($res,$sql) or die ("Unable to delete activity!");
+               // header('Location: http://localhost/cmstest/pbl/admin/page-references.php');
+                return $result;
+            } 
+
+                else if (strcmp($action, "create") == 0){
+               
+                    $sql = "INSERT INTO studios (title, client, costs, PD,content, page_id) VALUES ('$title', '$client', '$costs', '$pd', '$content', 5)";
+                    $result = mysqli_query($res,$sql) or die ("Unable to UPDATE studios!");
+                    header('Location: http://localhost/cmstest/pbl/admin/page-references.php');
+                    return $result;
+                }
+
           break;
 
       case "defaultrefs":
 
            if (strcmp($action, "select") == 0){
           
-              $sql = "SELECT * FROM defaultrefs";
+             if ($dataid != ''){
+                              
+                                $sql = "SELECT * FROM defaultrefs WHERE ID = '$dataid'" or die ("Unable to join tables!");
+                      }
+                      else {
+                        
+                                $sql = "SELECT * FROM defaultrefs" or die ("Unable select from studios!");
+                      }  
+
+
+
               $result = mysqli_query($res,$sql) or die ("Unable to SELECT defaultrefs records!");
               return $result;
           }    
             
             else if (strcmp($action, "update") == 0){
            
-                $sql = "UPDATE defaultrefs SET title='$title' WHERE ID=5";
+                $sql = "UPDATE defaultrefs SET title='$title',subtitle='$subtitle',content='$content' WHERE ID=$id";
                 $result = mysqli_query($res,$sql) or die ("Unable to UPDATE page services!");
-                header('Location: http://localhost/cmstest/pbl/admin/page-services.php');
+                header('Location: http://localhost/cmstest/pbl/admin/page-references.php');
+                return $result;
+          }       
+              else if (strcmp($action, "delete") == 0){
+             
+                  $sql = "DELETE FROM defaultrefs WHERE ID = '$dataid'" or die ("Unable to delete reference!");
+                  $result = mysqli_query($res,$sql) or die ("Unable to delete reference!");
+                 // header('Location: http://localhost/cmstest/pbl/admin/page-references.php');
+                  return $result;
+              } 
+                   else if (strcmp($action, "create") == 0){
+                 
+                      $sql = "INSERT INTO defaultrefs (title, subtitle, content, page_id) VALUES ('$title', '$subtitle', '$content', 5)";
+                      $result = mysqli_query($res,$sql) or die ("Unable to UPDATE studios!");
+                      header('Location: http://localhost/cmstest/pbl/admin/page-references.php');
+                      return $result;
+                  }   
+
+
+          break;
+
+      case "contact":
+
+           if (strcmp($action, "select") == 0){
+          
+              $sql = "SELECT * FROM contact";
+              $result = mysqli_query($res,$sql) or die ("Unable to SELECT page services content!");
+              return $result;
+          }    
+            
+            else if (strcmp($action, "update") == 0){
+           
+                $sql = "UPDATE contact SET email='$email',mobile='$mobile',company='$company',address='$address',psc_city='$psc_city',ic='$ic',dic='$dic' WHERE ID=5";
+                $result = mysqli_query($res,$sql) or die ("Unable to UPDATE page contact!");
+                header('Location: http://localhost/cmstest/pbl/admin/page-contact.php');
                 return $result;
           }        
           break;

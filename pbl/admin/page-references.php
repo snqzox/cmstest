@@ -14,12 +14,41 @@ function getRefsTable($table_name){
 	  
 	   	echo '<tr>
 	   		  <td>' . $title . ' </td>	  
-			  <td><a href="http://localhost/cmstest/pbl/admin/reference-detail-'.$table_name.'.php?edit='. $id .'">Upravit</a>, <a href=http://localhost/cmstest/pbl/admin/page-articles.php?del='. $id .'>Odstranit</a></td>
+			  <td><a href="http://localhost/cmstest/pbl/admin/reference-detail-'.$table_name.'.php?edit='. $id .'">Upravit</a>, <a href=http://localhost/cmstest/pbl/admin/page-references.php?del'.$table_name.'='. $id .'>Odstranit</a></td>
 	         </tr>';
 		 }
 	}
 
 
+$delsubsidies = isset($_GET['delsubsidies']) ? $_GET['delsubsidies'] : 'undefined';
+$delstudios = isset($_GET['delstudios']) ? $_GET['delstudios'] : 'undefined';
+$delactivities = isset($_GET['delactivities']) ? $_GET['delactivities'] : 'undefined';
+$deldefaultrefs = isset($_GET['deldefaultrefs']) ? $_GET['deldefaultrefs'] : 'undefined';
+
+
+
+
+if ($delsubsidies != 'undefined'){
+
+	data_handler("subsidies","delete",$delsubsidies);
+	unset($_GET['delsubsidies']);
+
+} else if ($delstudios != 'undefined'){
+
+	data_handler("studios","delete",$delstudios);
+	unset($_GET['delstudios']);
+
+
+}else if ($delactivities != 'undefined'){
+
+	data_handler("activities","delete",$delactivities);
+	unset($_GET['delactivities']);
+
+} else if ($deldefaultrefs != 'defaultrefs'){
+
+	data_handler("defaultrefs","delete",$deldefaultrefs);
+	unset($_GET['defaultrefs']);
+}
 
 if (isset($_POST['submit'])){
 
@@ -91,7 +120,7 @@ if (isset($_POST['submit'])){
 			</tr>
 			<?php  getRefsTable('studios'); ?>
 		</table>
-		<a class="button" id="btn" data-id="about" href="http://localhost/cmstest/pbl/admin/reference-detail-studios.php">Add new</a>
+		<a class="button" id="btn" data-id="about" href="http://localhost/cmstest/pbl/admin/reference-detail-studios.php?add=true">Add new</a>
 	</section>
 	<section>
 		<h2>Reference k Realitní činnosti</h2>
@@ -102,7 +131,7 @@ if (isset($_POST['submit'])){
 			</tr>
 			<?php  getRefsTable('activities'); ?>
 		</table>
-		<a class="button" id="btn" data-id="about" href="http://localhost/cmstest/pbl/admin/reference-detail-activities.php">Add new</a>
+		<a class="button" id="btn" data-id="about" href="http://localhost/cmstest/pbl/admin/reference-detail-activities.php?add=true">Add new</a>
 	</section>
 	<section>
 		<h2>Štandardní reference</h2>
@@ -113,7 +142,7 @@ if (isset($_POST['submit'])){
 			</tr>
 			<?php  getRefsTable('defaultrefs'); ?>
 		</table>
-		<a class="button" id="btn" data-id="about" href="http://localhost/cmstest/pbl/admin/reference-detail-defaultrefs.php">Add new</a>
+		<a class="button" id="btn" data-id="about" href="http://localhost/cmstest/pbl/admin/reference-detail-defaultrefs.php?add=true">Add new</a>
 	</section>
 
 </div>
