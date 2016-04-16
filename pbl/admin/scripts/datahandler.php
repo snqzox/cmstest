@@ -5,7 +5,7 @@ function data_handler($page,$dbaction,$dataid){
 
 
   
-  require_once('config.php'); 
+  require_once('config.php');
   
   $res = connect();
   $page_name=$page;
@@ -15,13 +15,18 @@ function data_handler($page,$dbaction,$dataid){
   $subtitle_set = isset($_POST['subtitle']) ? $_POST['subtitle'] : '';
   $content_set = isset($_POST['content']) ? $_POST['content'] : '';
   $id_set = isset($_POST['id']) ? $_POST['id'] : '';
-  
+  $subject_set = isset($_POST['subject']) ? $_POST['subject'] : '';
+  $client_set = isset($_POST['client']) ? $_POST['client'] : '';
+  $price_set = isset($_POST['price']) ? $_POST['price'] : '';
 
   $page_name = $page;
   $title=test_input($title_set);
   $subtitle=test_input($subtitle_set);
   $content=test_input($content_set);
   $id=test_input($id_set);
+  $subject=test_input($subject_set);
+  $client=test_input($client_set);
+  $price=test_input($price_set);
 
   switch($page_name){
 
@@ -75,7 +80,32 @@ function data_handler($page,$dbaction,$dataid){
               return $result;
         }        
         break;
-    
+      
+      case "page_about":
+
+        if (strcmp($action, "update") == 0){
+              $sql = "UPDATE pageabout SET title='$title', subtitle='$subtitle', content='$content' WHERE ID=5";
+              $result = mysqli_query($res,$sql) or die ("Unable to LOAD data!");
+              header('Location: http://localhost/cmstest/pbl/admin/page-about.php');
+              return $result;
+        }        
+        break;
+     
+      case "page_references":
+
+        if (strcmp($action, "update") == 0){
+              $sql = "UPDATE  pagereferences SET title='$title', subtitle='$subtitle' WHERE ID=5";
+              $result = mysqli_query($res,$sql) or die ("Unable to LOAD data!");
+              header('Location: http://localhost/cmstest/pbl/admin/page-references.php');
+              return $result;
+        }
+            else if (strcmp($action, "select") == 0){
+              $sql = "SELECT * FROM pagereferences WHERE ID=5";
+              $result = mysqli_query($res,$sql) or die ("Unable to LOAD data!");
+              return $result;
+            } 
+        break;
+     
       case "service":
 
         if (strcmp($action, "select") == 0){  
@@ -129,7 +159,99 @@ function data_handler($page,$dbaction,$dataid){
                 return $result;
           }        
           break;
+
+      case "subsidies":
+
+           if (strcmp($action, "select") == 0){
+          
+
+
+            if ($dataid != ''){
+                    
+                      $sql = "SELECT * FROM subsidies WHERE ID = '$dataid'" or die ("Unable to join tables!");
+            }
+            else {
+              
+                      $sql = "SELECT * FROM subsidies" or die ("Unable to join tables!");
+            }  
+
+
+
+             $result = mysqli_query($res,$sql) or die ("Unable to SELECT subsidies records!");
+              return $result;
+          }    
+            
+            else if (strcmp($action, "update") == 0){
+           
+                $sql = "UPDATE subsidies SET title='$title', subject='$subject', client='$client', price='$price', content='$content'  WHERE ID= $id";
+                $result = mysqli_query($res,$sql) or die ("Unable to UPDATE page services!");
+                header('Location: http://localhost/cmstest/pbl/admin/page-references.php');
+                return $result;
+            }     
+             else if (strcmp($action, "create") == 0){
+           
+                $sql = "INSERT INTO subsidies (title, subject, client, price, content, page_id) VALUES ('$title', '$subject', '$client', '$price', '$content', 5)";
+                $result = mysqli_query($res,$sql) or die ("Unable to UPDATE subsidies!");
+                header('Location: http://localhost/cmstest/pbl/admin/page-references.php');
+                return $result;
+            }
+
+          break;
       
+      case "activities":
+
+           if (strcmp($action, "select") == 0){
+          
+              $sql = "SELECT * FROM activities";
+              $result = mysqli_query($res,$sql) or die ("Unable to SELECT activities records!");
+              return $result;
+          }    
+            
+            else if (strcmp($action, "update") == 0){
+           
+                $sql = "UPDATE activities SET title='$title' WHERE ID=5";
+                $result = mysqli_query($res,$sql) or die ("Unable to UPDATE page services!");
+                header('Location: http://localhost/cmstest/pbl/admin/page-services.php');
+                return $result;
+          }        
+          break;
+      
+     case "studios":
+
+           if (strcmp($action, "select") == 0){
+          
+              $sql = "SELECT * FROM studios";
+              $result = mysqli_query($res,$sql) or die ("Unable to SELECT studios records!");
+              return $result;
+          }    
+            
+            else if (strcmp($action, "update") == 0){
+           
+                $sql = "UPDATE activities SET title='$title' WHERE ID=5";
+                $result = mysqli_query($res,$sql) or die ("Unable to UPDATE page services!");
+                header('Location: http://localhost/cmstest/pbl/admin/page-services.php');
+                return $result;
+          }        
+          break;
+
+      case "defaultrefs":
+
+           if (strcmp($action, "select") == 0){
+          
+              $sql = "SELECT * FROM defaultrefs";
+              $result = mysqli_query($res,$sql) or die ("Unable to SELECT defaultrefs records!");
+              return $result;
+          }    
+            
+            else if (strcmp($action, "update") == 0){
+           
+                $sql = "UPDATE defaultrefs SET title='$title' WHERE ID=5";
+                $result = mysqli_query($res,$sql) or die ("Unable to UPDATE page services!");
+                header('Location: http://localhost/cmstest/pbl/admin/page-services.php');
+                return $result;
+          }        
+          break;
+
       case "attachments":
 
            if (strcmp($action, "select") == 0){
@@ -142,7 +264,7 @@ function data_handler($page,$dbaction,$dataid){
                else if (strcmp($action, "delete") == 0){
                     
                     $art = getArtIDfromAttach($dataid);
-                    $title = getTitleAttach($dataid);
+                    $title = getObjectTitle('attachments',$dataid);
                    /* $id_art = $dataiad;
                     $articleID = getArtIDfromAttach($id_art);     */   
                     //$articleID = 87;
@@ -228,8 +350,6 @@ function getArtIDfromAttach ($attach_id){
   $sql = "SELECT article_id FROM attachments WHERE ID = '$attach_id'";
   $result = mysqli_query($res,$sql) or die ("Unable select article id");
 
-        echo "<br>FUNCTION:<br>";
-
   while ($row = mysqli_fetch_array($result)){
 
 
@@ -241,16 +361,19 @@ function getArtIDfromAttach ($attach_id){
 
 }
 
-function getTitleAttach($attach_id){
+//pass function table name and record ID to get record title
+function getObjectTitle($table_name,$attach_id){
+
+  echo "<br>TABLEEE:". $table_name ."<br> and ID:". $attach_id;
 
   require_once('config.php'); 
   $res  = connect();
 
-  $sql = "SELECT title FROM attachments WHERE ID = '$attach_id'";
+  $sql = "SELECT title FROM $table_name WHERE ID = '$attach_id'";
 
-   $result = mysqli_query($res,$sql) or die ("Unable select article id");
+   $result = mysqli_query($res,$sql) or die ("Unable get attachments title!");
 
-   echo "<br>TITLEEEEEEEEEEEEE:<br>";
+   
 
   while ($row = mysqli_fetch_array($result)){
 
@@ -262,6 +385,7 @@ function getTitleAttach($attach_id){
 
 }
 
+//function deletes attachments once an article is erased
 function deleteAttachments($article_id){
 
   require_once('config.php'); 
