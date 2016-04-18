@@ -37,7 +37,7 @@ if (isset($_POST['submit'])){
 
 	<h1>Kontakt</h1>
 	<form method="POST" action="">
-		<div class="form-basic" id="form">
+		<div class="form-basic">
 			<div class="form-group">
 				<label>E-mail:</label>
 				<input type="text" class="form-ctrl title" <?php echo 'value="'.$email.'"'; ?> name="email" id="email">

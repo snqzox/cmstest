@@ -79,7 +79,7 @@ function getAttach($article_id){
 
         echo '<tr><td>' . $id . '</td><td><a href="'. $path .'" download>' . $title . '</a></td>
         	  <td>' . $path . '</td><td>' . $size . '</td>
-        	  <td><a href="http://localhost/cmstest/pbl/admin/article-edit.php?delattach=' . $id . '">Smazat</a></td>
+        	  <td align="right"><a class="button small red" href="http://localhost/cmstest/pbl/admin/article-edit.php?delattach=' . $id . '">Smazat</a></td>
         	  </tr>';
           
     }
@@ -99,7 +99,7 @@ function getAttach($article_id){
 
 	<h1>Upravit/pridat clanok k podsluzbe 1,2 alebo 3?</h1>
 	<form method="POST" action="" enctype="multipart/form-data">
-		<div class="form-basic" id="form">
+		<div class="form-basic">
 			<div class="form-group">
 				<label>Titulek:</label>
 				<input type="text" class="form-ctrl" <?php echo 'value="'.$title.'"'; ?> name="title" id="title">
@@ -113,11 +113,11 @@ function getAttach($article_id){
 				<label>Attachment:</label>
 				<table>
 				<tr>
-					<td>ID</td>
-					<td>NAZEV</td>
-					<td>CESTA</td>
-					<td>VELKOST</td>
-					<td>AKCE</td>
+					<th align="left">ID</th>
+					<th align="left">NAZEV</th>
+					<th align="left">CESTA</th>
+					<th align="left">VELKOST</th>
+					<th align="right">AKCE</th>
 				</tr>
 				<?php getAttach($edit); ?>
 				</table>

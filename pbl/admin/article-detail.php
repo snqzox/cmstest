@@ -28,7 +28,7 @@ if (isset($_POST['subservice'])){
 
 	<h1>Upravit/pridat clanok k podsluzbe 1,2 alebo 3?</h1>
 	<form method="POST" action="">
-		<div class="form-basic" id="form">
+		<div class="form-basic" >
 			<div class="form-group">
 				<label>Titulek:</label>
 				<input type="text" class="form-ctrl" name="title" id="title">
