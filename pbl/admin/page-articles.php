@@ -39,7 +39,7 @@ function getDataTable($id){
 	   	$attach_count = count($result_attach);
 
 	  	echo '<tr>';
-			       echo '<td>' . $title . ' subservice = ' . $subservice_id . '</td>
+			       echo '<td style="font-weight:700;">' . $title . ' subservice = ' . $subservice_id . '</td>
 			       <td>';
 			  
 			   
@@ -51,14 +51,17 @@ function getDataTable($id){
 				if ($article_id==$id){
 					
 						$title_attach = $row2['title'];
-				   	 echo   '<a href=" ' . $path . '" download>' . $title_attach . '</a><br>';
+				   	 echo   '<a href=" ' . $path . '" download>' . $title_attach . '</a>, ';
+
+
 			       	}
+
 
 			   	}
 			}   
 			  
 		echo '</td>
-				   <td><a href="http://localhost/cmstest/pbl/admin/article-edit.php?edit='. $id .'">Upravit</a>, <a href=http://localhost/cmstest/pbl/admin/page-articles.php?del='. $id .'>Odstranit</a></td>
+				   <td align="right"><a class="button small blue" href="http://localhost/cmstest/pbl/admin/article-edit.php?edit='. $id .'">Upravit</a> <a class="button small red" href=http://localhost/cmstest/pbl/admin/page-articles.php?del='. $id .'>Odstranit</a></td>
 	         </tr>';
 		 }
 	}
@@ -72,49 +75,59 @@ function getDataTable($id){
 <div id="content">
 
 	<h1>Články</h1>
+	<p class="perex">
+	Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+	tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam
+	</p>
 	<section>
-		<h2><?php  getSubService(6);?></h2>
 		<table>
-			<tr>
-				<th>Title</th>
-				<th>Attachments</th>
-				<th>Actions</th>
-			</tr>
-			<?php 	
-			   getDataTable(6);
-			?>
-		</table>
-		<a class="button" id="btn" data-id="about" href="http://localhost/cmstest/pbl/admin/article-detail.php?id=6">Add new</a>
-			</section>
-			<section>
+		<tr class="no-hover">
+			<td colspan="3">
+				<h2><?php  getSubService(6);?></h2>
+			</td>
+		</tr>
+		<?php 	
+		   getDataTable(6);
+		?>	
+		<tr class="no-hover">
+			<td colspan="3">
+			<a class="button" id="btn" data-id="about" href="http://localhost/cmstest/pbl/admin/article-detail.php?id=6">Přidat nový</a>
+			</td>
+		</tr>
+
+
+		<tr class="no-hover">
+			<td colspan="3">
 				<h2><?php  getSubService(7);?></h2>
-				<table>
-					<tr>
-						<th>Title</th>
-						<th>Attachments</th>
-						<th>Actions</th>
-					</tr>
-					<?php 	
-					   getDataTable(7);
-					?>
-         		</table>
-				<a class="button" id="btn" data-id="about" href="http://localhost/cmstest/pbl/admin/article-detail.php?id=7">Add new</a>
-			</section>
-			<section>
+			</td>
+		</tr>
+		<?php 	
+		   getDataTable(7);
+		?>	
+		<tr class="no-hover">
+			<td colspan="3">
+			<a class="button" id="btn" data-id="about" href="http://localhost/cmstest/pbl/admin/article-detail.php?id=7">Přidat nový</a>
+			</td>
+		</tr>
+
+
+		<tr class="no-hover">
+			<td colspan="3">
 				<h2><?php  getSubService(8);?></h2>
-				<table>
-					<tr>
-						<th>Title</th>
-						<th>Attachments</th>
-						<th>Actions</th>
-					</tr>
-					<?php 	
-					   getDataTable(8);
-					?>
-				</table>
-				<a class="button" id="btn" data-id="about" href="http://localhost/cmstest/pbl/admin/article-detail.php?id=8">Add new</a>
-			</section>
-		</div>
+			</td>
+		</tr>
+		<?php 	
+			   getDataTable(8);
+			?>		
+		<tr class="no-hover">
+			<td colspan="3">
+			<a class="button" id="btn" data-id="about" href="http://localhost/cmstest/pbl/admin/article-detail.php?id=8">Přidat nový</a>
+			</td>
+		</tr>
+	</table>
+
+	</section>
+
 </div>
 </body>
 </html>
