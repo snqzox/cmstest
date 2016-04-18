@@ -1,3 +1,34 @@
+<?php 
+if (isset($_POST['submit'])){
+
+	require_once('scripts/datahandler.php');
+	
+	$name="service";
+	$action="update";
+	data_handler($name,$action,''); 
+
+}
+	else {
+		
+		require_once('scripts/datahandler.php');
+		
+		$name="service";
+		$action="select";
+        $edit = isset($_GET['edit']) ? $_GET['edit'] : '';
+
+		$result_select = data_handler($name,$action,$edit); 
+
+		while($row = mysqli_fetch_array($result_select)){ 
+
+            $id = $row['ID'];   
+            $title = $row['title']; 
+            $subtitle=$row['subtitle'];
+            $content = $row['content'];      
+              
+	    }
+	}
+?>
+
 <!DOCTYPE html>
 <html>
 <?php include 'meta.php'; ?>
@@ -6,22 +37,24 @@
 <div id="content">
 
 	<h1>Upravit sluzbu/podsluzbu</h1>
+	<form method="POST" action="">
 	<div class="form-basic" id="form">
 		<div class="form-group">
 			<label>Titulek:</label>
-			<input type="text" class="form-ctrl title" value="'.$title.'" name="id" id="title">
+			<input type="text" class="form-ctrl title" <?php echo 'value="'.$title.'"'; ?> name="title" id="title">
+			<input type="hidden" name="id" <?php echo 'value="'.$id.'"'; ?> >
 		</div>
 		<div class="form-group">
 			<label>Podtitulek:</label>
-			<input type="text" class="form-ctrl subtitle" name="subtitle" value="'.$subtitle.'" id="subtitle">
+			<input type="text" class="form-ctrl subtitle" name="subtitle" <?php echo 'value="'.$subtitle.'"'; ?> id="subtitle">
 		</div>
 		<div class="form-group">
 			<label>Obsah:</label>
-			<textarea class="form-ctrl" id="trumbowyg-demo" rows="15"></textarea>
+			<textarea class="form-ctrl" id="trumbowyg-demo" rows="15" name="content" ><?php echo $content; ?></textarea>
 		</div>
-		<button class="btn btn-submit" id="btn" data-id="about">Save</button>
+		<button class="btn btn-submit" id="btn" data-id="about" name="submit">Save</button>
 	  </div>
-
+	 </form>
 </div>
 </body>
 </html>
