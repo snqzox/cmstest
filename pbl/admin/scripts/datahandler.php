@@ -424,26 +424,26 @@ function fileupload($article_id){
     if ($_FILES['files']['error'][$i] === UPLOAD_ERR_OK) {
 
       
-    if($size > 3000000){  
+              if($size > 3000000){  
 
-              $error='Size of file ' . $name . ' must be less than 3MB ';
-              $_SESSION["error_message"] = $error; 
-              //die($error . 'Click <a href="http://localhost/cmstest/pbl/admin/article-edit.php?edit=' . $article_id . '">here</a> to go back.');      
-              
-              header('Location: http://localhost/cmstest/pbl/admin/article-edit.php?edit=' . $article_id);
-              die();
-      }
-        else {
-              
-              $sql = "INSERT INTO attachments (title, whole_path, article_id,size,type) VALUES ('$name','$path','$article_id','$size','TYP')" or die ('Unable to abs(number)ttachments!');
-              $result = mysqli_query($res,$sql) or die ("Unable to UPLOAD attachments!");
-              //die ('File ' . $name . ' was sucessfully uploaded!<br> TOTAL:' . $total . '<br>i = '.$i);
-              $file_tmp =$_FILES['files']['tmp_name'][$i];
-              move_uploaded_file($file_tmp,"uploads/".$name);
-              $_SESSION["error_message"] = ''; 
-              //die();
-        }     
-       // echo 'File ' . $name . ' has less than 5MB (server settings)!<br> TOTAL:' . $total . '<br>i = '. $i . '<br>SIZE :' . $size . '<br>ERROR: ' . $error . ' <br><br>';
+                        $error='Size of file ' . $name . ' must be less than 3MB ';
+                        $_SESSION["error_message"] = $error; 
+                        //die($error . 'Click <a href="http://localhost/cmstest/pbl/admin/article-edit.php?edit=' . $article_id . '">here</a> to go back.');      
+                        
+                        header('Location: http://localhost/cmstest/pbl/admin/article-edit.php?edit=' . $article_id);
+                        die();
+                }
+                  else {
+                        
+                        //die ('File ' . $name . ' was sucessfully uploaded!<br> TOTAL:' . $total . '<br>i = '.$i);
+                        $file_tmp =$_FILES['files']['tmp_name'][$i];
+                        move_uploaded_file($file_tmp,"uploads/".$name);
+                        $_SESSION["error_message"] = ''; 
+                        $sql = "INSERT INTO attachments (title, whole_path, article_id,size,type) VALUES ('$name','$path','$article_id','$size','TYP')" or die ('Unable to abs(number)ttachments!');
+                        $result = mysqli_query($res,$sql) or die ("Unable to UPLOAD attachments!");
+                        //die();
+                  }     
+                        // echo 'File ' . $name . ' has less than 5MB (server settings)!<br> TOTAL:' . $total . '<br>i = '. $i . '<br>SIZE :' . $size . '<br>ERROR: ' . $error . ' <br><br>';
 
 
     } 
@@ -458,13 +458,15 @@ function fileupload($article_id){
 
       }
         else {
-             
-           //  echo "Attachments must be smaller than 4 MB. <br>Upload failed with error code " . $_FILES['files']['error'][$i] . '<br> TOTAL:' . $total;
 
-      // die("Attachments must be smaller than 4 MB. <br>Upload failed with error code " . $_FILES['files']['error'][$i] . '<br> TOTAL:' . $total);
+             $error='ERROR: File upload completed with errors. Please refresh your browser and try again. ';
+             $_SESSION["error_message"] = $error;      
+             header('Location: http://localhost/cmstest/pbl/admin/article-edit.php?edit=' . $article_id);
+             die();
        }
    }
 }
+
 
 function getArtIDfromAttach ($attach_id){
 
