@@ -32,8 +32,12 @@ if (isset($_POST['submit'])){
 <div id="content">
 
 	<h1>O nás</h1>
+	<p class="perex">
+	Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+	tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam
+	</p>
 	<form method="POST" action="">
-	<div class="form-basic" id="form">
+	<div class="form-basic">
 		<div class="form-group">
 			<label>Titulek:</label>
 			<input type="text" class="form-ctrl title" <?php echo 'value="'.$title.'"'; ?> name="title" id="title">

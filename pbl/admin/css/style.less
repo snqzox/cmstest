@@ -1,7 +1,7 @@
 html, body{
 	height:100%;
-	font-family: 'Open Sans', sans-serif;
-	font-size:13px;
+	font-family: 'Roboto Condensed', sans-serif;
+	font-size:15px;
 }
 #right-panel{
 	background-color: @dark;
@@ -60,23 +60,58 @@ a.logout{
 }
 
 table{
-	min-width: 450px;
+	width: 100%;
+	&:empty{
+		&:after{
+		    content: 'Žádné záznamy';
+		    padding: 15px 50px;
+		    background: #f9f9f9;
+		    display: block;
+		    border: 1px solid #ddd;
+		    color: #666;
+		    text-align: center;
+		}
+	}
 	tr{
+		h3{
+				margin:10px 0px 0px;
+			}
+			h2{
+				margin:20px 0px 0px;
+			}
+		&:hover{
+			background: #f9f9f9;
+		}
+		&.no-hover{
+			background: #fff;
+			td{
+				border:none;
+			}
+			&:hover{
+				background: #fff;
+			}
+		}
 		td,th{
 			padding:6px;
-			border:1px solid #ddd;
+			border:none;
+			border-bottom:1px solid #ddd;
+			border-top:1px solid #ddd;
 			height:20px;
 			vertical-align:middle;
 		}
 		th{
 			background-color: #f9f9f9;
-			font-weight:700;
-			color:#666;
+			font-weight:400;
+			color:#333;
 		}
 		td{
 			color:#333;
+
 		}
 		&.parent{
+			h3{
+				margin:5px 0;
+			}
 			td{
 				&:first-child{
 					font-weight:700;
@@ -84,6 +119,11 @@ table{
 			}
 		}
 		&.child{
+			h3{
+				margin:5px 0;
+				font-size: 16px;
+				font-weight: 400;
+			}
 			td{
 				&:first-child{
 					padding-left: 26px;
@@ -93,8 +133,9 @@ table{
 	}
 }
 #content{
-	padding:20px 20px 20px 220px;
-}
+	padding: 0px 0px 0px 200px;
+    display: block;
+    overflow: hidden;}
 .logo{
 	font-weight:700;
 	text-align:center;
@@ -105,30 +146,36 @@ ul#menu{
 	li{
 		margin:0px;
 		cursor: pointer;
+
+		span{
+			padding:13px 15px;
+			text-transform: uppercase;
+			font-size: 12px;
+			display: inline-block;
+		}
 		
 		
 		a{
 			font-weight:400;
-			color:@light;
-			text-transform: uppercase;
+			text-decoration: none;
+			color:lighten(@dark, 45%);
 			cursor: pointer;
-			padding:10px 15px;
+			font-size:15px;
+			padding:13px 15px;
 			display: block;	
 			&:hover{
 				background-color: darken(@dark, 10%)
 			}
 			&.active{
-				background-color:#fff;
-				color:@dark;
-				font-weight: 700;
+				background-color:@blue;
+				color:#fff;
 			}	
 		}
 
 		ul{
 			padding: 5px 0px;
 			li{
-				a{
-					text-transform: inherit;				
+				a{				
 					
 				}
 			}
@@ -169,14 +216,14 @@ h1{
 	font-weight:300;
 	color:@blue;
 	font-size:32px;
-	margin: 5px 0 10px 0;
+	background:@light;
+	padding: 20px 40px;
 }
 h2{
-	font-weight:700;
-	text-transform: uppercase;
-	color:@darkenBlue;
-	font-size:15px;
-	margin:20px 0 10px;
+	font-weight:300;
+	color:@blue;
+	font-size:24px;
+	margin:0 0 10px;
 }
 h3{
 	font-weight:700;
@@ -194,52 +241,100 @@ h4{
 }
 p.perex{
 	color:#666;
-	margin:5px 0 10px;
+	font-weight: 300;
+	background:@light;
+	padding: 0px 40px 20px;
+	font-size:20px;
+	
 }
-
+p.info{
+	color: #666;
+    font-weight: 400;
+    font-style: italic;
+    font-size: 13px;
+    margin: 5px 0 5px;
+}
+.trumbowyg-editor{
+	font-family: Arial, Helvetica, sans-serif;
+	line-height: normal;
+	font-size: 13px;
+}
 input{
 	border:1px solid #ddd;
 	background-color: #fefefe;
 	border: 1px solid #ddd;
+	font-size:16px;
     background-color: #fefefe;
     padding: 5px 8px;
     width:50%;
-    font-family: 'Open Sans', sans-serif;
+    font-size:15px;
+    font-family: Arial, Helvetica, sans-serif;
     box-sizing: border-box;
     &.caption{
     	width:100%;
     	font-weight: 700;
     	font-size:18px;
     }
+    &.title{
+    	font-weight: 700;
+    	font-size:16px;
+    }
+
 
 }
 div.page-name{
 	font-size:14px;
 	color:#888;
 }
-button, a.button{
-	background-color: @blue;
-	color:#fff;
-	font-weight:700;
-	font-size:12px;
-	text-transform: uppercase;
-	display:block;
-	text-align: center;
-    text-decoration: none;
-	border:1px solid @darkenBlue;
-	border-radius:4px;
-	max-width: 100px;
-	padding:6px;
-	margin:10px 0;
-	cursor:pointer;
-	&:hover{
-		background: @darkenBlue;
-	}
-} 
-div#form, form {
-	max-width:600px;
-	margin:30px 0 15px 0;
+:not(li){
+	& > button,& > a.button{
+		background-color: #fff;
+		color:@blue;
+		font-weight:400;
+		font-family: 'Roboto Condensed', sans-serif;
+		font-size:15px;
+		display:block;
+		text-align: center;
+	    text-decoration: none;
+		border:1px solid @blue;
+		border-radius:4px;
+		max-width: 100px;
+		padding:6px 14px;
+		margin:0px 5px 0px 0;
+		cursor:pointer;
+		&:hover{
+			background: @blue;
+			color:#fff;
+		}
+		&.small{
+			padding:3px 7px;
+			margin:0 5px 0 0;
+			font-size:13px;
+			display: inline-block;
+			max-width: 60px;  
+		}
+		&.red{
+			border:1px solid @red;
+			color:@red;
+			&:hover{
+				background: @red;
+				color:#fff;
+			}
+		}
+
+	} 
+}
+div#form, form{
+
+
+}
+div#form, form, section{
+	max-width:900px;
+	margin:30px 0 10px 0;
+	padding:0 40px 20px;
 	overflow: hidden; 
+
+
 	.form-group{
 		margin:0 0 15px 0;
 		& > *{
@@ -247,9 +342,9 @@ div#form, form {
 			margin: 0 0 5px 0;
 		}
 		label{
-			display:block;
-			font-weight: 700;
-			color:#333;
+			display: block;
+		    font-weight: 400;
+		    color: #666;
 		}
 		.form-ctrl{
 			width: 60%;
@@ -258,11 +353,14 @@ div#form, form {
 			&.title{
 				width: 100%;
 			}
+			 &.subtitle{
+    	font-weight: 400;
+    	font-size:13px;
+    	width:100%;
+    }
 		}
 	}
-	&.form-basic{
-
-	}
+	
 }
 
 .trumbowyg-editor{
@@ -292,11 +390,11 @@ div#form, form {
 
 
 /*		VARIABLES		*/
-@blue:#3498DB;
+@blue:#348899;
 @darkenBlue:#2980B9;
 @red:#E74C3C;
-@dark:#2C3238;
-@light:#ECF0F1;
+@dark:#343642;
+@light:#E9F0F1;
 @green:#27B455;
 
 .transition(@property: all; @timing:.25s; @effect:ease-in-out) {
