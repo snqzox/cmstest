@@ -4,18 +4,17 @@
 		CMS
 	</div>	
 	<ul id="menu">
-		<li href="pages/pages.php">
-		 	<a>Stránky</a>
+		<li>
+		 	<span>Stránky</span>
 		 	<ul>
 		 		<li>
-			 		<a href="page-articles.php">Articles</a>
+			 		<a href="page-articles.php">Články</a>
 			 	</li>
-
 			 	<li>
 			 		<a href="page-main.php">Úvod</a>
 			 	</li>
 			 	<li>
-			 		<a href="page-about.php">O nás</a>
+			 		<a href="page-about.php">O spoločnosti</a>
 			 	</li>
 			 	<li>
 			 		<a href="page-services.php">Služby</a>

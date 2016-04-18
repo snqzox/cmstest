@@ -38,7 +38,7 @@ if (isset($_POST['submit'])){
 
 	<h1>Upravit sluzbu/podsluzbu</h1>
 	<form method="POST" action="">
-	<div class="form-basic" id="form">
+	<div class="form-basic" >
 		<div class="form-group">
 			<label>Titulek:</label>
 			<input type="text" class="form-ctrl title" <?php echo 'value="'.$title.'"'; ?> name="title" id="title">

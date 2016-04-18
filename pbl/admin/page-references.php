@@ -11,10 +11,12 @@ function getRefsTable($table_name){
 
 	  	$id = $row['ID'];	
 	  	$title = $row['title'];	
+	  	$client = $row['client'];	
 	  
 	   	echo '<tr>
-	   		  <td>' . $title . ' </td>	  
-			  <td><a href="http://localhost/cmstest/pbl/admin/reference-detail-'.$table_name.'.php?edit='. $id .'">Upravit</a>, <a href=http://localhost/cmstest/pbl/admin/page-references.php?del'.$table_name.'='. $id .'>Odstranit</a></td>
+	   		  <td>' . $title . ' </td>	 
+	   		   <td>' . $client . ' </td>	   
+			  <td align="right"><a class="button small blue" href="http://localhost/cmstest/pbl/admin/reference-detail-'.$table_name.'.php?edit='. $id .'">Upravit</a> <a class="button small red" href=http://localhost/cmstest/pbl/admin/page-references.php?del'.$table_name.'='. $id .'>Odstranit</a></td>
 	         </tr>';
 		 }
 	}
@@ -87,63 +89,72 @@ if (isset($_POST['submit'])){
 <div id="content">
 
 	<h1>Reference</h1>
+	<p class="perex">
+	Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+	tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam
+	</p>
 	<form method="POST" action="">
-	<div class="form-basic" id="form">
-		<div class="form-group">
-			<label>Titulek:</label>
-			<input type="text" class="form-ctrl title" <?php echo 'value="'.$title.'"'; ?> name="title" id="title">
+		<div class="form-basic">
+			<div class="form-group">
+				<label>Titulek:</label>
+				<input type="text" class="form-ctrl title" <?php echo 'value="'.$title.'"'; ?> name="title" id="title">
+			</div>
+			<div class="form-group">
+				<label>Podtitulek:</label>
+				<input type="text" class="form-ctrl subtitle" name="subtitle" <?php echo 'value="'.$subtitle.'"'; ?> id="subtitle">
+			</div>
+			<button class="btn btn-submit" id="btn" data-id="about" name="submit">Save</button>
 		</div>
-		<div class="form-group">
-			<label>Podtitulek:</label>
-			<input type="text" class="form-ctrl subtitle" name="subtitle" <?php echo 'value="'.$subtitle.'"'; ?> id="subtitle">
-		</div>
-		<button class="btn btn-submit" id="btn" data-id="about" name="submit">Save</button>
-	  </div>
-	  </form>
-	  <section>
-		<h2>Dotace</h2>
-		<table>
-			<tr>
-				<th>Title</th>
-				<th>Actions</th>
-			</tr>
-			<?php  getRefsTable('subsidies'); ?>
-		</table>
-		<a class="button" id="btn" data-id="about" href="http://localhost/cmstest/pbl/admin/reference-detail-subsidies.php?add=true">Add new</a>
-	</section>
+	</form>
 	<section>
-		<h2>Reference k Projekčnímu ateliéru</h2>
-		<table>
-			<tr>
-				<th>Title</th>
-				<th>Actions</th>
-			</tr>
-			<?php  getRefsTable('studios'); ?>
-		</table>
-		<a class="button" id="btn" data-id="about" href="http://localhost/cmstest/pbl/admin/reference-detail-studios.php?add=true">Add new</a>
+	<table>
+		<tr class="no-hover">
+			<td colspan="3">
+				<h2>Granty a dotace</h2>
+			</td>
+		</tr>
+		<?php  getRefsTable('subsidies'); ?>		
+		<tr class="no-hover">
+			<td colspan="3">
+			<a class="button" id="btn" data-id="about" href="http://localhost/cmstest/pbl/admin/reference-detail-subsidies.php?add=true">Add new</a>
+			</td>
+		</tr>
+
+
+		<tr class="no-hover">
+			<td colspan="3">
+				<h2>Projekční ateliér</h2>
+			</td>
+		</tr>
+		<?php  getRefsTable('studios'); ?>		
+		<tr class="no-hover">
+			<td colspan="3">
+			<a class="button" id="btn" data-id="about" href="http://localhost/cmstest/pbl/admin/reference-detail-studios.php?add=true">Add new</a>
+			</td>
+		</tr>
+
+
+		<tr class="no-hover">
+			<td colspan="3">
+				<h2>Realitní činnost</h2>
+			</td>
+		</tr>
+		<?php  getRefsTable('activities'); ?>		
+		<tr class="no-hover">
+			<td colspan="3">
+			<a class="button" id="btn" data-id="about" href="http://localhost/cmstest/pbl/admin/reference-detail-activities.php?add=true">Add new</a>
+			</td>
+		</tr>
+	</table>
 	</section>
-	<section>
-		<h2>Reference k Realitní činnosti</h2>
-		<table>
-			<tr>
-				<th>Title</th>
-				<th>Actions</th>
-			</tr>
-			<?php  getRefsTable('activities'); ?>
-		</table>
-		<a class="button" id="btn" data-id="about" href="http://localhost/cmstest/pbl/admin/reference-detail-activities.php?add=true">Add new</a>
-	</section>
-	<section>
+
+<!-- 	<section>
 		<h2>Štandardní reference</h2>
 		<table>
-			<tr>
-				<th>Title</th>
-				<th>Actions</th>
-			</tr>
 			<?php  getRefsTable('defaultrefs'); ?>
 		</table>
 		<a class="button" id="btn" data-id="about" href="http://localhost/cmstest/pbl/admin/reference-detail-defaultrefs.php?add=true">Add new</a>
-	</section>
+	</section> -->
 
 </div>
 </body>
