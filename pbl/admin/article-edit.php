@@ -13,6 +13,9 @@ if (isset($_POST['submit'])){
 	$name="article";
 	$action="update";
 	data_handler($name,$action,''); 
+	
+	data_handler('attachments','update',''); 
+
 
 	echo '<br>SUBMIT IS SET';
 	 unset($_POST['submit']);
@@ -70,21 +73,23 @@ function getAttach($article_id){
 	while($row = mysqli_fetch_array($result_attach)){ 
 
         $id = $row['ID'];   
-        $title = $row['title']; 
+        $name = $row['name']; 
         $path = $row['whole_path']; 
         $size = $row['size']; 
 		$article_id = $row['article_id'];
+		$title_attach = $row['title'];
 
 
-
-        echo '<tr><td>' . $id . '</td><td><a href="'. $path .'" download>' . $title . '</a></td>
-        	  <td>' . $path . '</td><td>' . $size . '</td>
-        	  <td align="right"><a class="button small red" href="http://localhost/cmstest/pbl/admin/article-edit.php?delattach=' . $id . '">Smazat</a></td>
+        echo '<tr><td><input type="text" class="form-ctrl" name="id_attach[]" id="id_attach" value="'.$id.'" readonly></td>
+        		<td><a href="'. $path .'" download>' . $name . '</a></td>
+        	  	<td><input type="text" class="form-ctrl" name="title_attach[]" id="title_attach" value="'.$title_attach.'"></td><td>' . $path . '</td><td>' . $size . '</td>
+        	  	<td align="right"><a class="button small red" href="http://localhost/cmstest/pbl/admin/article-edit.php?delattach=' . $id . '">Smazat</a></td>
         	  </tr>';
           
     }
 
 
+				
 
 } 
 
@@ -115,6 +120,7 @@ function getAttach($article_id){
 				<tr>
 					<th align="left">ID</th>
 					<th align="left">NAZEV</th>
+					<th align="left">TITULEK</th>
 					<th align="left">CESTA</th>
 					<th align="left">VELKOST</th>
 					<th align="right">AKCE</th>
