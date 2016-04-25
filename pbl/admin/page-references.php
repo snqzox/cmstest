@@ -4,7 +4,7 @@ require_once('scripts/datahandler.php');
 
 function getRefsTable($table_name){
 
-	$result = data_handler($table_name,'select','');
+	$result = data_handler($table_name,'select','','');
 
 	
 	while($row = mysqli_fetch_array($result)){ 
@@ -32,23 +32,23 @@ $deldefaultrefs = isset($_GET['deldefaultrefs']) ? $_GET['deldefaultrefs'] : 'un
 
 if ($delsubsidies != 'undefined'){
 
-	data_handler("subsidies","delete",$delsubsidies);
+	data_handler("subsidies","delete",$delsubsidies,'');
 	unset($_GET['delsubsidies']);
 
 } else if ($delstudios != 'undefined'){
 
-	data_handler("studios","delete",$delstudios);
+	data_handler("studios","delete",$delstudios,'');
 	unset($_GET['delstudios']);
 
 
 }else if ($delactivities != 'undefined'){
 
-	data_handler("activities","delete",$delactivities);
+	data_handler("activities","delete",$delactivities,'');
 	unset($_GET['delactivities']);
 
 } else if ($deldefaultrefs != 'defaultrefs'){
 
-	data_handler("defaultrefs","delete",$deldefaultrefs);
+	data_handler("defaultrefs","delete",$deldefaultrefs,'');
 	unset($_GET['defaultrefs']);
 }
 
@@ -58,7 +58,7 @@ if (isset($_POST['submit'])){
 	
 	$name="page_references";
 	$action="update";
-	data_handler($name,$action,5); 
+	data_handler($name,$action,5,''); 
 
 }
 	else {
@@ -68,7 +68,7 @@ if (isset($_POST['submit'])){
 		$name="page_references";
 		$action="select";
 
-		$result_select = data_handler($name,$action,5); 
+		$result_select = data_handler($name,$action,5,''); 
 
 		while($row = mysqli_fetch_array($result_select)){ 
 

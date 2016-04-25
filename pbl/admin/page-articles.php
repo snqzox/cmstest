@@ -6,12 +6,12 @@ $del = isset($_GET['del']) ? $_GET['del'] : 'undefined';
 
 if ($del != 'undefined'){
 
-	data_handler("article","delete",$del);
+	data_handler("article","delete",$del,'');
 }
 
 function getSubService($id){
 
-	$result = data_handler("service","select",$id);
+	$result = data_handler("service","select",$id,'');
 	
 	while($row = mysqli_fetch_array($result)){ 
 
@@ -25,7 +25,7 @@ function getSubService($id){
 
 function getDataTable($id){
 
-	$result = data_handler("articles_sub","select",$id);
+	$result = data_handler("articles_sub","select",$id,'');
 
 	
 	while($row = mysqli_fetch_array($result)){ 
@@ -35,7 +35,7 @@ function getDataTable($id){
 	  	$subservice_id = $row['subservice_id'];  
 /*		$title_attach = $row['attTitle'];
 	   	$article_id = $row['attArticle'];  
-*/		$result_attach = data_handler("attachments","select",$id);
+*/		$result_attach = data_handler("attachments","select",$id,'article_id');
 	   	$attach_count = count($result_attach);
 
 	  	echo '<tr>';
