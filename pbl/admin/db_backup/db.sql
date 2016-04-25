@@ -111,6 +111,7 @@ CREATE TABLE IF NOT EXISTS `contact` (
 
         CREATE TABLE IF NOT EXISTS `attachments` (
         `ID` mediumint(9) NOT NULL AUTO_INCREMENT,
+        `name` varchar(250) NOT NULL,
         `title` varchar(250) NOT NULL,
         `whole_path` varchar(500) NOT NULL,
         `article_id` mediumint(9) DEFAULT NULL,
@@ -120,6 +121,7 @@ CREATE TABLE IF NOT EXISTS `contact` (
         `defaultRef_id` mediumint(9)DEFAULT NULL,
         `size` varchar(20) NOT NULL,
         `type` varchar(20) NOT NULL,
+        `uploadtime` DATETIME DEFAULT NULL,
          PRIMARY KEY (`ID`),
          FOREIGN KEY (`article_id`) REFERENCES articles(`ID`) on delete cascade,               
          FOREIGN KEY (`subsidy_id`) REFERENCES subsidies(`ID`) on delete cascade,
