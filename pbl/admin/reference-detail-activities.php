@@ -12,11 +12,11 @@ if (isset($_POST['submit'])){
 	if ($add != ''){
 
 	$action="create";
-	data_handler($name,$action,''); 
+	data_handler($name,$action,'',''); 
 	} else {
 
 	$action="update";
-	data_handler($name,$action,''); 
+	data_handler($name,$action,'',''); 
 	}
 }
 	else {
@@ -31,7 +31,7 @@ if (isset($_POST['submit'])){
 		} else {
 
 			$action="select";
-			$result_select = data_handler($name,$action,$id); 
+			$result_select = data_handler($name,$action,$id,''); 
 			
 			while($row = mysqli_fetch_array($result_select)){ 
 	            
