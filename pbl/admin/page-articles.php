@@ -61,7 +61,7 @@ function getDataTable($id){
 			}   
 			  
 		echo '</td>
-				   <td align="right"><a class="button small blue" href="http://localhost/cmstest/pbl/admin/article-edit.php?edit='. $id .'">Upravit</a> <a class="button small red" href=http://localhost/cmstest/pbl/admin/page-articles.php?del='. $id .'>Odstranit</a></td>
+				   <td align="right"><a class="button small blue" href="http://localhost/cmstest/pbl/admin/article-detail.php?edit='. $id .'">Upravit</a> <a class="button small red" href=http://localhost/cmstest/pbl/admin/page-articles.php?del='. $id .'>Odstranit</a></td>
 	         </tr>';
 		 }
 	}
@@ -91,7 +91,7 @@ function getDataTable($id){
 		?>	
 		<tr class="no-hover">
 			<td colspan="3">
-			<a class="button" id="btn" data-id="about" href="http://localhost/cmstest/pbl/admin/article-detail.php?id=6">Přidat nový</a>
+			<a class="button" id="btn" data-id="about" href="http://localhost/cmstest/pbl/admin/article-detail.php?add=6">Přidat nový</a>
 			</td>
 		</tr>
 
@@ -106,7 +106,7 @@ function getDataTable($id){
 		?>	
 		<tr class="no-hover">
 			<td colspan="3">
-			<a class="button" id="btn" data-id="about" href="http://localhost/cmstest/pbl/admin/article-detail.php?id=7">Přidat nový</a>
+			<a class="button" id="btn" data-id="about" href="http://localhost/cmstest/pbl/admin/article-detail.php?add=7">Přidat nový</a>
 			</td>
 		</tr>
 
@@ -121,7 +121,7 @@ function getDataTable($id){
 			?>		
 		<tr class="no-hover">
 			<td colspan="3">
-			<a class="button" id="btn" data-id="about" href="http://localhost/cmstest/pbl/admin/article-detail.php?id=8">Přidat nový</a>
+			<a class="button" id="btn" data-id="about" href="http://localhost/cmstest/pbl/admin/article-detail.php?add=8">Přidat nový</a>
 			</td>
 		</tr>
 	</table>

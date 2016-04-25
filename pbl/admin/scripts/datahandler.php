@@ -62,7 +62,7 @@ function data_handler($page,$dbaction,$dataid,$attachParent){
           $sql = "UPDATE articles SET title='$title', content='$content' WHERE ID='$id'";  
           $result = mysqli_query($res,$sql) or die("Unable to update article");
           fileupload($id,'article_id');
-          header('Location: http://localhost/cmstest/pbl/admin/article-edit.php?edit=' . $id);
+          header('Location: http://localhost/cmstest/pbl/admin/article-detail.php?edit=' . $id);
 
           return $result;
         }
@@ -87,9 +87,9 @@ function data_handler($page,$dbaction,$dataid,$attachParent){
                 return $result;
               }
                  else if (strcmp($action, "create") == 0){
-                
                     $sql = "INSERT INTO articles (title, content, subservice_id) VALUES ('$title', '$content', '$dataid')";  
                     $result = mysqli_query($res,$sql) or die("Unable to create record");
+                    fileupload('article','article_id');
                     header('Location: http://localhost/cmstest/pbl/admin/page-articles.php'); 
                     
                     return $result;
@@ -293,7 +293,7 @@ function data_handler($page,$dbaction,$dataid,$attachParent){
                 fileupload($id,'studio_id');
                 $sql = "UPDATE studios SET title='$title', client='$client', costs='$costs', pd='$pd', content='$content'  WHERE ID=$id";
                 $result = mysqli_query($res,$sql) or die ("Unable to UPDATE page services!");
-                header('Location: http://localhost/cmstest/pbl/admin/page-references.php');
+                header('Location: http://localhost/cmstest/pbl/admin/reference-detail-studios.php?edit=' . $id);
                 return $result;
           }     
 
@@ -312,7 +312,7 @@ function data_handler($page,$dbaction,$dataid,$attachParent){
                
                     $sql = "INSERT INTO studios (title, client, costs, PD,content, page_id) VALUES ('$title', '$client', '$costs', '$pd', '$content', 5)";
                     $result = mysqli_query($res,$sql) or die ("Unable to UPDATE studios!");
-                    fileupload('undefined','studio_id');
+                    fileupload('studio','studio_id');
                     header('Location: http://localhost/cmstest/pbl/admin/page-references.php');
                     return $result;
                 }
@@ -395,13 +395,13 @@ function data_handler($page,$dbaction,$dataid,$attachParent){
                     $art = getArtIDfromAttach($dataid);
                     $title = getAttachName('attachments',$dataid);
                    
-                   // echo 'http://localhost/cmstest/pbl/admin/article-edit.php?edit=' . $art . ' <br>IDDEEE:' . $dataid ;
+                   // echo 'http://localhost/cmstest/pbl/admin/article-detail.php?edit=' . $art . ' <br>IDDEEE:' . $dataid ;
                     $sql = "DELETE FROM attachments WHERE ID = '$dataid'";
                     $result = mysqli_query($res,$sql) or die ("Unable to DELETE attachments!");
                     unlink("uploads/" . $title);
                     if (strcmp($attachParent, "article_id") == 0 ) {
 
-                    header('Location: http://localhost/cmstest/pbl/admin/article-edit.php?edit=' . $art);
+                    header('Location: http://localhost/cmstest/pbl/admin/article-detail.php?edit=' . $art);
 
                     }else if (strcmp($attachParent, "studio_id") == 0 ){
                     
@@ -452,101 +452,93 @@ function fileupload($article_id, $parentID){
 
     for ($i=0; $i < $total; $i++){
 
-        $name = $_FILES['files']['name'][$i];
-        //limit file size on 3 MB
-        $size = $_FILES['files']['size'][$i];
+      $name = $_FILES['files']['name'][$i];
+      //limit file size on 3 MB
+      $size = $_FILES['files']['size'][$i];
 
       $stem=substr($name,0,strpos($name,'.'));
 
         //take the file extension_loaded(name)
 
-        $extension = substr($name, strpos($name,'.'), strlen($name)-1);
+      $extension = substr($name, strpos($name,'.'), strlen($name)-1);
 
-        if (strcmp($extension, "docx")){
+      if (strcmp($extension, "docx")){
             $type = 'docx';          
-        }  
-         else {
+      }  
+        else {
             $type = $_FILES['files']['type'][$i];
         }
 
        
       if ($_FILES['files']['error'][$i] === UPLOAD_ERR_OK) {
 
-                if($size > 3000000){  
+          if($size > 3000000){  
 
-                          $error='Size of file ' . $name . ' must be less than 3MB ';
-                          $_SESSION["error_message"] = $error; 
-                          //die($error . 'Click <a href="http://localhost/cmstest/pbl/admin/article-edit.php?edit=' . $article_id . '">here</a> to go back.');      
-                          
-                          header('Location: http://localhost/cmstest/pbl/admin/article-edit.php?edit=' . $article_id);
-                          die();
+              $error='Size of file ' . $name . ' must be less than 3MB ';
+              $_SESSION["error_message"] = $error; 
+              //die($error . 'Click <a href="http://localhost/cmstest/pbl/admin/article-detail.php?edit=' . $article_id . '">here</a> to go back.');      
+              header("Refresh:0");
+              //header('Location: http://localhost/cmstest/pbl/admin/article-detail.php?edit=' . $article_id);
+              die();
+            }
+              else {
+                  
+                  $currentTime=time();
+                  $uploadTime = date("Y-m-d-H:i:s",$currentTime);
+                  $j = 0;
+                  $parts = pathinfo($name);
+                  $path = UPLOAD_DIR. $name;
+
+                  while (file_exists(UPLOAD_DIR . $name)) {
+                      $j++;
+                      $name = $parts["filename"] . "-" . $j . "." . $parts["extension"];
                   }
-                    else {
-                           $currentTime=time();
-                           $uploadTime = date("Y-m-d-H:i:s",$currentTime);
-
-                            $j = 0;
-                            $parts = pathinfo($name);
-                            while (file_exists(UPLOAD_DIR . $name)) {
-                                $j++;
-                                $name = $parts["filename"] . "-" . $j . "." . $parts["extension"];
-                            }
-
-                             $path = UPLOAD_DIR. $name;
 
 
-                              if (strcmp($article_id, 'undefined') == 0){
-                              $article_id = getMaxObjectID('studios');
-                              
-                              $sql = "INSERT INTO attachments (name, whole_path, studio_id,size, type, uploadtime) VALUES ('$name', '$path','$article_id','$size','$type','$uploadTime')" or die ('Unable to abs(number)ttachments!');
-                              $result = mysqli_query($res,$sql) or die ("Unable to UPLOAD attachments! Size of file okAAAAA");
-                          
-                          }else {
+                  //get ID of new article and insert it into attachments
+                  if (strcmp($article_id, 'studio') == 0){
+                    
+                    $article_id = getMaxObjectID('studios');
+                  
+                  }
+                    else if (strcmp($article_id, 'article') == 0) {
+                    
+                        $article_id = getMaxObjectID('articles');
 
-                              $sql = "INSERT INTO attachments (name, whole_path, $parentID,size, type, uploadtime) VALUES ('$name', '$path','$article_id','$size','$type','$uploadTime')" or die ('Unable to abs(number)ttachments!');
-                              $result = mysqli_query($res,$sql) or die ("Unable to UPLOAD attachments! Size of file ok and ARTICLE ID IS " . $article_id. "______" );
-  
-                          }
+                    } 
+                  
+                  $sql = "INSERT INTO attachments (name, whole_path, $parentID,size, type, uploadtime) VALUES ('$name', '$path','$article_id','$size','$type','$uploadTime')" or die ('Unable to abs(number)ttachments!');
+                  $result = mysqli_query($res,$sql) or die ("Unable to UPLOAD attachments! Size of file ok and ARTICLE ID IS " . $article_id. "______" );
 
-
-                          
-                          //die ('File ' . $name . ' was sucessfully uploaded!<br> TOTAL:' . $total . '<br>i = '.$i);
-                          $file_tmp =$_FILES['files']['tmp_name'][$i];
-                          move_uploaded_file($file_tmp,UPLOAD_DIR.$name);
-                          $_SESSION["error_message"] = ''; 
-                        
-                         
-
-
-
-                          //die();
-                    }     
-                          // echo 'File ' . $name . ' has less than 5MB (server settings)!<br> TOTAL:' . $total . '<br>i = '. $i . '<br>SIZE :' . $size . '<br>ERROR: ' . $error . ' <br><br>';
-
-
-      } 
-
+                }
+            //die ('File ' . $name . ' was sucessfully uploaded!<br> TOTAL:' . $total . '<br>i = '.$i);
+            $file_tmp =$_FILES['files']['tmp_name'][$i];
+            move_uploaded_file($file_tmp,UPLOAD_DIR.$name);
+            $_SESSION["error_message"] = ''; 
+            //die();
+      }     
+        // echo 'File ' . $name . ' has less than 5MB (server settings)!<br> TOTAL:' . $total . '<br>i = '. $i . '<br>SIZE :' . $size . '<br>ERROR: ' . $error . ' <br><br>';
         else if ($_FILES['files']['error'][$i] === UPLOAD_ERR_INI_SIZE || $_FILES['files']['error'][$i] === UPLOAD_ERR_FORM_SIZE){
 
-               $error='ERROR Size of file ' . $name . ' must be less than 3MB ';
-               $_SESSION["error_message"] = $error; 
-         
-               header('Location: http://localhost/cmstest/pbl/admin/article-edit.php?edit=' . $article_id);
-               die();
+           $error='ERROR Size of file ' . $name . ' must be less than 3MB ';
+           $_SESSION["error_message"] = $error; 
+     
+           header('Location: http://localhost/cmstest/pbl/admin/article-detail.php?edit=' . $article_id);
+           die();
 
-        } 
-          
-        else if ($_FILES['files']['error'][$i] === UPLOAD_ERR_NO_FILE) {
+       } 
+        
+          else if ($_FILES['files']['error'][$i] === UPLOAD_ERR_NO_FILE) {
 
-        }
+          }
 
-          else {
+           else {
 
                $error='ERROR: File upload completed with errors. Please refresh your browser and try again. ';
                $_SESSION["error_message"] = $error;      
-               header('Location: http://localhost/cmstest/pbl/admin/article-edit.php?edit=' . $article_id);
+               header('Location: http://localhost/cmstest/pbl/admin/article-detail.php?edit=' . $article_id);
                die();
-         }
+           }
    }
 }
 
@@ -620,7 +612,7 @@ function getMaxObjectID($objectName){
   require_once('config.php'); 
   $res  = connect();
     
-  $sql = "SELECT ID FROM studios";
+  $sql = "SELECT ID FROM $objectName";
   $result=mysqli_query($res, $sql) or die ("Unable TO GET MAX ID");
 
   $maxID = 0;
