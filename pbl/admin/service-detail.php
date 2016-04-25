@@ -5,7 +5,7 @@ if (isset($_POST['submit'])){
 	
 	$name="service";
 	$action="update";
-	data_handler($name,$action,''); 
+	data_handler($name,$action,'',''); 
 
 }
 	else {
@@ -16,7 +16,7 @@ if (isset($_POST['submit'])){
 		$action="select";
         $edit = isset($_GET['edit']) ? $_GET['edit'] : '';
 
-		$result_select = data_handler($name,$action,$edit); 
+		$result_select = data_handler($name,$action,$edit,''); 
 
 		while($row = mysqli_fetch_array($result_select)){ 
 

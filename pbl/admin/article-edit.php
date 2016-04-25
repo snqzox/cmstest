@@ -28,7 +28,7 @@ if (isset($_POST['submit'])){
 		$name="article";
 		$action="select";
 
-		$result_select = data_handler($name,$action,$edit); 
+		$result_select = data_handler($name,$action,$edit,''); 
 
 
 		while($row = mysqli_fetch_array($result_select)){ 
@@ -43,14 +43,16 @@ if (isset($_POST['submit'])){
 	echo 'DELET ATTACH' . $delattach;
 	echo '<br>IDEEEE' . $edit;
 	echo '<br>title' . $title;
-	echo '<br>content' . $content;*/
+	echo '<br>content' . $content
+	;*/
+
 
 
 
 
 if ($delattach != 'undefined'){		
 	
-   data_handler("attachments","delete",$delattach);
+   data_handler("attachments","delete",$delattach,'article_id');
    
 
  }
@@ -68,7 +70,7 @@ function getAttach($article_id){
 
 
 	require_once('scripts/datahandler.php');
-	$result_attach = data_handler("attachments","select",$article_id);
+	$result_attach = data_handler("attachments","select",$article_id,'article_id');
 
 	while($row = mysqli_fetch_array($result_attach)){ 
 

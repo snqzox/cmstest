@@ -5,7 +5,7 @@ require_once('scripts/datahandler.php');
 
 function getServices(){
 
-	$result = data_handler("service","select",'');
+	$result = data_handler("service","select",'','');
 	
 	while($row = mysqli_fetch_array($result)){ 
 		$id = $row['ID'];
@@ -42,7 +42,7 @@ if (isset($_POST['submit'])){
 		$name="page_services";
 		$action="select";
 
-		$result_select = data_handler($name,$action,5); 
+		$result_select = data_handler($name,$action,5,''); 
 
 		while($row = mysqli_fetch_array($result_select)){ 
 
