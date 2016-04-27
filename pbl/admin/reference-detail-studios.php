@@ -54,7 +54,15 @@ if ($delattach != 'undefined'){
    
 
  }
+}
+
+function attachSizeError(){
+	if (isset($_SESSION["error_message"])){
+
+		echo '<br><span style="color:red">' . $_SESSION["error_message"] . '</span>';
+		unset($_SESSION["error_message"]);
 	}
+}
 
 function getAttach($article_id){
 
@@ -126,6 +134,7 @@ function getAttach($article_id){
 		<div class="form-group">
 			<input type="file" name="files[]" id="fileToUpload" multiple=""/>		
 		</div>
+		<?php attachSizeError(); ?>
 		<div class="form-group">
 		<table>
 			<?php	getAttach($id); ?>
