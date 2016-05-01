@@ -1,3 +1,7 @@
+<?php
+ini_set('session.save_path', '../tmp');
+session_start();
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -24,10 +28,8 @@
 	</form>
 
  <?php 
- session_start();
  if(!empty($_SESSION['error'])) { echo $_SESSION['error']; }
 	unset($_SESSION['error']);
-
  ?>
 
  </div>

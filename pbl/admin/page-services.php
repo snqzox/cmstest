@@ -21,7 +21,7 @@ function getServices(){
 	 		echo '<tr class="parent">';
 	 	}
 	  	echo '	<td><h3>'.$title.'</h3></td>
-				<td align="right"><a class="button small blue" href="http://localhost/cmstest/pbl/admin/service-detail.php?edit='. $id .'">Upravit</a></td>
+				<td align="right"><a class="button small blue" href="' . HOST . 'service-detail.php?edit='. $id .'">Upravit</a></td>
 				</tr>';
 	 }
 }
@@ -32,7 +32,7 @@ if (isset($_POST['submit'])){
 	
 	$name="page_services";
 	$action="update";
-	data_handler($name,$action,5); 
+	data_handler($name,$action,5,''); 
 
 }
 	else {

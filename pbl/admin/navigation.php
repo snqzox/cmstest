@@ -1,3 +1,4 @@
+<?//php require_once('scripts/datahandler.php');?>
 <a href="scripts/logout.php" class="logout"></a> 
 <div id="right-panel">
 	<div class="logo">

@@ -1,6 +1,7 @@
+<?php require_once('scripts/datahandler.php');?>  	
 <!DOCTYPE html>
 <html>
-<?php include 'meta.php'; ?>
+<?php include 'meta.php';?>
 <body>	
 <?php include 'navigation.php'; ?>
 <div id="content">

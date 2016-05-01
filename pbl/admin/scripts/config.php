@@ -1,5 +1,4 @@
 <?php
-
 function connect(){
 
 	$user = 'root';
