@@ -528,7 +528,7 @@ function fileupload($article_id, $parentID){
 
                         }
 
-                  $sql = "INSERT INTO attachments (name, whole_path, " . $parentID . " ,size, type, uploadtime, thumb) VALUES ('$name', '$path','$article_id','$size','$type','$uploadTime','$thumbName')" or die ('Unable to abs(number)ttachments!');
+                  $sql = "INSERT INTO attachments (name, whole_path, " . $parentID . " ,size, type, uploadtime, thumb) VALUES ('$name', '$path','$article_id','$size','0','$uploadTime','$thumbName')" or die ('Unable to abs(number)ttachments!');
                   $result = mysqli_query($res,$sql) or die ("Unable to UPLOAD attachments! Size of file ok and ARTICLE ID IS " . $article_id. "______" );
 
                   }
