@@ -5,7 +5,7 @@ $add = isset($_GET['add']) ? $_GET['add'] : '';
 $id = isset($_GET['edit']) ? $_GET['edit'] : '';
 $delattach = isset($_GET['delattach']) ? $_GET['delattach'] : 'undefined';
 
-
+ 
 $name="studios";
 
 if (isset($_POST['submit'])){
@@ -143,10 +143,11 @@ function getAttach($article_id){
 			<?php	getAttach($id); ?>
 		</table>
 		</div>
-		<button class="btn btn-submit" id="btn" data-id="about" name="submit">Save</button>
+		<button class="btn btn-submit" id="btn" data-id="about" name="submit" onclick='checkFileSize();'>Save</button>
 	  </div>
 	</form>
 
 </div>
+<script src="js/checkFileSize.js"></script>
 </body>
 </html>

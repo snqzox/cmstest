@@ -474,7 +474,7 @@ function fileupload($article_id, $parentID){
 
       if ($_FILES['files']['error'][$i] === UPLOAD_ERR_OK) {
 
-          if($size > 30000000){  
+          if($size > 3000000){  
 
               $error='Size of file ' . $name . ' must be less than 30MB ';
               $_SESSION["error_message"] = $error; 
@@ -548,7 +548,7 @@ function fileupload($article_id, $parentID){
              $error='ERROR Size of file ' . $name . ' must be less than 3MB ';
              $_SESSION["error_message"] = $error; 
        
-             header('Location: ' . HOST . 'article-detail.php?edit=' . $article_id);
+             header("Refresh:0");
              die();
 
          } 
