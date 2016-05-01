@@ -162,5 +162,6 @@ function getAttach($article_id){
 	  </form>
 
 </div>
+<script src="js/checkFileSize.js"></script>
 </body>
 </html>
