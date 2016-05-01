@@ -1,18 +1,18 @@
-<?php 
+<?php
+require_once('scripts/datahandler.php');
 
 if (isset($_POST['submit'])){
 
-	require_once('scripts/datahandler.php');
 	
 	$name="page_main";
 	$action="update";
-	data_handler($name,$action,''); 
+	data_handler($name,$action,'',''); 
 }
 	else {
 		require_once('scripts/config.php'); 
 
 		$res = connect();
-		$sql = "SELECT * from pagemain";
+		$sql = "SELECT * from pageMain";
 		$result = mysqli_query($res,$sql) or die ("Unable to LOAD data!");
 
 		while ($row = mysqli_fetch_array($result)) {

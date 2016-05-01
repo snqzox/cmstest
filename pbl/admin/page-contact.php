@@ -1,12 +1,12 @@
-<?php 
+<?php
+require_once('scripts/datahandler.php');
+
 
 if (isset($_POST['submit'])){
 
-	require_once('scripts/datahandler.php');
-	
 	$name="contact";
 	$action="update";
-	data_handler($name,$action,''); 
+	data_handler($name,$action,'',''); 
 }
 	else {
 		require_once('scripts/config.php'); 

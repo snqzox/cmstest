@@ -5,9 +5,6 @@ $edit = isset($_GET['edit']) ? $_GET['edit'] : '';
 $add = isset($_GET['add']) ? $_GET['add'] : '';
 $delattach = isset($_GET['delattach']) ? $_GET['delattach'] : 'undefined';
 
-
-
-
 if (isset($_POST['submit'])){
 
 	
@@ -27,13 +24,8 @@ if (isset($_POST['submit'])){
 
 	}
 
-
-
-	
-
 	echo '<br>SUBMIT IS SET';	
-	 unset($_POST['submit']);
-
+	unset($_POST['submit']);
 
 }
 	else {
@@ -109,7 +101,7 @@ function getAttach($article_id){
         echo '<tr><td><input type="text" class="form-ctrl" name="id_attach[]" id="id_attach" value="'.$id.'" readonly></td>
         		<td><a href="'. $path .'" download>' . $name . '</a></td>
         	  	<td><input type="text" class="form-ctrl" name="title_attach[]" id="title_attach" value="'.$title_attach.'"></td><td>' . $path . '</td><td>' . $size . '</td>
-        	  	<td align="right"><a class="button small red" href="http://localhost/cmstest/pbl/admin/article-detail.php?delattach=' . $id . '">Smazat</a></td>
+        	  	<td align="right"><a class="button small red" href="' . HOST . 'article-detail.php?delattach=' . $id . '">Smazat</a></td>
         	  </tr>';
           
     }

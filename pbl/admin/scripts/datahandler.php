@@ -1,5 +1,12 @@
 <?php
+ini_set('session.save_path', '../tmp');
 session_start();
+define("HOST", "http://localhost/cmstest/pbl/admin/");
+
+if(!$_SESSION['logged']){
+    header("location: login.php");
+    exit();
+}
 
 function data_handler($page,$dbaction,$dataid,$attachParent){
 
@@ -62,7 +69,7 @@ function data_handler($page,$dbaction,$dataid,$attachParent){
           $sql = "UPDATE articles SET title='$title', content='$content' WHERE ID='$id'";  
           $result = mysqli_query($res,$sql) or die("Unable to update article");
           fileupload($id,'article_id');
-          header('Location: http://localhost/cmstest/pbl/admin/article-detail.php?edit=' . $id);
+          header('Location: ' . HOST . 'article-detail.php?edit=' . $id);
 
           return $result;
         }
@@ -90,7 +97,7 @@ function data_handler($page,$dbaction,$dataid,$attachParent){
                     $sql = "INSERT INTO articles (title, content, subservice_id) VALUES ('$title', '$content', '$dataid')";  
                     $result = mysqli_query($res,$sql) or die("Unable to create record");
                     fileupload('article','article_id');
-                    header('Location: http://localhost/cmstest/pbl/admin/page-articles.php'); 
+                    header('Location: ' . HOST . 'page-articles.php'); 
                     
                     return $result;
                   }
@@ -99,9 +106,9 @@ function data_handler($page,$dbaction,$dataid,$attachParent){
       case "page_main":
 
         if (strcmp($action, "update") == 0){
-              $sql = "UPDATE pagemain SET title='$title', subtitle='$subtitle' WHERE ID=5";
+              $sql = "UPDATE pageMain SET title='$title', subtitle='$subtitle' WHERE ID=5";
               $result = mysqli_query($res,$sql) or die ("Unable to LOAD data!");
-              header('Location: http://localhost/cmstest/pbl/admin/page-main.php');
+              header('Location: ' . HOST . 'page-main.php');
               return $result;
         }        
         break;
@@ -109,9 +116,9 @@ function data_handler($page,$dbaction,$dataid,$attachParent){
       case "page_about":
 
         if (strcmp($action, "update") == 0){
-              $sql = "UPDATE pageabout SET title='$title', subtitle='$subtitle', content='$content' WHERE ID=5";
+              $sql = "UPDATE pageAbout SET title='$title', subtitle='$subtitle', content='$content' WHERE ID=5";
               $result = mysqli_query($res,$sql) or die ("Unable to LOAD data!");
-              header('Location: http://localhost/cmstest/pbl/admin/page-about.php');
+              header('Location: ' . HOST . 'page-about.php');
               return $result;
         }        
         break;
@@ -119,13 +126,13 @@ function data_handler($page,$dbaction,$dataid,$attachParent){
       case "page_references":
 
         if (strcmp($action, "update") == 0){
-              $sql = "UPDATE  pagereferences SET title='$title', subtitle='$subtitle' WHERE ID=5";
+              $sql = "UPDATE  pageReferences SET title='$title', subtitle='$subtitle' WHERE ID=5";
               $result = mysqli_query($res,$sql) or die ("Unable to LOAD data!");
-              header('Location: http://localhost/cmstest/pbl/admin/page-references.php');
+              header('Location: ' . HOST . 'page-references.php');
               return $result;
         }
             else if (strcmp($action, "select") == 0){
-              $sql = "SELECT * FROM pagereferences WHERE ID=5";
+              $sql = "SELECT * FROM pageReferences WHERE ID=5";
               $result = mysqli_query($res,$sql) or die ("Unable to LOAD data!");
               return $result;
             } 
@@ -152,7 +159,7 @@ function data_handler($page,$dbaction,$dataid,$attachParent){
              
                 $sql = "UPDATE services SET title='$title', subtitle='$subtitle', content = '$content' WHERE ID= '$id'";
                 $result = mysqli_query($res,$sql) or die ("Unable to UPDATE service!");
-                header('Location: http://localhost/cmstest/pbl/admin/page-services.php');
+                header('Location: ' . HOST . 'page-services.php');
                 return $result;
           
           }        
@@ -171,16 +178,16 @@ function data_handler($page,$dbaction,$dataid,$attachParent){
 
            if (strcmp($action, "select") == 0){
           
-              $sql = "SELECT * FROM pageservices";
+              $sql = "SELECT * FROM pageServices";
               $result = mysqli_query($res,$sql) or die ("Unable to SELECT page services content!");
               return $result;
           }    
             
             else if (strcmp($action, "update") == 0){
            
-                $sql = "UPDATE pageservices SET title='$title' WHERE ID=5";
+                $sql = "UPDATE pageServices SET title='$title' WHERE ID=5";
                 $result = mysqli_query($res,$sql) or die ("Unable to UPDATE page services!");
-                header('Location: http://localhost/cmstest/pbl/admin/page-services.php');
+                header('Location: ' . HOST . 'page-services.php');
                 return $result;
           }        
           break;
@@ -206,21 +213,21 @@ function data_handler($page,$dbaction,$dataid,$attachParent){
            
                 $sql = "UPDATE subsidies SET title='$title', subject='$subject', client='$client', price='$price', content='$content'  WHERE ID= $id";
                 $result = mysqli_query($res,$sql) or die ("Unable to UPDATE page services!");
-                header('Location: http://localhost/cmstest/pbl/admin/page-references.php');
+                header('Location: ' . HOST . 'page-references.php');
                 return $result;
             }     
                  else if (strcmp($action, "create") == 0){
                
                     $sql = "INSERT INTO subsidies (title, subject, client, price, content, page_id) VALUES ('$title', '$subject', '$client', '$price', '$content', 5)";
                     $result = mysqli_query($res,$sql) or die ("Unable to UPDATE subsidies!");
-                    header('Location: http://localhost/cmstest/pbl/admin/page-references.php');
+                    header('Location: ' . HOST . 'page-references.php');
                     return $result;
                 }
                       else if (strcmp($action, "delete") == 0){
                      
                           $sql = "DELETE FROM subsidies WHERE ID = '$dataid'" or die ("Unable to delete attachments!");
                           $result = mysqli_query($res,$sql) or die ("Unable to UPDATE subsidies!");
-                         // header('Location: http://localhost/cmstest/pbl/admin/page-references.php');
+                         // header('Location: ' . HOST . 'page-references.php');
                           return $result;
                       }
 
@@ -250,7 +257,7 @@ function data_handler($page,$dbaction,$dataid,$attachParent){
              
                   $sql = "UPDATE activities SET title='$title',client='$client',investition='$investition',content='$content' WHERE ID=$id";
                   $result = mysqli_query($res,$sql) or die ("Unable to UPDATE activities!");
-                  header('Location: http://localhost/cmstest/pbl/admin/page-references.php');
+                  header('Location: ' . HOST . 'page-references.php');
                   return $result;
               }
 
@@ -258,14 +265,14 @@ function data_handler($page,$dbaction,$dataid,$attachParent){
                  
                       $sql = "DELETE FROM activities WHERE ID = '$dataid'" or die ("Unable to delete activity!");
                       $result = mysqli_query($res,$sql) or die ("Unable to delete activity!");
-                     // header('Location: http://localhost/cmstest/pbl/admin/page-references.php');
+                     // header('Location: ' . HOST . 'page-references.php');
                       return $result;
                   } 
                      else if (strcmp($action, "create") == 0){
                
                     $sql = "INSERT INTO activities (title, client, investition, content, page_id) VALUES ('$title', '$client', '$investition', '$content', 5)";
                     $result = mysqli_query($res,$sql) or die ("Unable to UPDATE activvities!");
-                    header('Location: http://localhost/cmstest/pbl/admin/page-references.php');
+                    header('Location: ' . HOST . 'page-references.php');
                     return $result;
                 }
           break;
@@ -293,7 +300,7 @@ function data_handler($page,$dbaction,$dataid,$attachParent){
                 fileupload($id,'studio_id');
                 $sql = "UPDATE studios SET title='$title', client='$client', costs='$costs', pd='$pd', content='$content'  WHERE ID=$id";
                 $result = mysqli_query($res,$sql) or die ("Unable to UPDATE page services!");
-                header('Location: http://localhost/cmstest/pbl/admin/reference-detail-studios.php?edit=' . $id);
+                header('Location: ' . HOST . 'reference-detail-studios.php?edit=' . $id);
                 return $result;
           }     
 
@@ -304,59 +311,59 @@ function data_handler($page,$dbaction,$dataid,$attachParent){
                 $result = mysqli_query($res,$sql) or die ("Unable to delete activity!");
 
 
-               // header('Location: http://localhost/cmstest/pbl/admin/page-references.php');
+               // header('Location: ' . HOST . 'page-references.php');
                 return $result;
             } 
 
                 else if (strcmp($action, "create") == 0){
-               
+                    
                     $sql = "INSERT INTO studios (title, client, costs, PD,content, page_id) VALUES ('$title', '$client', '$costs', '$pd', '$content', 5)";
                     $result = mysqli_query($res,$sql) or die ("Unable to UPDATE studios!");
                     fileupload('studio','studio_id');
-                    header('Location: http://localhost/cmstest/pbl/admin/page-references.php');
+                    header('Location: ' . HOST . 'page-references.php');
                     return $result;
                 }
 
           break;
 
-      case "defaultrefs":
+      case "defaultRefs":
 
            if (strcmp($action, "select") == 0){
           
              if ($dataid != ''){
                               
-                                $sql = "SELECT * FROM defaultrefs WHERE ID = '$dataid'" or die ("Unable to join tables!");
+                                $sql = "SELECT * FROM defaultRefs WHERE ID = '$dataid'" or die ("Unable to join tables!");
                       }
                       else {
                         
-                                $sql = "SELECT * FROM defaultrefs" or die ("Unable select from studios!");
+                                $sql = "SELECT * FROM defaultRefs" or die ("Unable select from studios!");
                       }  
 
 
 
-              $result = mysqli_query($res,$sql) or die ("Unable to SELECT defaultrefs records!");
+              $result = mysqli_query($res,$sql) or die ("Unable to SELECT defaultRefs records!");
               return $result;
           }    
             
             else if (strcmp($action, "update") == 0){
            
-                $sql = "UPDATE defaultrefs SET title='$title',subtitle='$subtitle',content='$content' WHERE ID=$id";
+                $sql = "UPDATE defaultRefs SET title='$title',subtitle='$subtitle',content='$content' WHERE ID=$id";
                 $result = mysqli_query($res,$sql) or die ("Unable to UPDATE page services!");
-                header('Location: http://localhost/cmstest/pbl/admin/page-references.php');
+                header('Location: ' . HOST . 'page-references.php');
                 return $result;
           }       
               else if (strcmp($action, "delete") == 0){
              
-                  $sql = "DELETE FROM defaultrefs WHERE ID = '$dataid'" or die ("Unable to delete reference!");
+                  $sql = "DELETE FROM defaultRefs WHERE ID = '$dataid'" or die ("Unable to delete reference!");
                   $result = mysqli_query($res,$sql) or die ("Unable to delete reference!");
-                 // header('Location: http://localhost/cmstest/pbl/admin/page-references.php');
+                 // header('Location: ' . HOST . 'page-references.php');
                   return $result;
               } 
                    else if (strcmp($action, "create") == 0){
                  
-                      $sql = "INSERT INTO defaultrefs (title, subtitle, content, page_id) VALUES ('$title', '$subtitle', '$content', 5)";
+                      $sql = "INSERT INTO defaultRefs (title, subtitle, content, page_id) VALUES ('$title', '$subtitle', '$content', 5)";
                       $result = mysqli_query($res,$sql) or die ("Unable to UPDATE studios!");
-                      header('Location: http://localhost/cmstest/pbl/admin/page-references.php');
+                      header('Location: ' . HOST . 'page-references.php');
                       return $result;
                   }   
 
@@ -376,7 +383,7 @@ function data_handler($page,$dbaction,$dataid,$attachParent){
            
                 $sql = "UPDATE contact SET email='$email',mobile='$mobile',company='$company',address='$address',psc_city='$psc_city',ic='$ic',dic='$dic' WHERE ID=5";
                 $result = mysqli_query($res,$sql) or die ("Unable to UPDATE page contact!");
-                header('Location: http://localhost/cmstest/pbl/admin/page-contact.php');
+                header('Location: ' . HOST . 'page-contact.php');
                 return $result;
           }        
           break;
@@ -395,18 +402,28 @@ function data_handler($page,$dbaction,$dataid,$attachParent){
                     $art = getArtIDfromAttach($dataid);
                     $title = getAttachName('attachments',$dataid);
                    
-                   // echo 'http://localhost/cmstest/pbl/admin/article-detail.php?edit=' . $art . ' <br>IDDEEE:' . $dataid ;
+                   // echo '' . HOST . 'article-detail.php?edit=' . $art . ' <br>IDDEEE:' . $dataid ;
+                    
+                    
+                    unlink("uploads/" . $title);
+    
+                    if (file_exists('uploads/thumb/'. $title)) {
+                     
+                      unlink("uploads/thumb/" . $title);
+                    
+                    }
+
                     $sql = "DELETE FROM attachments WHERE ID = '$dataid'";
                     $result = mysqli_query($res,$sql) or die ("Unable to DELETE attachments!");
-                    unlink("uploads/" . $title);
+
+                  
                     if (strcmp($attachParent, "article_id") == 0 ) {
 
-                    header('Location: http://localhost/cmstest/pbl/admin/article-detail.php?edit=' . $art);
+                    header('Location: ' . HOST . 'article-detail.php?edit=' . $art);
 
                     }else if (strcmp($attachParent, "studio_id") == 0 ){
                     
-                      header('Location: http://localhost/cmstest/pbl/admin/reference-detail-studios.php?edit=' . $art);
-
+                      header('Location: ' . HOST . 'reference-detail-studios.php?edit=' . $art);
 
                     }
                     
@@ -414,27 +431,14 @@ function data_handler($page,$dbaction,$dataid,$attachParent){
                     
               }   else if(strcmp($action, "update") == 0) {
 
-
                     for ($counter=0; $counter<count($_POST['id_attach']); $counter++){
 
-                          /*$title_attach_set = isset($_POST['title_attach'][$counter]) ? $_POST['title_attach'][$counter] : '';
-                          $title_attach=test_input($title_attach_set);
-*/
+                         $title_attachment = $_POST['title_attach'][$counter];
+                         $id_attach = $_POST['id_attach'][$counter];
 
-                        /*if(isset($_FILES['file']['name'][$counter]) && $_FILES['file']['name'][$counter])
-                        {*/
-                           $title_attachment = $_POST['title_attach'][$counter];
-                           $id_attach = $_POST['id_attach'][$counter];
-
-
-                        /*}*/
-                      $sql = "UPDATE attachments SET title='$title_attachment' WHERE ID = $id_attach";
-                      mysqli_query($res,$sql) or die ("Unable to UPDATE attachments title!");
-                    
-                    }
-
-
-                    
+                         $sql = "UPDATE attachments SET title='$title_attachment' WHERE ID = $id_attach";
+                         mysqli_query($res,$sql) or die ("Unable to UPDATE attachments title!");                  
+                    }                  
 
               }  
          
@@ -453,33 +457,31 @@ function fileupload($article_id, $parentID){
     for ($i=0; $i < $total; $i++){
 
       $name = $_FILES['files']['name'][$i];
-      //limit file size on 3 MB
       $size = $_FILES['files']['size'][$i];
-
+      $file_tmp =$_FILES['files']['tmp_name'][$i];
       $stem=substr($name,0,strpos($name,'.'));
-
-        //take the file extension_loaded(name)
-
       $extension = substr($name, strpos($name,'.'), strlen($name)-1);
 
-      if (strcmp($extension, "docx")){
-            $type = 'docx';          
+     /*!only for localhost!*/
+     if ($extension == ".docx"){
+    
+            $type = 0;          
       }  
         else {
+            
             $type = $_FILES['files']['type'][$i];
         }
 
-       
       if ($_FILES['files']['error'][$i] === UPLOAD_ERR_OK) {
 
-          if($size > 3000000){  
+          if($size > 30000000){  
 
-              $error='Size of file ' . $name . ' must be less than 3MB ';
+              $error='Size of file ' . $name . ' must be less than 30MB ';
               $_SESSION["error_message"] = $error; 
-              //die($error . 'Click <a href="http://localhost/cmstest/pbl/admin/article-detail.php?edit=' . $article_id . '">here</a> to go back.');      
+              //die($error . 'Click <a href="' . HOST . 'article-detail.php?edit=' . $article_id . '">here</a> to go back.');      
               header("Refresh:0");
-              //header('Location: http://localhost/cmstest/pbl/admin/article-detail.php?edit=' . $article_id);
-              die();
+              //header('Location: ' . HOST . 'article-detail.php?edit=' . $article_id);
+              exit();
             }
               else {
                   
@@ -494,54 +496,122 @@ function fileupload($article_id, $parentID){
                       $name = $parts["filename"] . "-" . $j . "." . $parts["extension"];
                   }
 
+                  $uploadImage = UPLOAD_DIR.$name;
 
-                  //get ID of new article and insert it into attachments
-                  if (strcmp($article_id, 'studio') == 0){
-                    
-                    $article_id = getMaxObjectID('studios');
-                  
-                  }
-                    else if (strcmp($article_id, 'article') == 0) {
-                    
-                        $article_id = getMaxObjectID('articles');
+                  if (move_uploaded_file($file_tmp,$uploadImage)){
 
-                    } 
-                  
-                  $sql = "INSERT INTO attachments (name, whole_path, $parentID,size, type, uploadtime) VALUES ('$name', '$path','$article_id','$size','$type','$uploadTime')" or die ('Unable to abs(number)ttachments!');
+                      $_SESSION["error_message"] = ''; 
+
+                      if (strcmp($extension, ".jpg") == 0 || 
+                      		strcmp($extension, ".jpeg") == 0 || 
+                      		strcmp($extension, ".png") == 0 || 
+                      	  	strcmp($extension, ".gif") == 0){
+
+                      	$thumbName = createThumb($name,$extension,$uploadImage,'200','160');
+
+                      }
+                       else {
+
+                       	$thumbName ='';
+                       
+                       }
+
+                      
+                      if (strcmp($article_id, 'studio') == 0){
+                        
+                        $article_id = getMaxObjectID('studios');
+                      
+                      }
+                        else if (strcmp($article_id, 'article') == 0) {
+                        
+                            $article_id = getMaxObjectID('articles');
+
+                        }
+
+                  $sql = "INSERT INTO attachments (name, whole_path, " . $parentID . " ,size, type, uploadtime, thumb) VALUES ('$name', '$path','$article_id','$size','$type','$uploadTime','$thumbName')" or die ('Unable to abs(number)ttachments!');
                   $result = mysqli_query($res,$sql) or die ("Unable to UPLOAD attachments! Size of file ok and ARTICLE ID IS " . $article_id. "______" );
+
+                  }
+                    else {
+
+                      $_SESSION["error_message"] = 'Error occured while uploading file. Please refresh the page and try agin.'; 
+
+                  }
 
                 }
             //die ('File ' . $name . ' was sucessfully uploaded!<br> TOTAL:' . $total . '<br>i = '.$i);
-            $file_tmp =$_FILES['files']['tmp_name'][$i];
-            move_uploaded_file($file_tmp,UPLOAD_DIR.$name);
-            $_SESSION["error_message"] = ''; 
-            //die();
       }     
         // echo 'File ' . $name . ' has less than 5MB (server settings)!<br> TOTAL:' . $total . '<br>i = '. $i . '<br>SIZE :' . $size . '<br>ERROR: ' . $error . ' <br><br>';
-        else if ($_FILES['files']['error'][$i] === UPLOAD_ERR_INI_SIZE || $_FILES['files']['error'][$i] === UPLOAD_ERR_FORM_SIZE){
+        else if ($_FILES['files']['error'][$i] === UPLOAD_ERR_INI_SIZE || 
+                  $_FILES['files']['error'][$i] === UPLOAD_ERR_FORM_SIZE){
 
-           $error='ERROR Size of file ' . $name . ' must be less than 3MB ';
-           $_SESSION["error_message"] = $error; 
-     
-           header('Location: http://localhost/cmstest/pbl/admin/article-detail.php?edit=' . $article_id);
-           die();
+             $error='ERROR Size of file ' . $name . ' must be less than 3MB ';
+             $_SESSION["error_message"] = $error; 
+       
+             header('Location: ' . HOST . 'article-detail.php?edit=' . $article_id);
+             die();
 
-       } 
+         } 
         
           else if ($_FILES['files']['error'][$i] === UPLOAD_ERR_NO_FILE) {
-
+                
           }
 
            else {
 
                $error='ERROR: File upload completed with errors. Please refresh your browser and try again. ';
                $_SESSION["error_message"] = $error;      
-               header('Location: http://localhost/cmstest/pbl/admin/article-detail.php?edit=' . $article_id);
+               header('Location: ' . HOST . 'article-detail.php?edit=' . $article_id);
                die();
            }
-   }
-}
+     }
+ }
 
+function createThumb($fileName, $ext, $upload_image, $thumb_width, $thumb_height){
+    
+    $thumbnail = 'uploads/thumb/' . $fileName;
+    list($width,$height) = getimagesize($upload_image);
+    $thumb_height = ($thumb_width/$width) * $height;
+    $thumb_create = imagecreatetruecolor($thumb_width,$thumb_height);
+    
+    switch($ext){
+        case '.jpg':
+            $source = imagecreatefromjpeg($upload_image);
+            break;
+        case '.jpeg':
+            $source = imagecreatefromjpeg($upload_image);
+            break;
+
+        case '.png':
+            $source = imagecreatefrompng($upload_image);
+            break;
+        case '.gif':
+            $source = imagecreatefromgif($upload_image);
+            break;
+        default:
+            $source = imagecreatefromjpeg($upload_image);
+    }
+
+    imagecopyresized($thumb_create,$source,0,0,0,0,$thumb_width,$thumb_height,$width,$height);
+
+    switch($ext){
+        case '.jpg' || '.jpeg':
+            imagejpeg($thumb_create,$thumbnail,100);
+            break;
+        case '.png':
+            imagepng($thumb_create,$thumbnail,100);
+            break;
+
+        case '.gif':
+            imagegif($thumb_create,$thumbnail,100);
+            break;
+        default:
+            imagejpeg($thumb_create,$thumbnail,100);
+    }
+
+return $fileName;
+
+}
 
 function getArtIDfromAttach ($attach_id){
 
@@ -560,13 +630,12 @@ function getArtIDfromAttach ($attach_id){
     return $article_id2;
   }
 
-
 }
 
 //pass function table name and record ID to get record title
 function getAttachName($table_name,$attach_id){
 
-  echo "<br>TABLEEE:". $table_name ."<br> and ID:". $attach_id;
+  //echo "<br>TABLEEE:". $table_name ."<br> and ID:". $attach_id;
 
   require_once('config.php'); 
   $res  = connect();
@@ -599,11 +668,14 @@ function deleteAttachments($article_id,$attachParent){
 
   while ($row = mysqli_fetch_array($result)){   
 
-
     $attachment_title = $row['name'];
     unlink("uploads/" . $attachment_title);
 
-    
+    if (file_exists('uploads/thumb/'. $attachment_title)) {
+                     
+     unlink("uploads/thumb/" . $attachment_title);
+                    
+    }   
   } 
 }
 
@@ -629,3 +701,4 @@ function getMaxObjectID($objectName){
 
   return $maxID;
 }
+?>

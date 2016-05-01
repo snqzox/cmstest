@@ -16,7 +16,7 @@ function getRefsTable($table_name){
 	   	echo '<tr>
 	   		  <td>' . $title . ' </td>	 
 	   		   <td>' . $client . ' </td>	   
-			  <td align="right"><a class="button small blue" href="http://localhost/cmstest/pbl/admin/reference-detail-'.$table_name.'.php?edit='. $id .'">Upravit</a> <a class="button small red" href=http://localhost/cmstest/pbl/admin/page-references.php?del'.$table_name.'='. $id .'>Odstranit</a></td>
+			  <td align="right"><a class="button small blue" href="' . HOST . 'reference-detail-'.$table_name.'.php?edit='. $id .'">Upravit</a> <a class="button small red" href=' . HOST . 'page-references.php?del'.$table_name.'='. $id .'>Odstranit</a></td>
 	         </tr>';
 		 }
 	}
@@ -116,7 +116,7 @@ if (isset($_POST['submit'])){
 		<?php  getRefsTable('subsidies'); ?>		
 		<tr class="no-hover">
 			<td colspan="3">
-			<a class="button" id="btn" data-id="about" href="http://localhost/cmstest/pbl/admin/reference-detail-subsidies.php?add=true">Add new</a>
+			<a class="button" id="btn" data-id="about" href=<?php echo '" ' . HOST . 'reference-detail-subsidies.php?add=true"'?>>Add new</a>
 			</td>
 		</tr>
 
@@ -129,7 +129,7 @@ if (isset($_POST['submit'])){
 		<?php  getRefsTable('studios'); ?>		
 		<tr class="no-hover">
 			<td colspan="3">
-			<a class="button" id="btn" data-id="about" href="http://localhost/cmstest/pbl/admin/reference-detail-studios.php?add=true">Add new</a>
+			<a class="button" id="btn" data-id="about" href=<?php echo '" ' . HOST . 'reference-detail-studios.php?add=true"'?>>Add new</a>
 			</td>
 		</tr>
 
@@ -142,7 +142,7 @@ if (isset($_POST['submit'])){
 		<?php  getRefsTable('activities'); ?>		
 		<tr class="no-hover">
 			<td colspan="3">
-			<a class="button" id="btn" data-id="about" href="http://localhost/cmstest/pbl/admin/reference-detail-activities.php?add=true">Add new</a>
+			<a class="button" id="btn" data-id="about" href=<?php echo '" ' . HOST . 'reference-detail-activities.php?add=true"'?>>Add new</a>
 			</td>
 		</tr>
 	</table>
@@ -153,7 +153,7 @@ if (isset($_POST['submit'])){
 		<table>
 			<?php  getRefsTable('defaultrefs'); ?>
 		</table>
-		<a class="button" id="btn" data-id="about" href="http://localhost/cmstest/pbl/admin/reference-detail-defaultrefs.php?add=true">Add new</a>
+		<a class="button" id="btn" data-id="about" href="http://pbl.imakeui.com/admin/reference-detail-defaultrefs.php?add=true">Add new</a>
 	</section> -->
 
 </div>
