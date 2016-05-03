@@ -1,3 +1,6 @@
+$(window).load(function(){
+  //your code here
+});
 $(function() {
 	var $appeared = $('#appeared');
 	var $disappeared = $('#disappeared');
@@ -14,7 +17,7 @@ $(function() {
 $('.menu-expander').click(function(){
 	console.log('ta');
 	$('#menu > ul').slideToggle();
-})
+});
 
 $(function() {
 
@@ -24,103 +27,38 @@ $(function() {
 	var tempRes = res[res.length - 1].split("#");
 	var finalRes = tempRes[0];
 	console.log("detected url: " + finalRes);
+	var pages = ["granty-a-dotace.php", "realitni-cinnost.php", "projekcni-atelier.php", "nakladni-autodoprava.php"];
+	var isSubpage = $.inArray(finalRes, pages) > -1;
+	if (isSubpage == true){
+		$('#menu > ul > li > a[href="index.php#sluzby"]').addClass("active");
+		$(window).scroll(function(){
+			var scrollPos = $(document).scrollTop();
+		    if (scrollPos <= 20) {
+		        $('#top-stripe').removeClass('shrinked');
+		        $('.subpage:not(#reference) h1').removeClass('sticky');
+		    }
+		    else{
+		        $('#top-stripe').addClass('shrinked');
+		        $('.subpage:not(#reference) h1').addClass('sticky');
+		    }
+		});
 
-	if (finalRes === "granty-a-dotace.php"){
-		$('#menu > ul > li > a[href="#sluzby"]').addClass("active");
-		console.log('subpage');
-		$(document).on("scroll", onScroll);
-		function onScroll(event){
-		    var scrollPos = $(document).scrollTop();
-		    console.log('sasasa')
-		    if (scrollPos <= 1) {
-		        $('#top-stripe').removeClass('shrinked');
-		        $('.subpage:not(#reference) h1').removeClass('sticky');
-		    }
-		    else{
-		        $('#top-stripe').addClass('shrinked');
-		        $('.subpage:not(#reference) h1').addClass('sticky');
-		    }
-   
-		}
-
-	}
-	else if (finalRes === "realitni-cinnost.php"){
-		$('#menu > ul > li > a[href="#sluzby"]').addClass("active");
-		console.log('subpage');
-		$(document).on("scroll", onScroll);
-		function onScroll(event){
-		    var scrollPos = $(document).scrollTop();
-		    console.log('sasasa')
-		    if (scrollPos <= 1) {
-		        $('#top-stripe').removeClass('shrinked');
-		        $('.subpage:not(#reference) h1').removeClass('sticky');
-		    }
-		    else{
-		        $('#top-stripe').addClass('shrinked');
-		        $('.subpage:not(#reference) h1').addClass('sticky');
-		    }
-   
-		}
-		
-	}
-	else if (finalRes === "projekcni-atelier.php"){
-		$('#menu > ul > li > a[href="#sluzby"]').addClass("active");
-		console.log('subpage');
-		$(document).on("scroll", onScroll);
-		function onScroll(event){
-		    var scrollPos = $(document).scrollTop();
-		    console.log('sasasa')
-		    if (scrollPos <= 1) {
-		        $('#top-stripe').removeClass('shrinked');
-		        $('.subpage:not(#reference) h1').removeClass('sticky');
-		    }
-		    else{
-		        $('#top-stripe').addClass('shrinked');
-		        $('.subpage:not(#reference) h1').addClass('sticky');
-		    }
-   
-		}
-		
-	}
-	else if (finalRes === "nakladni-autodoprava.php"){
-		$('#menu > ul > li > a[href="#sluzby"]').addClass("active");
-		console.log('subpage');
-		$(document).on("scroll", onScroll);
-		function onScroll(event){
-		    var scrollPos = $(document).scrollTop();
-		    console.log('sasasa')
-		    if (scrollPos <= 1) {
-		        $('#top-stripe').removeClass('shrinked');
-		        $('.subpage:not(#reference) h1').removeClass('sticky');
-		    }
-		    else{
-		        $('#top-stripe').addClass('shrinked');
-		        $('.subpage:not(#reference) h1').addClass('sticky');
-		    }
-   
-		}
-		
 	}
 	else{
-		$(document).on("scroll", onScroll);
-		function onScroll(event){
-		    var scrollPos = $(document).scrollTop();
-		    console.log('sasasa')
+		$(window).scroll(function(){
+			var scrollPos = $(document).scrollTop();
 		    if (scrollPos <= 200) {
 		        $('#top-stripe').removeClass('shrinked');
 		    }
 		    else{
 		        $('#top-stripe').addClass('shrinked');
 		    }
-
-
 		    $('#menu > ul > li > a').each(function () {
 		        var currLink = $(this);
 		        var refElementTemp = $(currLink.attr("href").split("#"));
 				var refElement = $('#' + refElementTemp[1]);
-		        console.log(refElement);
 
-
+				//change active nav item while scrolling
 			
 		        if (refElement.length && refElement.position().top <= scrollPos + 180 && refElement.position().top + refElement.height() > scrollPos) {
 		            $('#menu > ul > li > a').removeClass("active");
@@ -129,11 +67,11 @@ $(function() {
 		        else{
 		            currLink.removeClass("active");
 		        }
-		    });
+		    });	
+		});
+
 		    
-		}
-		    
-		    //smoothscroll
+		    //smoothscroll while click on nav item
 		    $('#menu > ul > li > a[href^="index.php#"]').on('click', function (e) {
 		        e.preventDefault();
 		        $(document).off("scroll");
@@ -153,7 +91,6 @@ $(function() {
 		            'scrollTop': $target.offset().top+2
 		        }, 1500, 'swing', function () {
 		            window.location.hash = target;
-		            $(document).on("scroll", onScroll);
 		        });
 				} 
 		       

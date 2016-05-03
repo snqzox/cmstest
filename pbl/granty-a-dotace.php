@@ -178,7 +178,7 @@ informačních a komunikačních technologií (PO4) lze využít 17,2 % z celk
 <div class="wrapper">
 		<h1>Reference</h1>
 
-		<div class="ref">
+		<div class="ref gt">
 			<div class="ref-icon"></div>
 			<h3>Lorem ipsum dolor sit</h3>
 			<p class="sub">
@@ -190,7 +190,7 @@ informačních a komunikačních technologií (PO4) lze využít 17,2 % z celk
 			<p class="sub">1.000.000 CZK</p>
 			<h4>Klient</h4>
 			<p class="sub">Janik Mrkva</p>
-		</div><div class="ref">
+		</div><div class="ref gt">
 			<div class="ref-icon"></div>
 			<h3>Lorem ipsum dolor sit</h3>
 			<p class="sub">
@@ -202,43 +202,7 @@ informačních a komunikačních technologií (PO4) lze využít 17,2 % z celk
 			<p class="sub">1.000.000 CZK</p>
 			<h4>Klient</h4>
 			<p class="sub">Janik Mrkva</p>
-		</div><div class="ref">
-			<div class="ref-icon"></div>
-			<h3>Lorem ipsum dolor sit</h3>
-			<p class="sub">
-			Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-			</p>
-			<h4>Predmet dotace</h4>
-			<p class="sub">Predmet dotace placeholder</p>
-			<h4>Výše dotace</h4>
-			<p class="sub">1.000.000 CZK</p>
-			<h4>Klient</h4>
-			<p class="sub">Janik Mrkva</p>
-		</div><div class="ref">
-			<div class="ref-icon"></div>
-			<h3>Lorem ipsum dolor sit</h3>
-			<p class="sub">
-			Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-			</p>
-			<h4>Predmet dotace</h4>
-			<p class="sub">Predmet dotace placeholder</p>
-			<h4>Výše dotace</h4>
-			<p class="sub">1.000.000 CZK</p>
-			<h4>Klient</h4>
-			<p class="sub">Janik Mrkva</p>
-		</div><div class="ref">
-			<div class="ref-icon"></div>
-			<h3>Lorem ipsum dolor sit</h3>
-			<p class="sub">
-			Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-			</p>
-			<h4>Predmet dotace</h4>
-			<p class="sub">Predmet dotace placeholder</p>
-			<h4>Výše dotace</h4>
-			<p class="sub">1.000.000 CZK</p>
-			<h4>Klient</h4>
-			<p class="sub">Janik Mrkva</p>
-		</div><div class="ref">
+		</div><div class="ref gt">
 			<div class="ref-icon"></div>
 			<h3>Lorem ipsum dolor sit</h3>
 			<p class="sub">

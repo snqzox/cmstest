@@ -136,14 +136,14 @@ function getReferences(){
 				<div class="icon"></div>
 				<span>Granty a Dotace</span>
 			</a>
-			<div class="btn ghost reference-reality">
+			<a href="realitni-cinnost.php#reference" class="btn ghost reference-reality">
 				<div class="icon"></div>
 				<span>Realitní činnost</span>
-			</div>
-			<div class="btn ghost reference-atelier">
+			</a>
+			<a href="projekcni-atelier.php#reference" class="btn ghost reference-atelier">
 				<div class="icon"></div>
 				<span>Projekční ateliér</span>
-			</div>
+			</a>
 			</div>
 	</div>
 
