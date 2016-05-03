@@ -1,7 +1,5 @@
-
 <?php 
-require_once('scripts/datahandler.php'); 
-
+require_once('scripts/datahandler.php');
 $del = isset($_GET['del']) ? $_GET['del'] : 'undefined';
 
 if ($del != 'undefined'){
@@ -24,6 +22,7 @@ function getSubService($id){
 
 
 function getDataTable($id){
+require_once('scripts/datahandler.php'); 
 
 	$result = data_handler("articles_sub","select",$id,'');
 
@@ -61,7 +60,7 @@ function getDataTable($id){
 			}   
 			  
 		echo '</td>
-				   <td align="right"><a class="button small blue" href="http://localhost/cmstest/pbl/admin/article-detail.php?edit='. $id .'">Upravit</a> <a class="button small red" href=http://localhost/cmstest/pbl/admin/page-articles.php?del='. $id .'>Odstranit</a></td>
+				   <td align="right"><a class="button small blue" href="' . HOST . 'article-detail.php?edit='. $id .'">Upravit</a> <a class="button small red" href=' . HOST . 'page-articles.php?del='. $id .'>Odstranit</a></td>
 	         </tr>';
 		 }
 	}
@@ -91,7 +90,7 @@ function getDataTable($id){
 		?>	
 		<tr class="no-hover">
 			<td colspan="3">
-			<a class="button" id="btn" data-id="about" href="http://localhost/cmstest/pbl/admin/article-detail.php?add=6">Přidat nový</a>
+			<a class="button" id="btn" data-id="about" href=<?php echo '" ' . HOST . 'article-detail.php?add=6"'?>>Přidat nový</a>
 			</td>
 		</tr>
 
@@ -106,7 +105,7 @@ function getDataTable($id){
 		?>	
 		<tr class="no-hover">
 			<td colspan="3">
-			<a class="button" id="btn" data-id="about" href="http://localhost/cmstest/pbl/admin/article-detail.php?add=7">Přidat nový</a>
+			<a class="button" id="btn" data-id="about" href=<?php echo '" ' . HOST . 'article-detail.php?add=7"'?>>Přidat nový</a>
 			</td>
 		</tr>
 
@@ -121,7 +120,7 @@ function getDataTable($id){
 			?>		
 		<tr class="no-hover">
 			<td colspan="3">
-			<a class="button" id="btn" data-id="about" href="http://localhost/cmstest/pbl/admin/article-detail.php?add=8">Přidat nový</a>
+			<a class="button" id="btn" data-id="about" href=<?php echo '" ' . HOST . 'article-detail.php?add=8"'?>>Přidat nový</a>
 			</td>
 		</tr>
 	</table>

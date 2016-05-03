@@ -1,18 +1,27 @@
 <?php 
+require_once('scripts/datahandler.php');
+/* DUE LOCALHOST session error
+ini_set('session.save_path', '../../tmp');
+session_start();
+if(!isset($_SESSION['logged']) ){
+    header("location: login.php");
+    exit();
+}*/
+
 
 if (isset($_POST['submit'])){
 
-	require_once('scripts/datahandler.php');
+	
 	
 	$name="page_about";
 	$action="update";
-	data_handler($name,$action,''); 
+	data_handler($name,$action,'',''); 
 }
 	else {
 		require_once('scripts/config.php'); 
 
 		$res = connect();
-		$sql = "SELECT * from pageabout";
+		$sql = "SELECT * from pageAbout";
 		$result = mysqli_query($res,$sql) or die ("Unable to LOAD data!");
 
 		while ($row = mysqli_fetch_array($result)) {

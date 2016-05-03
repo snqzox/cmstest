@@ -5,7 +5,7 @@ $add = isset($_GET['add']) ? $_GET['add'] : '';
 $id = isset($_GET['edit']) ? $_GET['edit'] : '';
 $delattach = isset($_GET['delattach']) ? $_GET['delattach'] : 'undefined';
 
-
+ 
 $name="studios";
 
 if (isset($_POST['submit'])){
@@ -14,11 +14,14 @@ if (isset($_POST['submit'])){
 	if ($add != ''){
 
 	$action="create";
-	data_handler($name,$action,'',''); 
-	} else {
 
-	$action="update";
-	data_handler($name,$action,'',''); 
+		data_handler($name,$action,'',''); 
+	} 
+	else {
+
+		$action="update";
+		data_handler($name,$action,'',''); 
+	
 	}
 }
 	else {
@@ -82,8 +85,8 @@ function getAttach($article_id){
 
         echo '<tr><td><input type="text" class="form-ctrl" name="id_attach[]" id="id_attach" value="'.$id.'" readonly></td>
         		<td><a href="'. $path .'" download>' . $name . '</a></td>
-        	  	<td><img src="' . $path . '" height="42" width="42"></td><td>' . $size . '</td>
-        	  	<td align="right"><a class="button small red" href="http://localhost/cmstest/pbl/admin/reference-detail-studios.php?delattach=' . $id . '">Smazat</a></td>
+        	  	<td><img src="uploads/thumb/' . $name . '" height="42" width="42"></td><td>' . $size . '</td>
+        	  	<td align="right"><a class="button small red" href="' . HOST . 'reference-detail-studios.php?delattach=' . $id . '">Smazat</a></td>
         	  </tr>';
           
     }
@@ -140,10 +143,11 @@ function getAttach($article_id){
 			<?php	getAttach($id); ?>
 		</table>
 		</div>
-		<button class="btn btn-submit" id="btn" data-id="about" name="submit">Save</button>
+		<button class="btn btn-submit" id="btn" data-id="about" name="submit" onclick='checkFileSize();'>Save</button>
 	  </div>
 	</form>
 
 </div>
+<script src="js/checkFileSize.js"></script>	
 </body>
 </html>
