@@ -42,13 +42,14 @@ if (isset($_POST['submit'])){
 		$name="page_services";
 		$action="select";
 
-		$result_select = data_handler($name,$action,5,''); 
-
-		while($row = mysqli_fetch_array($result_select)){ 
+		$result_select = data_handler($name,$action,5,'');
+		$checkedResult = checkResult($result_select);
+		
+		while($row = mysqli_fetch_array($checkedResult)){ 
 
             $id = $row['ID'];   
             $title = $row['title']; 
-            //$subtitle = $row['subtitle']; 
+            $subtitle = $row['subtitle']; 
               
 	    }
 	}
@@ -82,7 +83,7 @@ if (isset($_POST['submit'])){
 		</div>
 		<div class="form-group">
 			<label>Podtitulek:</label>
-			<input type="text" class="form-ctrl subtitle" name="subtitle" <?php //echo 'value="'.$subtitle.'"'; ?> id="subtitle">
+			<input type="text" class="form-ctrl subtitle" name="subtitle" <?php echo 'value="'.$subtitle.'"'; ?> id="subtitle">
 		</div>
 		<button class="btn btn-submit" id="btn" data-id="about" name="submit">Save</button>
 	</div>

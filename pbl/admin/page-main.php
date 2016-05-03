@@ -14,8 +14,9 @@ if (isset($_POST['submit'])){
 		$res = connect();
 		$sql = "SELECT * from pageMain";
 		$result = mysqli_query($res,$sql) or die ("Unable to LOAD data!");
-
-		while ($row = mysqli_fetch_array($result)) {
+		$checkedResult = checkResult($result);
+		
+		while ($row = mysqli_fetch_array($checkedResult)) {
 			$title=$row['title'];
 			$subtitle=$row['subtitle'];
 		}		

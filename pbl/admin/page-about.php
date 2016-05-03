@@ -1,13 +1,5 @@
 <?php 
 require_once('scripts/datahandler.php');
-/* DUE LOCALHOST session error
-ini_set('session.save_path', '../../tmp');
-session_start();
-if(!isset($_SESSION['logged']) ){
-    header("location: login.php");
-    exit();
-}*/
-
 
 if (isset($_POST['submit'])){
 

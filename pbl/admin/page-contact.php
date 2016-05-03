@@ -14,8 +14,9 @@ if (isset($_POST['submit'])){
 		$res = connect();
 		$sql = "SELECT * from contact";
 		$result = mysqli_query($res,$sql) or die ("Unable to LOAD data!");
-
-		while ($row = mysqli_fetch_array($result)) {
+		$checkedResult = checkResult($result);
+		
+		while ($row = mysqli_fetch_array($checkedResult)) {
 			$email=$row['email'];
 			$mobile=$row['mobile'];
 			$company=$row['company'];

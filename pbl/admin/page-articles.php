@@ -10,8 +10,9 @@ if ($del != 'undefined'){
 function getSubService($id){
 
 	$result = data_handler("service","select",$id,'');
+	$checkedResult = checkResult($result);
 	
-	while($row = mysqli_fetch_array($result)){ 
+	while($row = mysqli_fetch_array($checkedResult)){ 
 
 	  	$title = $row['title'];	
 	 	
@@ -25,9 +26,9 @@ function getDataTable($id){
 require_once('scripts/datahandler.php'); 
 
 	$result = data_handler("articles_sub","select",$id,'');
+	$checkedResult = checkResult($result);
 
-	
-	while($row = mysqli_fetch_array($result)){ 
+	while($row = mysqli_fetch_array($checkedResult)){ 
 
 	  	$title = $row['title'];	
 	  	$id = $row['ID'];      
@@ -38,7 +39,7 @@ require_once('scripts/datahandler.php');
 	   	$attach_count = count($result_attach);
 
 	  	echo '<tr>';
-			       echo '<td style="font-weight:700;">' . $title . ' subservice = ' . $subservice_id . '</td>
+			       echo '<td style="font-weight:700;">' . $title . '</td>
 			       <td>';
 			  
 			   
