@@ -5,9 +5,9 @@ require_once('scripts/datahandler.php');
 function getRefsTable($table_name){
 
 	$result = data_handler($table_name,'select','','');
-
+	$checkedResult = checkResult($result);
 	
-	while($row = mysqli_fetch_array($result)){ 
+	while($row = mysqli_fetch_array($checkedResult)){ 
 
 	  	$id = $row['ID'];	
 	  	$title = $row['title'];	
@@ -27,29 +27,26 @@ $delstudios = isset($_GET['delstudios']) ? $_GET['delstudios'] : 'undefined';
 $delactivities = isset($_GET['delactivities']) ? $_GET['delactivities'] : 'undefined';
 $deldefaultrefs = isset($_GET['deldefaultrefs']) ? $_GET['deldefaultrefs'] : 'undefined';
 
-
-
-
 if ($delsubsidies != 'undefined'){
 
-	data_handler("subsidies","delete",$delsubsidies,'');
+	$result = data_handler("subsidies","delete",$delsubsidies,'');
 	unset($_GET['delsubsidies']);
 
 } else if ($delstudios != 'undefined'){
 
-	data_handler("studios","delete",$delstudios,'');
+	$result = data_handler("studios","delete",$delstudios,'');
 	unset($_GET['delstudios']);
-
 
 }else if ($delactivities != 'undefined'){
 
-	data_handler("activities","delete",$delactivities,'');
+	$result = data_handler("activities","delete",$delactivities,'');
 	unset($_GET['delactivities']);
 
 } else if ($deldefaultrefs != 'defaultrefs'){
 
-	data_handler("defaultrefs","delete",$deldefaultrefs,'');
+	$result = data_handler("defaultrefs","delete",$deldefaultrefs,'');
 	unset($_GET['defaultrefs']);
+
 }
 
 if (isset($_POST['submit'])){
@@ -58,7 +55,7 @@ if (isset($_POST['submit'])){
 	
 	$name="page_references";
 	$action="update";
-	data_handler($name,$action,5,''); 
+	$resultSubmit = data_handler($name,$action,5,''); 
 
 }
 	else {
@@ -69,8 +66,9 @@ if (isset($_POST['submit'])){
 		$action="select";
 
 		$result_select = data_handler($name,$action,5,''); 
+		$checkedResult = checkResult($result_select);
 
-		while($row = mysqli_fetch_array($result_select)){ 
+		while($row = mysqli_fetch_array($checkedResult)){ 
 
             $title = $row['title']; 
             $subtitle = $row['subtitle']; 
