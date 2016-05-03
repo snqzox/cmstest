@@ -8,8 +8,11 @@ html, body{
 	height:100%;
 }
 .subpage{
+	&:first-child{
+		.wrapper{padding-top:205px;}
+	}
 	.wrapper{
-		padding-top:205px;
+		padding-top:105px;
 	}
 	h1,h2,h3,h4,p,ul,ol{
 		text-align: left;
@@ -103,7 +106,7 @@ html, body{
 	background-color:#454545;
 	width:100%;
 	height:60px;
-	position: absolute;
+	position: relative;
 	bottom: 0px;
 	font-size:12px;
 	padding:25px 15px;
@@ -111,7 +114,12 @@ html, body{
 	.box-sizing();
 
 	ul{
-		float:left;
+		float: left;
+	    font-size: inherit;
+	    padding: 0;
+	    margin: 0;
+	    line-height: inherit;
+		
 		li{
 			display: inline-block;
 			padding:0 15px;
@@ -120,6 +128,7 @@ html, body{
 
 			a{
 				color:#fff;
+				font-size:12px;
 				text-decoration: none;
 			}
 		}
@@ -414,29 +423,58 @@ html, body{
 	}
 
 }
+.photos-wrapper{
+	display: block;
+	margin-bottom: 5px;
+	overflow: hidden;
+	text-align: center;
+	.photo-thumb{
+		cursor: pointer;
+		width:100px;
+		height:100px;
+		display: inline-block;
+		background-color: #f9f9f9;
+		.box-sizing();
+		border:1px solid #ddd;
+		margin:5px;
+	}
+}
 .ref{
 	width: 33.33333%;
 	display: inline-block;
 	.box-sizing();
 	padding: 0 15px 10px;
 	margin:20px 0 15px;
-	cursor: pointer;
 	border:1px solid transparent;
 	h3,h4{
 		text-align: center;
 	}
+	h3{
+		margin:0px;
+	}
 	.transition();
 	.ref-icon{
 		margin:0 auto;
-		&:extend(.image);
-		background-position: 0px -300px;
+		&:extend(.image);		
 		width:50px;
 		height: 50px;
 		margin:10px auto;
 	}
-	&:hover{
-		border-color: #ddd;
-		background-color: #FDFDFD;
+	&.gt .ref-icon{
+		background-position: 0px -300px;
+	}
+	&.pa .ref-icon{
+		background-position: -100px -300px;
+	}
+	&.rc .ref-icon{
+		background-position: -50px -300px;
+	}
+	&.small{
+		cursor: pointer;
+		&:hover{
+			border-color: #ddd;
+			background-color: #FDFDFD;
+		}
 	}
 }
 .ref-btns{

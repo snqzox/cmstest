@@ -79,37 +79,37 @@
 	<div class="wrapper">
 		<h1>Reference</h1>
 		<p class="subtitle">O naší dosavadní práci vypovídají referenční zakázky, kterým se v současnosti věnujeme nebo které jsme v minulosti realizovali.</p>
-		<div class="ref">
+		<div class="ref pa">
 			<div class="ref-icon"></div>
 			<h3>Lorem ipsum dolor sit</h3>
 			<p class="sub">
 			Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
 			</p>
-		</div><div class="ref">
+		</div><div class="ref gt">
 			<div class="ref-icon"></div>
 			<h3>Lorem ipsum dolor sit</h3>
 			<p class="sub">
 			Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
 			</p>
-		</div><div class="ref">
+		</div><div class="ref rc">
 			<div class="ref-icon"></div>
 			<h3>Lorem ipsum dolor sit</h3>
 			<p class="sub">
 			Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
 			</p>
-		</div><div class="ref">
+		</div><div class="ref gt">
 			<div class="ref-icon"></div>
 			<h3>Lorem ipsum dolor sit</h3>
 			<p class="sub">
 			Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
 			</p>
-		</div><div class="ref">
+		</div><div class="ref pa">
 			<div class="ref-icon"></div>
 			<h3>Lorem ipsum dolor sit</h3>
 			<p class="sub">
 			Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
 			</p>
-		</div><div class="ref">
+		</div><div class="ref gt">
 			<div class="ref-icon"></div>
 			<h3>Lorem ipsum dolor sit</h3>
 			<p class="sub">
@@ -123,14 +123,14 @@
 				<div class="icon"></div>
 				<span>Granty a Dotace</span>
 			</a>
-			<div class="btn ghost reference-reality">
+			<a href="realitni-cinnost.php#reference" class="btn ghost reference-reality">
 				<div class="icon"></div>
 				<span>Realitní činnost</span>
-			</div>
-			<div class="btn ghost reference-atelier">
+			</a>
+			<a href="projekcni-atelier.php#reference" class="btn ghost reference-atelier">
 				<div class="icon"></div>
 				<span>Projekční ateliér</span>
-			</div>
+			</a>
 			</div>
 	</div>
 
