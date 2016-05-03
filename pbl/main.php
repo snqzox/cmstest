@@ -12,7 +12,6 @@
 
 		}
 
-		$res = connect();
 		$sqlSR = "SELECT * FROM services WHERE subservice = 0";
 		$resultSR = mysqli_query($res,$sqlSR) or die ("Unable to LOAD data!");
 		$i=0;
@@ -21,6 +20,44 @@
 			$subtitleSR[$i]=$row['subtitle'];
 			$i++;
 		}
+
+	
+
+function getReferences(){
+
+		require_once('admin/scripts/config.php'); 
+		$res = connect();
+
+		
+		$sqlRef =  "SELECT title, content FROM activities
+					UNION
+					SELECT title, content FROM subsidies
+					UNION
+					SELECT title, content FROM studios
+					ORDER BY title";
+
+		$resultRef = mysqli_query($res,$sqlRef) or die ("Unable to LOAD data!");
+		
+		$j=0;
+		while ($row = mysqli_fetch_array($resultRef)) {
+			
+				$titleRef=$row['title'];
+				$contentRef=$row['content'];
+			
+				echo '<div class="ref">
+			      <div class="ref-icon"></div>
+				  <h3>'. $titleRef . '</h3>
+				  <p class="sub">
+				  '. $contentRef . '</p>
+				  </div>';
+				$j++;
+				
+				if ($j==6) {
+					break;
+				}
+		 }
+
+}
 
 ?>
 <div class="page" id="uvod">
@@ -91,43 +128,7 @@
 	<div class="wrapper">
 		<h1>Reference</h1>
 		<p class="subtitle">O naší dosavadní práci vypovídají referenční zakázky, kterým se v současnosti věnujeme nebo které jsme v minulosti realizovali.</p>
-		<div class="ref">
-			<div class="ref-icon"></div>
-			<h3>Lorem ipsum dolor sit</h3>
-			<p class="sub">
-			Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-			</p>
-		</div><div class="ref">
-			<div class="ref-icon"></div>
-			<h3>Lorem ipsum dolor sit</h3>
-			<p class="sub">
-			Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-			</p>
-		</div><div class="ref">
-			<div class="ref-icon"></div>
-			<h3>Lorem ipsum dolor sit</h3>
-			<p class="sub">
-			Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-			</p>
-		</div><div class="ref">
-			<div class="ref-icon"></div>
-			<h3>Lorem ipsum dolor sit</h3>
-			<p class="sub">
-			Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-			</p>
-		</div><div class="ref">
-			<div class="ref-icon"></div>
-			<h3>Lorem ipsum dolor sit</h3>
-			<p class="sub">
-			Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-			</p>
-		</div><div class="ref">
-			<div class="ref-icon"></div>
-			<h3>Lorem ipsum dolor sit</h3>
-			<p class="sub">
-			Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-			</p>
-		</div>
+		<?php getReferences(); ?>
 		<hr/>
 		<div class="ref-btns">
 			<h3 class="dark">Lorem ipsum dolor sit</h3>
