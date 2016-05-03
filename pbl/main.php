@@ -1,3 +1,28 @@
+<?php 
+		require_once('admin/scripts/config.php'); 
+
+		$res = connect();
+		$sqlPA = "SELECT * from pageAbout";
+		$resultPA = mysqli_query($res,$sqlPA) or die ("Unable to LOAD data!");
+
+		while ($row = mysqli_fetch_array($resultPA)) {
+			$titlePA=$row['title'];
+			$subtitlePA=$row['subtitle'];
+			$contentPA=$row['content'];
+
+		}
+
+		$res = connect();
+		$sqlSR = "SELECT * FROM services WHERE subservice = 0";
+		$resultSR = mysqli_query($res,$sqlSR) or die ("Unable to LOAD data!");
+		$i=0;
+		while ($row = mysqli_fetch_array($resultSR)) {
+			$titleSR[$i]=$row['title'];
+			$subtitleSR[$i]=$row['subtitle'];
+			$i++;
+		}
+
+?>
 <div class="page" id="uvod">
 	<div class="wrapper">
 		<div class="title">Lorem ipsum dolor sit amet, consectetur</div>
@@ -9,14 +34,9 @@
 </div>
 <div class="page" id="o-nas">
 	<div class="wrapper">
-		<h1>O společnosti</h1>
-		<p class="subtitle">Víme co děláme a rádi Vám pomáháme, proto nás to baví!</p>
-		<p>
-		Jsme malá, dynamická a ambiciózní společnost PBL Migliori Futuro s.r.o., která díky svým pracovníkům aktivně pomáhá podnikům s jejich cíli a plány. Primárně se zaměřujeme na získávání dotací z evropských fondů a služby s tím spojené. Do současné chvíle jsme zpracovali žádosti v celkové výši přesahující 50 mil Kč s 95% úspěšností. 
-		S naší vervou se rovněž vrháme do obstarávání nemovitostí na míru pro naše klienty. 
-
-		Naším cílem je být klientům dlouhodobým a stabilním partnerem s jasnou strategií a výbornou perspektivou pro další spolupráci.
-
+		<h1><?php echo $titlePA ?></h1>
+		<p class="subtitle"><?php echo $subtitlePA ?></p>
+		<p><?php echo $contentPA ?>
 		</p>
 
 	</div>
@@ -30,10 +50,8 @@
 				<div class="icon">
 				</div>
 				<div class="service-content">
-					<h2>Granty a dotace</h2>
-					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-					tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim 
-					cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+					<h2><?php echo $titleSR[0] ?></h2>
+					<p><?php echo $subtitleSR[0] ?></p>
 				</div>
 			</div>
 		</div>
@@ -42,10 +60,8 @@
 				<div class="icon">
 				</div>
 				<div class="service-content">
-					<h2>Realitní činnost</h2>
-					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-					tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim 
-					cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+					<h2><?php echo $titleSR[1] ?></h2>
+					<p><?php echo $subtitleSR[1] ?></p>
 				</div>
 			</div>
 		</div>
@@ -54,10 +70,8 @@
 				<div class="icon">
 				</div>
 				<div class="service-content">
-					<h2>Projekční ateliér</h2>
-					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-					tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim 
-					cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+					<h2><?php echo $titleSR[2] ?></h2>
+					<p><?php echo $subtitleSR[2] ?></p>
 				</div>
 			</div>
 		</div>
@@ -66,10 +80,8 @@
 				<div class="icon">
 				</div>
 				<div class="service-content">
-					<h2>Nákladní autodoprava</h2>
-					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-					tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim 
-					cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+					<h2><?php echo $titleSR[3]?></h2>
+					<p><?php echo $subtitleSR[3]?></p>
 				</div>
 			</div>
 		</div>
