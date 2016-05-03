@@ -255,23 +255,22 @@ switch($page_name){
       
           $sql = "SELECT * FROM pageServices";
           $result = mysqli_query($res,$sql) or die ("Unable to SELECT page services content!");
-          return $result;
-     
+      
       }    
         
         else if (strcmp($action, "update") == 0){
                    
-            $stmt = $res->prepare('UPDATE pageServices SET title=? WHERE ID=5 ');
-            $stmt -> bind_param('s',$title);
+            $stmt = $res->prepare('UPDATE pageServices SET title=?, subtitle=? WHERE ID=5 ');
+            $stmt -> bind_param('ss',$title, $subtitle);
             $stmt -> execute();
             $result = $stmt -> get_result();
             header('Location: ' . HOST . 'page-services.php');
 
-            return $result;
 
         }        
-
- break;
+  
+  return $result;
+  break;
 
   case "subsidies":
 
@@ -541,19 +540,24 @@ switch($page_name){
                 
                 $art = getArtIDfromAttach($dataid);
                 $title = getAttachName('attachments',$dataid);           
-                
-                unlink("uploads/" . $title);
+                                
+                if (file_exists('uploads/'. $title)){
 
-                if (file_exists('uploads/thumb/'. $title)) {
-                 
-                  unlink("uploads/thumb/" . $title);
-                
-                }
+                    unlink("uploads/" . $title);
 
-                $stmt = $res->prepare( 'DELETE FROM attachments WHERE ID = ?' );
-                $stmt -> bind_param('i',$dataid);
-                $stmt -> execute();
-                $result = $stmt -> get_result(); 
+                    if (file_exists('uploads/thumb/'. $title)) {
+                     
+                      unlink("uploads/thumb/" . $title);
+                    
+                    }
+
+                    $stmt = $res->prepare( 'DELETE FROM attachments WHERE ID = ?' );
+                    $stmt -> bind_param('i',$dataid);
+                    $stmt -> execute();
+                    $result = $stmt -> get_result();
+
+                 }                
+                
 
                 if (strcmp($attachParent, "article_id") == 0 ) {
 
@@ -566,8 +570,7 @@ switch($page_name){
                     header('Location: ' . HOST . 'reference-detail-studios.php?edit=' . $art);
 
                   }
-                
-                
+                  
              }  
 
              else if(strcmp($action, "update") == 0) {
@@ -607,7 +610,6 @@ function fileupload($article_id, $parentID){
       $extension = substr($name, strpos($name,'.'), strlen($name)-1);
 
      /*!only for localhost!*/
-
      if ($extension == ".docx"){
     
             $type = 0;          
@@ -617,16 +619,13 @@ function fileupload($article_id, $parentID){
             $type = $_FILES['files']['type'][$i];
         }
 
-
      if ($_FILES['files']['error'][$i] === UPLOAD_ERR_OK) {
 
-          if($size > 3000000){  
+          if($size > 30000000){  
 
               $error='Size of file ' . $name . ' must be less than 30MB ';
               $_SESSION["error_message"] = $error; 
-              //die($error . 'Click <a href="' . HOST . 'article-detail.php?edit=' . $article_id . '">here</a> to go back.');      
               header("Refresh:0");
-              //header('Location: ' . HOST . 'article-detail.php?edit=' . $article_id);
               exit();
             }
               else {
@@ -651,11 +650,12 @@ function fileupload($article_id, $parentID){
                       if (strcmp($extension, ".jpg") == 0 || 
                       		strcmp($extension, ".jpeg") == 0 || 
                       		strcmp($extension, ".png") == 0 || 
-                      	  	strcmp($extension, ".gif") == 0){
+                     	  	strcmp($extension, ".gif") == 0){
 
                       	$thumbName = createThumb($name,$extension,$uploadImage,'200','160');
 
                       }
+
                        else {
 
                        	$thumbName ='';
@@ -663,51 +663,51 @@ function fileupload($article_id, $parentID){
                        }
 
                       
-                      if (strcmp($article_id, 'studio') == 0){
+                        if (strcmp($article_id, 'studio') == 0){
+                          
+                          $article_id = getMaxObjectID('studios');
                         
-                        $article_id = getMaxObjectID('studios');
-                      
-                      }
-                        else if (strcmp($article_id, 'article') == 0) {
-                        
-                            $article_id = getMaxObjectID('articles');
-
                         }
+                          else if (strcmp($article_id, 'article') == 0) {
+                          
+                              $article_id = getMaxObjectID('articles');
 
-                        $sql = "INSERT INTO attachments (name, whole_path, $parentID, size, type, uploadtime, thumb) VALUES ('$name', '$path','$article_id','$size','$type','$uploadTime','$thumbName')" or die ('Unable to abs(number)ttachments!');
-                        $result = mysqli_query($res,$sql) or die ("Unable to UPLOAD attachments! Size of file ok and ARTICLE ID IS " . $article_id. "______" );
+                          }
 
-                  }
+                         $sql = "INSERT INTO attachments (name, whole_path, $parentID, size, type, uploadtime, thumb) VALUES ('$name', '$path','$article_id','$size','$type','$uploadTime','$thumbName')" or die ('Unable to abs(number)ttachments!');
+                         $result = mysqli_query($res,$sql) or die ("Unable to UPLOAD attachments! Size of file ok and ARTICLE ID IS " . $article_id. "______" );
+                    }
+  
                     else {
 
                       $_SESSION["error_message"] = 'Error occured while uploading file. Please refresh the page and try agin.'; 
 
                   }
 
-                }
-      }     
+             }
+    }     
+      
+      else if ($_FILES['files']['error'][$i] === UPLOAD_ERR_INI_SIZE || 
+               $_FILES['files']['error'][$i] === UPLOAD_ERR_FORM_SIZE){
 
-        else if ($_FILES['files']['error'][$i] === UPLOAD_ERR_INI_SIZE || 
-                 $_FILES['files']['error'][$i] === UPLOAD_ERR_FORM_SIZE){
+               $error='ERROR Size of file ' . $name . ' must be less than 30MB ';
+               $_SESSION["error_message"] = $error; 
+               header("Refresh:0");
+               exit();
 
-             $error='ERROR Size of file ' . $name . ' must be less than 3MB ';
-             $_SESSION["error_message"] = $error;    
-             header("Refresh:0");
-             exit();
-
-         } 
+       } 
         
-          else if ($_FILES['files']['error'][$i] === UPLOAD_ERR_NO_FILE) {
+         else if ($_FILES['files']['error'][$i] === UPLOAD_ERR_NO_FILE) {
                 
-          }
+           }
 
-           else {
+            else {
 
                $error='ERROR: File upload completed with errors. Please refresh your browser and try again. ';
                $_SESSION["error_message"] = $error;      
                header('Location: ' . HOST . 'article-detail.php?edit=' . $article_id);
                exit();
-           }
+            }
      }
  }
 
@@ -725,7 +725,6 @@ function createThumb($fileName, $ext, $upload_image, $thumb_width, $thumb_height
         case '.jpeg':
             $source = imagecreatefromjpeg($upload_image);
             break;
-
         case '.png':
             $source = imagecreatefrompng($upload_image);
             break;
@@ -779,16 +778,15 @@ function getArtIDfromAttach ($attach_id){
 //pass function table name and record ID to get record title
 function getAttachName($table_name,$attach_id){
 
-  //echo "<br>TABLEEE:". $table_name ."<br> and ID:". $attach_id;
-
   require_once('config.php'); 
   $res  = connect();
 
   $sql = "SELECT name FROM $table_name WHERE ID = '$attach_id'";
 
-   $result = mysqli_query($res,$sql) or die ("Unable get attachments title!");
+  $result = mysqli_query($res,$sql) or die ("Unable get attachments title!");
 
   while ($row = mysqli_fetch_array($result)){
+
 
     $article_title = $row['name'];
 
@@ -805,19 +803,24 @@ function deleteAttachments($article_id,$attachParent){
 
   $sql = "SELECT name FROM attachments WHERE $attachParent = '$article_id'";
 
-  $result = mysqli_query($res,$sql) or die ("Unable select article id");
+  $result = mysqli_query($res,$sql) or die ("Unable to select attachments!");
 
   while ($row = mysqli_fetch_array($result)){   
 
     $attachment_title = $row['name'];
-    unlink("uploads/" . $attachment_title);
 
-    if (file_exists('uploads/thumb/'. $attachment_title)) {
-                     
-     unlink("uploads/thumb/" . $attachment_title);
-                    
-    }   
-  } 
+    if (file_exists('uploads/'. $attachment_title)){
+
+        unlink("uploads/" . $attachment_title);
+
+        if (file_exists('uploads/thumb/'. $attachment_title)) {
+                         
+         unlink("uploads/thumb/" . $attachment_title);
+                        
+        }
+     } 
+
+   } 
 }
 
 function getMaxObjectID($objectName){
@@ -826,7 +829,7 @@ function getMaxObjectID($objectName){
   $res  = connect();
     
   $sql = "SELECT ID FROM $objectName";
-  $result=mysqli_query($res, $sql) or die ("Unable TO GET MAX ID");
+  $result=mysqli_query($res, $sql) or die ("Unable to get max ID!");
 
   $maxID = 0;
 
@@ -837,10 +840,27 @@ function getMaxObjectID($objectName){
     if ($id > $maxID){
 
         $maxID=$id;      
-    }
+     }
   
   }
 
   return $maxID;
 }
+
+function checkResult ($dbRes){
+
+  if (!$dbRes){
+
+      die ("Unable to display content!");
+    
+    }
+
+       else {
+
+          return $dbRes;
+
+       } 
+}
+
+
 ?>

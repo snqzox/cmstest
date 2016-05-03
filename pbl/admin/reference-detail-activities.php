@@ -32,8 +32,9 @@ if (isset($_POST['submit'])){
 
 			$action="select";
 			$result_select = data_handler($name,$action,$id,''); 
+			$checkedResult = checkResult($result_select);
 			
-			while($row = mysqli_fetch_array($result_select)){ 
+			while($row = mysqli_fetch_array($checkedResult)){ 
 	            
 	            $id = $row['ID']; 
 	            $title = $row['title']; 

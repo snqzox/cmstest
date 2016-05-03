@@ -1,3 +1,65 @@
+<?php 
+		require_once('admin/scripts/config.php'); 
+
+		$res = connect();
+		$sqlPA = "SELECT * from pageAbout";
+		$resultPA = mysqli_query($res,$sqlPA) or die ("Unable to LOAD data!");
+
+		while ($row = mysqli_fetch_array($resultPA)) {
+			$titlePA=$row['title'];
+			$subtitlePA=$row['subtitle'];
+			$contentPA=$row['content'];
+
+		}
+
+		$sqlSR = "SELECT * FROM services WHERE subservice = 0";
+		$resultSR = mysqli_query($res,$sqlSR) or die ("Unable to LOAD data!");
+		$i=0;
+		while ($row = mysqli_fetch_array($resultSR)) {
+			$titleSR[$i]=$row['title'];
+			$subtitleSR[$i]=$row['subtitle'];
+			$i++;
+		}
+
+	
+
+function getReferences(){
+
+		require_once('admin/scripts/config.php'); 
+		$res = connect();
+
+		
+		$sqlRef =  "SELECT title, content FROM activities
+					UNION
+					SELECT title, content FROM subsidies
+					UNION
+					SELECT title, content FROM studios
+					ORDER BY title";
+
+		$resultRef = mysqli_query($res,$sqlRef) or die ("Unable to LOAD data!");
+		
+		$j=0;
+		while ($row = mysqli_fetch_array($resultRef)) {
+			
+				$titleRef=$row['title'];
+				$contentRef=$row['content'];
+			
+				echo '<div class="ref">
+			      <div class="ref-icon"></div>
+				  <h3>'. $titleRef . '</h3>
+				  <p class="sub">
+				  '. $contentRef . '</p>
+				  </div>';
+				$j++;
+				
+				if ($j==6) {
+					break;
+				}
+		 }
+
+}
+
+?>
 <div class="page" id="uvod">
 	<div class="wrapper">
 		<div class="title">Lorem ipsum dolor sit amet, consectetur</div>
@@ -9,14 +71,9 @@
 </div>
 <div class="page" id="o-nas">
 	<div class="wrapper">
-		<h1>O společnosti</h1>
-		<p class="subtitle">Víme co děláme a rádi Vám pomáháme, proto nás to baví!</p>
-		<p>
-		Jsme malá, dynamická a ambiciózní společnost PBL Migliori Futuro s.r.o., která díky svým pracovníkům aktivně pomáhá podnikům s jejich cíli a plány. Primárně se zaměřujeme na získávání dotací z evropských fondů a služby s tím spojené. Do současné chvíle jsme zpracovali žádosti v celkové výši přesahující 50 mil Kč s 95% úspěšností. 
-		S naší vervou se rovněž vrháme do obstarávání nemovitostí na míru pro naše klienty. 
-
-		Naším cílem je být klientům dlouhodobým a stabilním partnerem s jasnou strategií a výbornou perspektivou pro další spolupráci.
-
+		<h1><?php echo $titlePA ?></h1>
+		<p class="subtitle"><?php echo $subtitlePA ?></p>
+		<p><?php echo $contentPA ?>
 		</p>
 
 	</div>
@@ -30,10 +87,8 @@
 				<div class="icon">
 				</div>
 				<div class="service-content">
-					<h2>Granty a dotace</h2>
-					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-					tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim 
-					cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+					<h2><?php echo $titleSR[0] ?></h2>
+					<p><?php echo $subtitleSR[0] ?></p>
 				</div>
 			</div>
 		</div>
@@ -42,10 +97,8 @@
 				<div class="icon">
 				</div>
 				<div class="service-content">
-					<h2>Realitní činnost</h2>
-					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-					tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim 
-					cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+					<h2><?php echo $titleSR[1] ?></h2>
+					<p><?php echo $subtitleSR[1] ?></p>
 				</div>
 			</div>
 		</div>
@@ -54,10 +107,8 @@
 				<div class="icon">
 				</div>
 				<div class="service-content">
-					<h2>Projekční ateliér</h2>
-					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-					tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim 
-					cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+					<h2><?php echo $titleSR[2] ?></h2>
+					<p><?php echo $subtitleSR[2] ?></p>
 				</div>
 			</div>
 		</div>
@@ -66,10 +117,8 @@
 				<div class="icon">
 				</div>
 				<div class="service-content">
-					<h2>Nákladní autodoprava</h2>
-					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-					tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim 
-					cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+					<h2><?php echo $titleSR[3]?></h2>
+					<p><?php echo $subtitleSR[3]?></p>
 				</div>
 			</div>
 		</div>
@@ -79,43 +128,7 @@
 	<div class="wrapper">
 		<h1>Reference</h1>
 		<p class="subtitle">O naší dosavadní práci vypovídají referenční zakázky, kterým se v současnosti věnujeme nebo které jsme v minulosti realizovali.</p>
-		<div class="ref pa">
-			<div class="ref-icon"></div>
-			<h3>Lorem ipsum dolor sit</h3>
-			<p class="sub">
-			Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-			</p>
-		</div><div class="ref gt">
-			<div class="ref-icon"></div>
-			<h3>Lorem ipsum dolor sit</h3>
-			<p class="sub">
-			Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-			</p>
-		</div><div class="ref rc">
-			<div class="ref-icon"></div>
-			<h3>Lorem ipsum dolor sit</h3>
-			<p class="sub">
-			Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-			</p>
-		</div><div class="ref gt">
-			<div class="ref-icon"></div>
-			<h3>Lorem ipsum dolor sit</h3>
-			<p class="sub">
-			Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-			</p>
-		</div><div class="ref pa">
-			<div class="ref-icon"></div>
-			<h3>Lorem ipsum dolor sit</h3>
-			<p class="sub">
-			Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-			</p>
-		</div><div class="ref gt">
-			<div class="ref-icon"></div>
-			<h3>Lorem ipsum dolor sit</h3>
-			<p class="sub">
-			Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-			</p>
-		</div>
+		<?php getReferences(); ?>
 		<hr/>
 		<div class="ref-btns">
 			<h3 class="dark">Lorem ipsum dolor sit</h3>
