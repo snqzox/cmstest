@@ -76,7 +76,9 @@ if (isset($_POST['submit'])){
 			</div>
 			<div class="form-group">
 				<label>Obsah:</label>
-				<input type="text" class="form-ctrl" name="content" <?php echo 'value="'.$content.'"'; ?> id="content">
+				<textarea class="form-ctrl" id="trumbowyg-demo" rows="2" name="content" id="content">
+					<?php echo $content; ?>
+				</textarea>
 			</div>
 			<button class="btn btn-submit" id="btn" name="submit" data-id="about">Save</button>
 		  </div>

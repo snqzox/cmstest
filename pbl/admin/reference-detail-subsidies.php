@@ -82,7 +82,9 @@ if (isset($_POST['submit'])){
 		</div>
 		<div class="form-group">
 			<label>Obsah:</label>
-			<input type="text" class="form-ctrl" name="content" <?php echo 'value="'.$content.'"'; ?> id="content">
+			<textarea class="form-ctrl" id="trumbowyg-demo" rows="2" name="content" id="content">
+				<?php echo $content; ?>
+			</textarea>
 		</div>
 		<button class="btn btn-submit" id="btn" data-id="about" name="submit">Save</button>
 	  </div>

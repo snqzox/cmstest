@@ -133,7 +133,9 @@ function getAttach($article_id){
 		</div>
 		<div class="form-group">
 			<label>Obsah:</label>
-			<input type="text" class="form-ctrl" name="content" <?php echo 'value="'.$content.'"'; ?> id="content">
+			<textarea class="form-ctrl" id="trumbowyg-demo" rows="2" name="content" id="content">
+				<?php echo $content; ?>
+			</textarea>
 		</div>
 		<div class="form-group">
 			<input type="file" name="files[]" id="fileToUpload" multiple=""/>		
