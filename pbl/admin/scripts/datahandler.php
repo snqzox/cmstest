@@ -308,8 +308,8 @@ switch($page_name){
 
             else if (strcmp($action, "create") == 0){
                            
-                $stmt = $res->prepare( 'INSERT INTO subsidies (title, subject, client, price, content, page_id) VALUES (?, ?, ?, ?, ?, 5)' );
-                $stmt -> bind_param('sssss',$title, $subject, $client, $price, $content);
+                $stmt = $res->prepare( 'INSERT INTO subsidies (title, subject, client, price, content, type, page_id) VALUES (?, ?, ?, ?, ?, ?, 5)' );
+                $stmt -> bind_param('ssssss',$title, $subject, $client, $price, $content, $page_name) or die ('Unable to load data reference');
                 $stmt -> execute();
                 $result = $stmt -> get_result();
 
@@ -378,8 +378,8 @@ switch($page_name){
                  
                 else if (strcmp($action, "create") == 0){
            
-                    $stmt = $res->prepare('INSERT INTO activities (title, client, investition, content, page_id) VALUES (?, ?, ?, ?, 5)');
-                    $stmt -> bind_param('ssss', $title, $client,$investition, $content);
+                    $stmt = $res->prepare('INSERT INTO activities (title, client, investition, content, type, page_id) VALUES (?, ?, ?, ?, ?, 5)');
+                    $stmt -> bind_param('sssss', $title, $client,$investition, $content, $page_name);
                     $stmt -> execute();
                     $result = $stmt -> get_result(); 
 
@@ -437,8 +437,8 @@ switch($page_name){
 
              else if (strcmp($action, "create") == 0){
                 
-                 $stmt = $res->prepare( 'INSERT INTO studios (title, client, costs, PD,content, page_id) VALUES (?, ?, ?, ?, ?, 5)' );
-                 $stmt -> bind_param('sssss', $title, $client, $costs, $pd, $content);
+                 $stmt = $res->prepare( 'INSERT INTO studios (title, client, costs, PD,content, type, page_id) VALUES (?, ?, ?, ?, ?, ?, 5)' );
+                 $stmt -> bind_param('ssssss', $title, $client, $costs, $pd, $content, $page_name);
                  $stmt -> execute();
                  $result = $stmt -> get_result(); 
                  fileupload('studio','studio_id');
