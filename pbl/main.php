@@ -21,21 +21,20 @@
 			$i++;
 		}
 
-	
-
 function getReferences(){
 
 		require_once('admin/scripts/config.php'); 
 		$res = connect();
 
 		
-		$sqlRef =  "SELECT title, content FROM activities
+		$sqlRef =  "SELECT ID,title,type, content FROM activities
 					UNION
-					SELECT title, content FROM subsidies
+					SELECT ID,title,type, content FROM subsidies
 					UNION
-					SELECT title, content FROM studios
-					ORDER BY title";
+					SELECT ID,title,type, content FROM studios
+					ORDER BY ID DESC";
 
+					
 		$resultRef = mysqli_query($res,$sqlRef) or die ("Unable to LOAD data!");
 		
 		$j=0;
@@ -43,8 +42,24 @@ function getReferences(){
 			
 				$titleRef=$row['title'];
 				$contentRef=$row['content'];
-			
-				echo '<div class="ref">
+				$typeRef=$row['type'];
+
+				
+
+			    if ( $typeRef == 'activities' ){
+
+			    	$class='ref rc';
+			    }
+			    	else if ($typeRef == 'subsidies'){
+
+			    			$class ='ref gt';
+			    	} 
+				    	else {
+				    	
+				    			$class = 'ref pa';
+				    	}
+
+				  echo '<div class="'.$class.'">
 			      <div class="ref-icon"></div>
 				  <h3>'. $titleRef . '</h3>
 				  <p class="sub">
