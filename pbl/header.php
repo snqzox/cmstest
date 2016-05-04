@@ -22,10 +22,10 @@
 			<li><a href="index.php#uvod">Úvod</a></li>
 			<li><a href="index.php#o-nas">O nás</a></li>
 			<li class="submenu">
-				<a href="#sluzby">Služby</a>
+				<a href="index.php#sluzby">Služby</a>
 				<ul>
 					<li><a href="granty-a-dotace.php">Granty a dotace</a></li><li>
-					<a href="projekcni-atelier.php">Projektový ateliér</a></li><li>
+					<a href="projekcni-atelier.php">Projekční ateliér</a></li><li>
 					<a href="realitni-cinnost.php">Realitní činnost</a></li><li>
 					<a href="nakladni-autodoprava.php">Nákladní autodoprava</a></li>
 				</ul>
