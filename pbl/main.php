@@ -1,75 +1,76 @@
 <?php 
-		require_once('admin/scripts/config.php'); 
+	require_once('admin/scripts/config.php'); 
 
-		$res = connect();
-		$sqlPA = "SELECT * from pageAbout";
-		$resultPA = mysqli_query($res,$sqlPA) or die ("Unable to LOAD data!");
+	$res = connect();
+	$sqlPA = "SELECT * from pageAbout";
+	$resultPA = mysqli_query($res,$sqlPA) or die ("Unable to LOAD data!");
 
-		while ($row = mysqli_fetch_array($resultPA)) {
-			$titlePA=$row['title'];
-			$subtitlePA=$row['subtitle'];
-			$contentPA=$row['content'];
+	while ($row = mysqli_fetch_array($resultPA)) {
+		$titlePA=$row['title'];
+		$subtitlePA=$row['subtitle'];
+		$contentPA=$row['content'];
 
-		}
+	}
 
-		$sqlSR = "SELECT * FROM services WHERE subservice = 0";
-		$resultSR = mysqli_query($res,$sqlSR) or die ("Unable to LOAD data!");
-		$i=0;
-		while ($row = mysqli_fetch_array($resultSR)) {
-			$titleSR[$i]=$row['title'];
-			$subtitleSR[$i]=$row['subtitle'];
-			$i++;
-		}
+	$sqlSR = "SELECT * FROM services WHERE subservice = 0";
+	$resultSR = mysqli_query($res,$sqlSR) or die ("Unable to LOAD data!");
+	$i=0;
+	while ($row = mysqli_fetch_array($resultSR)) {
+		$titleSR[$i]=$row['title'];
+		$subtitleSR[$i]=$row['subtitle'];
+		$i++;
+	}
 
 function getReferences(){
 
-		require_once('admin/scripts/config.php'); 
-		$res = connect();
+	require_once('admin/scripts/config.php'); 
 
+	$res = connect();
+	
+	$sqlRef =  "SELECT ID,title,type, content FROM activities
+				UNION
+				SELECT ID,title,type, content FROM subsidies
+				UNION
+				SELECT ID,title,type, content FROM studios
+				ORDER BY title ASC LIMIT 6";
+				
+	$resultRef = mysqli_query($res,$sqlRef) or die ("Unable to LOAD data!");
+	
+	$j=0;
+	
+	while ($row = mysqli_fetch_array($resultRef)) {
 		
-		$sqlRef =  "SELECT ID,title,type, content FROM activities
-					UNION
-					SELECT ID,title,type, content FROM subsidies
-					UNION
-					SELECT ID,title,type, content FROM studios
-					ORDER BY ID DESC";
+	     $titleRef=$row['title'];
+		 $contentRef=$row['content'];
+		 $typeRef=$row['type'];
 
-					
-		$resultRef = mysqli_query($res,$sqlRef) or die ("Unable to LOAD data!");
+	     if ( $typeRef == 'activities' ){
+
+	    	$class='ref rc';
+	      }
+	    	else if ($typeRef == 'subsidies'){
+
+	    			$class ='ref gt';
+	    	} 
+		    	else {
+		    	
+		    			$class = 'ref pa';
+		    	}
+
+		  echo '<div class="'.$class.'">
+	      <div class="ref-icon"></div>
+		  <h3>'. $titleRef . '</h3>
+		  <p class="sub">
+		  '. $contentRef . '</p>
+		  </div>';
+		  $j++;
 		
-		$j=0;
-		while ($row = mysqli_fetch_array($resultRef)) {
+		  if ($j==6) {
 			
-				$titleRef=$row['title'];
-				$contentRef=$row['content'];
-				$typeRef=$row['type'];
-
-				
-
-			    if ( $typeRef == 'activities' ){
-
-			    	$class='ref rc';
-			    }
-			    	else if ($typeRef == 'subsidies'){
-
-			    			$class ='ref gt';
-			    	} 
-				    	else {
-				    	
-				    			$class = 'ref pa';
-				    	}
-
-				  echo '<div class="'.$class.'">
-			      <div class="ref-icon"></div>
-				  <h3>'. $titleRef . '</h3>
-				  <p class="sub">
-				  '. $contentRef . '</p>
-				  </div>';
-				$j++;
-				
-				if ($j==6) {
-					break;
-				}
+			break;
+		   
+		   }
+	
 		 }
 
 }
