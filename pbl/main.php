@@ -57,12 +57,12 @@ function getReferences(){
 		    			$class = 'ref pa';
 		    	}
 
-		  echo '<div class="'.$class.'">
+		  echo '<a href="#"><div class="'.$class.'">
 	      <div class="ref-icon"></div>
 		  <h3>'. $titleRef . '</h3>
 		  <p class="sub">
 		  '. $contentRef . '</p>
-		  </div>';
+		  </div></a>';
 		  $j++;
 		
 		  if ($j==6) {
@@ -100,8 +100,10 @@ function getReferences(){
 		<p class="subtitle">Podívejte se, co umíme</p>
 		<div class="service granty animate from-left">
 			<div class="service-wrapper">
+				<a href="granty-a-dotace.php">
 				<div class="icon">
 				</div>
+				</a>
 				<div class="service-content">
 					<h2><?php echo $titleSR[0] ?></h2>
 					<p><?php echo $subtitleSR[0] ?></p>
@@ -110,8 +112,10 @@ function getReferences(){
 		</div>
 		<div class="service reality animate from-right">
 			<div class="service-wrapper">
+				<a href="realitni-cinnost.php">
 				<div class="icon">
 				</div>
+				</a>
 				<div class="service-content">
 					<h2><?php echo $titleSR[1] ?></h2>
 					<p><?php echo $subtitleSR[1] ?></p>
@@ -120,8 +124,10 @@ function getReferences(){
 		</div>
 		<div class="service atelier animate from-left">
 				<div class="service-wrapper">
+				<a href="projekcni-atelier.php">
 				<div class="icon">
 				</div>
+				</a>
 				<div class="service-content">
 					<h2><?php echo $titleSR[2] ?></h2>
 					<p><?php echo $subtitleSR[2] ?></p>
@@ -130,8 +136,10 @@ function getReferences(){
 		</div>
 		<div class="service doprava animate from-right">
 			<div class="service-wrapper">
+				<a href="nakladni-autodoprava.php">
 				<div class="icon">
 				</div>
+				</a>
 				<div class="service-content">
 					<h2><?php echo $titleSR[3]?></h2>
 					<p><?php echo $subtitleSR[3]?></p>
@@ -160,7 +168,7 @@ function getReferences(){
 				<div class="icon"></div>
 				<span>Projekční ateliér</span>
 			</a>
-			</div>
+		</div>
 	</div>
 
 </div>

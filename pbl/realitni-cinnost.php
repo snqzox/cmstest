@@ -1,6 +1,6 @@
 <?php include 'header.php'; ?>
 <div class="content">
-<div class="subpage">
+<div class="subpage rc">
 	<div class="wrapper">
 		<h1>Realitní činnost</h1>
 		<p class="subtitle">Společnost PBL Migliori Futuro s.r.o. se primárně zaměřuje na dotační programy Ministerstva životního prostředí a Ministerstva průmyslu a obchodu (CzechInvest), společně s nimi nabízíme podpůrné služby které jsou nutné k získání a udržení dotací v průběhu udržitelnosti projektu. </p>

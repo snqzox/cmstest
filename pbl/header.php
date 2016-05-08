@@ -8,6 +8,7 @@
 	<link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
 	<link rel="icon" href="img/favicon.ico" type="image/x-icon">
 	<link rel="stylesheet" type="text/css" href="css/reset.min.css">
+	<link rel="stylesheet" type="text/css" href="css/lightbox.min.css">
 	<link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
 <body>
@@ -24,7 +25,12 @@
 			<li class="submenu">
 				<a href="index.php#sluzby">Služby</a>
 				<ul>
-					<li><a href="granty-a-dotace.php">Granty a dotace</a></li><li>
+					<li><a href="granty-a-dotace.php">Granty a dotace</a>
+						<ul>
+							<li><a href="granty-a-dotace-OPZP.php">Operační program životního prostředí</a></li><li>
+							<a href="granty-a-dotace-OPPIK.php">Operační program podnikání a inovace pro konkurenceschopnost</a></li>
+						</ul>
+					</li><li>
 					<a href="projekcni-atelier.php">Projekční ateliér</a></li><li>
 					<a href="realitni-cinnost.php">Realitní činnost</a></li><li>
 					<a href="nakladni-autodoprava.php">Nákladní autodoprava</a></li>
