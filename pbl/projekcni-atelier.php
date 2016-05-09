@@ -1,6 +1,6 @@
 <?php include 'header.php'; ?>
 <div class="content">
-<div class="subpage">
+<div class="subpage pa">
 	<div class="wrapper">
 		<h1>Projekční ateliér</h1>
 		<p class="subtitle">Společnost PBL Migliori Futuro s.r.o. se primárně zaměřuje na dotační programy Ministerstva životního prostředí a Ministerstva průmyslu a obchodu (CzechInvest), společně s nimi nabízíme podpůrné služby které jsou nutné k získání a udržení dotací v průběhu udržitelnosti projektu. </p>
@@ -29,9 +29,9 @@
 			<h4>Klient</h4>
 			<p class="sub">Janik Mrkva</p>
 			<div class="photos-wrapper">
-				<div class="photo-thumb">Photo</div>
-				<div class="photo-thumb">Photo</div>
-				<div class="photo-thumb">Photo</div>
+				<div class="photo-thumb"><a data-lightbox="id1" href="images/sample_a.jpg"><img src="images/sample_a_thumb.jpg" alt="Image"></a></div>
+			    <div class="photo-thumb"><a data-lightbox="id1" href="images/sample_b.jpg"><img src="images/sample_b_thumb.jpg" alt="Image"></a></div>
+			    <div class="photo-thumb"><a data-lightbox="id1" href="images/sample_c.jpg"><img src="images/sample_c_thumb.jpg" alt="Image"></a></div>
 			</div>
 		</div><div class="ref pa">
 			<div class="ref-icon"></div>
@@ -46,9 +46,7 @@
 			<h4>Klient</h4>
 			<p class="sub">Janik Mrkva</p>
 			<div class="photos-wrapper">
-				<div class="photo-thumb">Photo</div>
-				<div class="photo-thumb">Photo</div>
-				<div class="photo-thumb">Photo</div>
+			    <div class="photo-thumb"><a data-lightbox="id2" href="images/sample_d.jpg"><img src="images/sample_d_thumb.jpg" alt="Image"></a></div>
 			</div>
 		</div><div class="ref pa">
 			<div class="ref-icon"></div>
@@ -63,11 +61,11 @@
 			<h4>Klient</h4>
 			<p class="sub">Janik Mrkva</p>
 			<div class="photos-wrapper">
-				<div class="photo-thumb">Photo</div>
-				<div class="photo-thumb">Photo</div>
-				<div class="photo-thumb">Photo</div>
+			    <div class="photo-thumb"><a data-lightbox="id1" href="images/sample_c.jpg"><img src="images/sample_c_thumb.jpg" alt="Image"></a></div>
+			    <div class="photo-thumb"><a data-lightbox="id1" href="images/sample_d.jpg"><img src="images/sample_d_thumb.jpg" alt="Image"></a></div>
 			</div>
 		</div>
 </div>
 </div>
+
 <?php include 'footer.php'; ?>
