@@ -1,14 +1,37 @@
+<?php 
+
+	require_once('admin/scripts/config.php'); 
+	require_once('scripts/articles.php');
+
+	$res = connect();
+	$sqlOPIK = "SELECT * from services WHERE ID = 7";
+	$resultOPIK = mysqli_query($res,$sqlOPIK) or die ("Unable to load page OPIK!");
+
+	while ($row = mysqli_fetch_array($resultOPIK)) {
+
+		$titleOPIK=$row['title'];
+		$subtitleOPIK=$row['subtitle'];
+		$contentOPIK=$row['content'];
+	}
+
+?>
+
+
+
 <?php include 'header.php'; ?>
 <div class="content">
 <div class="subpage granty">
 	<div class="wrapper">
 		<h1>
 			<a href="granty-a-dotace.php">Granty a dotace</a>
-			<span>Operační program podnikání a inovace pro konkurenceschopnost - OPPIK</span>
+			<span><?php echo $titleOPIK; ?></span>
 		</h1>
 
 		<div id="oppik">
-			<p>Operační program Podnikání a inovace pro konkurenceschopnost přináší v dotačním odbobí
+
+			<?php echo $contentOPIK; ?>
+
+			<!-- <p>Operační program Podnikání a inovace pro konkurenceschopnost přináší v dotačním odbobí
 
 				2014 - 2020 možnost získat dotaci ve čtyřech oblastech podpory:</p>
 				<ol>
@@ -48,11 +71,12 @@
 				odlišuje např. průmyslový výzkum (50 % způsobilých nákladů), experimentální vývoj (25 % - 45 %
 				způsobilých nákladů), studie proveditelnosti (50 % způsobilých nákladů) či podporu výzkumné
 				infrastruktury (50%).
-				</p>
+				</p> -->
 		</div>	
 		<div class="articles">
 				<h2>Articles</h2>
-				<div class="article">
+					<?php getArticles(7);  ?>					
+				<!-- <div class="article">
 					<p class="article-content">Ut enim ad minim veniam,	quis nostrud exercitation ullamco laboris</p>
 					<a class="file" href="#">
 						<div class="icon"></div>
@@ -84,7 +108,7 @@
 						<div class="icon"></div>
 						<span>Another file with long name</span>
 					</a>
-				</div>
+				</div> -->
 			</div>
 		
 	</div>

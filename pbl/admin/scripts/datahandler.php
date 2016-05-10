@@ -83,7 +83,8 @@ $dic=test_input($dic_set_escaped);
 $psc_city=test_input($psc_city_set_escaped);
 
 
-
+$currentTime=time();
+$uploadTime = date("Y-m-d-H:i:s",$currentTime);
 
 switch($page_name){
 
@@ -95,7 +96,7 @@ switch($page_name){
         $stmt->bind_param('ssi', $title, $content, $id);
         $stmt->execute();
         $result = $stmt->get_result();
-        fileupload($id,'article_id');
+        fileupload($id,'article_id', $uploadTime);
         header('Location: ' . HOST . 'article-detail.php?edit=' . $id);
 
       }
@@ -135,7 +136,7 @@ switch($page_name){
                $stmt->bind_param('ssi', $title, $content, $dataid);
                $stmt->execute();
                $result = $stmt->get_result();
-               fileupload('article','article_id');
+               fileupload('article','article_id', $uploadTime);
                header('Location: ' . HOST . 'page-articles.php');         
                  
              }
@@ -308,8 +309,8 @@ switch($page_name){
 
             else if (strcmp($action, "create") == 0){
                            
-                $stmt = $res->prepare( 'INSERT INTO subsidies (title, subject, client, price, content, type, page_id) VALUES (?, ?, ?, ?, ?, ?, 5)' );
-                $stmt -> bind_param('ssssss',$title, $subject, $client, $price, $content, $page_name) or die ('Unable to load data reference');
+                $stmt = $res->prepare( 'INSERT INTO subsidies (title, subject, client, price, content, type, uploadtime, page_id) VALUES (?, ?, ?, ?, ?, ?, ?, 5)' );
+                $stmt -> bind_param('sssssss',$title, $subject, $client, $price, $content, $page_name, $uploadTime) or die ('Unable to load data reference');
                 $stmt -> execute();
                 $result = $stmt -> get_result();
 
@@ -378,8 +379,8 @@ switch($page_name){
                  
                 else if (strcmp($action, "create") == 0){
            
-                    $stmt = $res->prepare('INSERT INTO activities (title, client, investition, content, type, page_id) VALUES (?, ?, ?, ?, ?, 5)');
-                    $stmt -> bind_param('sssss', $title, $client,$investition, $content, $page_name);
+                    $stmt = $res->prepare('INSERT INTO activities (title, client, investition, content, type, uploadtime, page_id) VALUES (?, ?, ?, ?, ?, ?, 5)');
+                    $stmt -> bind_param('ssssss', $title, $client,$investition, $content, $page_name, $uploadTime);
                     $stmt -> execute();
                     $result = $stmt -> get_result(); 
 
@@ -414,7 +415,7 @@ switch($page_name){
         
          else if (strcmp($action, "update") == 0){
        
-            fileupload($id,'studio_id');
+            fileupload($id,'studio_id', $uploadTime);
           
             $stmt = $res->prepare( 'UPDATE studios SET title=?, client=?, costs=?, pd=?, content=? WHERE ID= ?' );
             $stmt -> bind_param('sssssi', $title, $client, $costs, $pd, $content, $id);
@@ -437,11 +438,11 @@ switch($page_name){
 
              else if (strcmp($action, "create") == 0){
                 
-                 $stmt = $res->prepare( 'INSERT INTO studios (title, client, costs, PD,content, type, page_id) VALUES (?, ?, ?, ?, ?, ?, 5)' );
-                 $stmt -> bind_param('ssssss', $title, $client, $costs, $pd, $content, $page_name);
+                 $stmt = $res->prepare( 'INSERT INTO studios (title, client, costs, PD,content, type,uploadtime, page_id) VALUES (?, ?, ?, ?, ?, ?, ?, 5)' );
+                 $stmt -> bind_param('sssssss', $title, $client, $costs, $pd, $content, $page_name, $uploadTime);
                  $stmt -> execute();
                  $result = $stmt -> get_result(); 
-                 fileupload('studio','studio_id');
+                 fileupload('studio','studio_id', $uploadTime);
                  header('Location: ' . HOST . 'page-references.php');
 
              }
@@ -538,7 +539,7 @@ switch($page_name){
        
             else if (strcmp($action, "delete") == 0){
                 
-                $art = getArtIDfromAttach($dataid);
+                $art = getArtIDfromAttach($attachParent, $dataid);
                 $title = getAttachName('attachments',$dataid);           
                                 
                 if (file_exists('uploads/'. $title)){
@@ -593,7 +594,7 @@ switch($page_name){
     }
 }
 
-function fileupload($article_id, $parentID){
+function fileupload($article_id, $parentID, $uploadTimeFile){
 
     require_once('config.php'); 
     define("UPLOAD_DIR", "uploads/");
@@ -630,8 +631,6 @@ function fileupload($article_id, $parentID){
             }
               else {
                   
-                  $currentTime=time();
-                  $uploadTime = date("Y-m-d-H:i:s",$currentTime);
                   $j = 0;
                   $parts = pathinfo($name);
                   $path = UPLOAD_DIR. $name;
@@ -674,7 +673,7 @@ function fileupload($article_id, $parentID){
 
                           }
 
-                         $sql = "INSERT INTO attachments (name, whole_path, $parentID, size, type, uploadtime, thumb) VALUES ('$name', '$path','$article_id','$size','$type','$uploadTime','$thumbName')" or die ('Unable to abs(number)ttachments!');
+                         $sql = "INSERT INTO attachments (name, whole_path, $parentID, size, type, uploadtime, thumb) VALUES ('$name', '$path','$article_id','$size','$type','$uploadTimeFile','$thumbName')" or die ('Unable to abs(number)ttachments!');
                          $result = mysqli_query($res,$sql) or die ("Unable to UPLOAD attachments! Size of file ok and ARTICLE ID IS " . $article_id. "______" );
                     }
   
@@ -756,19 +755,32 @@ return $fileName;
 
 }
 
-function getArtIDfromAttach ($attach_id){
+function getArtIDfromAttach ($parent, $attach_id){
 
   require_once('config.php'); 
   $res  = connect();
 
 
-  $sql = "SELECT article_id FROM attachments WHERE ID = '$attach_id'";
+  $sql = "SELECT $parent FROM attachments WHERE ID = '$attach_id'";
   $result = mysqli_query($res,$sql) or die ("Unable select article id");
 
   while ($row = mysqli_fetch_array($result)){
 
+    if ($parent == 'article_id'){
 
     $article_id2 = $row['article_id'];
+
+    }
+      else if ($parent == 'studio_id'){
+
+        $article_id2 = $row['studio_id'];
+
+      } 
+        else {
+
+          $article_id2 = 0;
+
+      }
 
     return $article_id2;
   }

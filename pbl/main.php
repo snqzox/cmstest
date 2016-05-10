@@ -3,7 +3,7 @@
 
 	$res = connect();
 	$sqlPA = "SELECT * from pageAbout";
-	$resultPA = mysqli_query($res,$sqlPA) or die ("Unable to LOAD data!");
+	$resultPA = mysqli_query($res,$sqlPA) or die ("Unable to load page about!");
 
 	while ($row = mysqli_fetch_array($resultPA)) {
 		$titlePA=$row['title'];
@@ -12,8 +12,18 @@
 
 	}
 
+	$sqlMain = "SELECT * from pageMain";
+	$resultMain = mysqli_query($res,$sqlMain) or die ("Unable to load page about!");
+
+	while ($row = mysqli_fetch_array($resultMain)) {
+	
+		$titleMain=$row['title'];
+		$subtitleMain=$row['subtitle'];
+
+	}
+
 	$sqlSR = "SELECT * FROM services WHERE subservice = 0";
-	$resultSR = mysqli_query($res,$sqlSR) or die ("Unable to LOAD data!");
+	$resultSR = mysqli_query($res,$sqlSR) or die ("Unable to load service data!");
 	$i=0;
 	while ($row = mysqli_fetch_array($resultSR)) {
 		$titleSR[$i]=$row['title'];
@@ -21,20 +31,36 @@
 		$i++;
 	}
 
+	$sqlCon = "SELECT * from contact";
+	$resultCon = mysqli_query($res,$sqlCon) or die ("Unable to load page contact!");
+
+	while ($row = mysqli_fetch_array($resultCon)) {
+		
+		$email=$row['email'];
+		$mobile=$row['mobile'];
+		$company=$row['company'];
+		$address=$row['address'];
+		$pscCity=$row['psc_city'];
+		$ic=$row['ic'];
+		$dic=$row['dic'];
+
+	}
+
+
 function getReferences(){
 
 	require_once('admin/scripts/config.php'); 
 
 	$res = connect();
 	
-	$sqlRef =  "SELECT ID,title,type, content FROM activities
+	$sqlRef =  "SELECT ID,title,type, content,uploadtime FROM activities
 				UNION
-				SELECT ID,title,type, content FROM subsidies
+				SELECT ID,title,type, content,uploadtime FROM subsidies
 				UNION
-				SELECT ID,title,type, content FROM studios
-				ORDER BY title ASC LIMIT 6";
+				SELECT ID,title,type, content,uploadtime FROM studios
+				ORDER BY uploadtime DESC LIMIT 6";
 				
-	$resultRef = mysqli_query($res,$sqlRef) or die ("Unable to LOAD data!");
+	$resultRef = mysqli_query($res,$sqlRef) or die ("Unable to load reference data!");
 	
 	$j=0;
 	
@@ -78,8 +104,8 @@ function getReferences(){
 ?>
 <div class="page" id="uvod">
 	<div class="wrapper">
-		<div class="title">Lorem ipsum dolor sit amet, consectetur</div>
-		<p class="perex">Labore et dolore magna aliqua. Ut enim ad minim veniam,	quis nostrud exercitation</p>
+		<div class="title"><?php echo $titleMain; ?></div>
+		<p class="perex"><?php echo $subtitleMain; ?></p>
 		<div class="scroll-icon"></div>
 	</div>
 	<div class="bg-mask">
@@ -180,21 +206,21 @@ function getReferences(){
 		<div class="box three">
 			<div class="icon logo-contact"></div>
 			<p>
-				<b>PBL Migliori Futuro s.r.o.</b></br>
-				V Jámě 1/699</br>
-				110 00 Praha 1 - Staré Město</br></br>
+				<b><?php echo $company;?></b></br>
+				<?php echo $address;?></br>
+				<?php echo $pscCity;?></br></br>
 
-				IČ: 037 13 148</br>
-				DIČ: CZ037 13 148</br>
+				IČ: <?php echo $ic;?></br>
+				DIČ: <?php echo $dic;?></br>
 			</p>
 		</div><div class="box three">
 			<div class="icon phone"></div>
 			<p>
-				<b>+420 724 444 999</b>
+				<b><?php echo $mobile;?></b>
 			</p>
 			<div class="icon mail"></div>
 			<p>
-				<b>info@pblm.cz</b>
+				<b><?php echo $email;?></b>
 			</p>		
 		</div><div class="box three gf">
 			<div class="btn green big">Napište nám</div>
