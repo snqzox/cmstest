@@ -111,7 +111,7 @@ function getAttach($article_id){
 <div id="content">
 
 	<h1>upravit/pridat referenciu k Projekční ateliér</h1>
-	<div class="form-basic" id="form">
+	<div class="form-basic">
 
 	<form method="POST" action="" enctype="multipart/form-data">
 		<div class="form-group">
@@ -133,9 +133,7 @@ function getAttach($article_id){
 		</div>
 		<div class="form-group">
 			<label>Obsah:</label>
-			<textarea class="form-ctrl" id="trumbowyg-demo" rows="2" name="content" id="content">
-				<?php echo $content; ?>
-			</textarea>
+			<textarea class="form-ctrl" rows="10" name="content" id="content"><?php echo $content; ?></textarea>
 		</div>
 		<div class="form-group">
 			<input type="file" name="files[]" id="fileToUpload" multiple=""/>		

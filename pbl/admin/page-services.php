@@ -71,8 +71,7 @@ if (isset($_POST['submit'])){
 	<h1>Služby</h1>
 
 	<p class="perex">
-	Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-	tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam
+	Zoznam všetkých zobrazovaných služieb a podslužieb. V rámci tejto stránky je možne upravovať ich obsah prípadne zmeniť titulek a podtitulek sekce "Služby" v rámci hlavnej stránky.
 	</p>
 	<form method="POST" action="">
 	<div class="form-basic">

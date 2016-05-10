@@ -10,6 +10,7 @@ html, body{
 .subpage{
 	background-repeat: no-repeat;
     background-size: contain;
+    min-height:550px;
     background-position: center top;
 	&:first-child{
 		.wrapper{padding-top:120px;}
@@ -197,6 +198,7 @@ html, body{
 	overflow: hidden;
 	.box-sizing();
 }
+
 #top-stripe{
 	z-index: 1000;
 	width: 100%;
@@ -678,6 +680,9 @@ ul,ol {
     line-height: 28px;
     margin: 20px auto 15px;
 }
+div.wysiwyg{
+	
+}
 p{
 	color:#666;
 	font-size:16px;
@@ -841,6 +846,15 @@ p{
 					    visibility: visible;
 					    opacity: 1;
 					    width: 100%;
+					    li{
+					    	a{
+					    		height: 40px;
+					    		line-height: 40px;
+					    	}
+					    	ul{
+					    		display: none;
+					    	}
+					    }
     				}
     				a{
     					height: 54px;

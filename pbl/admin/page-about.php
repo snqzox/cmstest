@@ -32,10 +32,9 @@ if (isset($_POST['submit'])){
 <?php include 'navigation.php'; ?>
 <div id="content">
 
-	<h1>O nás</h1>
+	<h1>O společnosti</h1>
 	<p class="perex">
-	Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-	tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam
+	Informácie zobrazujúce sa v rámci sekcie "O společnosti" na hlavnej stránke
 	</p>
 	<form method="POST" action="">
 	<div class="form-basic">

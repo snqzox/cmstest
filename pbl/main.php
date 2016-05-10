@@ -115,7 +115,8 @@ function getReferences(){
 	<div class="wrapper">
 		<h1><?php echo $titlePA ?></h1>
 		<p class="subtitle"><?php echo $subtitlePA ?></p>
-		<p><?php echo $contentPA ?>
+		<p class="wysiwyg">
+			<?php echo $contentPA ?>
 		</p>
 
 	</div>
