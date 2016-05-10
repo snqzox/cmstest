@@ -21,7 +21,9 @@ require_once('admin/scripts/config.php');
 	<div class="wrapper">
 		<h1><?php echo $titleTransfer; ?></h1>
 		<p class="subtitle"><?php echo $subtitleTransfer; ?></p>
+		<p class="wysiwyg">
 		<?php echo $contentTransfer; ?>
+		</p>
 	</div>
 </div>
 </div>

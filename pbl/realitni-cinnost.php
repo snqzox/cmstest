@@ -27,38 +27,9 @@ while ($row = mysqli_fetch_array($resultAct)) {
 <div id="reference" class="subpage">
 <div class="wrapper">
 		<h1>Reference</h1>
-
+		<p class="wysiwyg">
 			<?php getReferences('activities'); ?>
-		<!-- <div class="ref rc">
-			<div class="ref-icon"></div>
-			<h3>Lorem ipsum dolor sit</h3>
-			<p class="sub">
-			Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-			</p>
-			<h4>Výše investice</h4>
-			<p class="sub">1.000.000 CZK</p>
-			<h4>Klient</h4>
-			<p class="sub">Janik Mrkva</p>
-		</div><div class="ref rc">
-			<div class="ref-icon"></div>
-			<h3>Lorem ipsum dolor sit</h3>
-			<p class="sub">
-			Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-			</p>
-			<h4>Výše investice</h4>
-			<p class="sub">1.000.000 CZK</p>
-			<h4>Klient</h4>
-			<p class="sub">Janik Mrkva</p>
-		</div><div class="ref rc">
-			<div class="ref-icon"></div>
-			<h3>Lorem ipsum dolor sit</h3>
-			<p class="sub">
-			Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-			</p>
-			<h4>Výše investice</h4>
-			<p class="sub">1.000.000 CZK</p>
-			<h4>Klient</h4>
-			<p class="sub">Janik Mrkva</p>-->
+		</p>
 		</div> 
 </div>
 </div>
