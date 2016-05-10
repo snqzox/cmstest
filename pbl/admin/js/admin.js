@@ -34,9 +34,9 @@ $(document).ready(function(){
 	$('#trumbowyg-demo').trumbowyg({
         fullscreenable: false,
         closable: true,
-        semantic: false,
+        semantic: true,
         removeformatPasted: true,
-        resetCss: false,
+        resetCss: true,
         autogrow: true,
         lang: 'cs',
         btnsAdd: ['|', 'foreColor', 'backColor'],
