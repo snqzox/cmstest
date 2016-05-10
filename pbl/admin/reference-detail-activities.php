@@ -60,7 +60,7 @@ if (isset($_POST['submit'])){
 	<h1>upravit/pridat referenciu k Realitní činnosti</h1>
 
 	<form method="POST" action="">
-	   	<div class="form-basic" id="form">
+	   	<div class="form-basic">
 			<div class="form-group">
 				<label>Titulek:</label>
 				<input type="text" class="form-ctrl title" <?php echo 'value="'.$title.'"'; ?> name="title" id="title">
@@ -76,9 +76,7 @@ if (isset($_POST['submit'])){
 			</div>
 			<div class="form-group">
 				<label>Obsah:</label>
-				<textarea class="form-ctrl" id="trumbowyg-demo" rows="2" name="content" id="content">
-					<?php echo $content; ?>
-				</textarea>
+				<textarea class="form-ctrl" rows="10" name="content" id="content"><?php echo $content; ?></textarea>
 			</div>
 			<button class="btn btn-submit" id="btn" name="submit" data-id="about">Save</button>
 		  </div>

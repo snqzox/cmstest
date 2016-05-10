@@ -14,15 +14,16 @@ session_start();
 	
 </head>
 <body>
-	<h1 style="padding:20px; border-bottom:1px solid #ddd;">Login</h1>
-	<form style="margin:20px;" class="form-basic" action="scripts/authenticate.php" method="POST">
+<div id="content" style="    padding: 0;">
+	<div class="login-logo"></div>
+	<form style="margin: 0 auto; padding: 0 0 20px; max-width: 450px;" class="form-basic" action="scripts/authenticate.php" method="POST">
 	<div class="form-group">
 		<label>Meno:</label>
-		<input type="text" class="form-ctrl" name="login">
+		<input type="text" style="width:100%;" class="form-ctrl" name="login">
 	</div>
 	<div class="form-group">
 		<label>Heslo:</label>
-		<input type="password" class="form-ctrl" name="password">
+		<input type="password" style="width:100%;" class="form-ctrl" name="password">
 	</div>
 	<button type="submit" class="btn btn-submit">Login</button>
 	</form>
@@ -31,7 +32,7 @@ session_start();
  if(!empty($_SESSION['error'])) { echo $_SESSION['error']; }
 	unset($_SESSION['error']);
  ?>
-
+</div>
  </div>
 
 

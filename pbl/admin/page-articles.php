@@ -76,8 +76,7 @@ require_once('scripts/datahandler.php');
 
 	<h1>Články</h1>
 	<p class="perex">
-	Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-	tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam
+	Zoznam všetkých článkov pridaných k jednotlivách podlužbám. Články je možné mazať, upravovať ich obsah a prídávať nové.
 	</p>
 	<section>
 		<table>
@@ -110,7 +109,7 @@ require_once('scripts/datahandler.php');
 			</td>
 		</tr>
 
-
+<!-- 
 		<tr class="no-hover">
 			<td colspan="3">
 				<h2><?php  getSubService(8);?></h2>
@@ -123,7 +122,7 @@ require_once('scripts/datahandler.php');
 			<td colspan="3">
 			<a class="button" id="btn" data-id="about" href=<?php echo '" ' . HOST . 'article-detail.php?add=8"'?>>Přidat nový</a>
 			</td>
-		</tr>
+		</tr> -->
 	</table>
 
 	</section>
