@@ -130,7 +130,7 @@ function getAttach($article_id){
 			</div>
 			<div class="form-group">
 				<label>Obsah:</label>
-				<input type="text" class="form-ctrl" <?php echo 'value="'.$content .'"'; ?> name="content" id="title">
+				<textarea class="form-ctrl" rows="5" name="content" id="content"><?php echo $content; ?></textarea>
 			</div>
 			<div class="form-group">
 				<label>Attachment:</label>

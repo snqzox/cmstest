@@ -2,11 +2,11 @@
 <a href="scripts/logout.php" class="logout"></a> 
 <div id="right-panel">
 	<div class="logo">
-		CMS
+		
 	</div>	
 	<ul id="menu">
-		<li>
-		 	<span>Stránky</span>
+		<li><!-- 
+		 	<span>Stránky</span> -->
 		 	<ul>
 		 		<li>
 			 		<a href="page-articles.php">Články</a>
@@ -15,7 +15,7 @@
 			 		<a href="page-main.php">Úvod</a>
 			 	</li>
 			 	<li>
-			 		<a href="page-about.php">O spoločnosti</a>
+			 		<a href="page-about.php">O společnosti</a>
 			 	</li>
 			 	<li>
 			 		<a href="page-services.php">Služby</a>
