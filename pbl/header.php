@@ -1,3 +1,25 @@
+<?php 
+
+require_once('admin/scripts/config.php'); 
+
+$res = connect();
+$sqlMenu = "SELECT * from services";
+$resultMenu = mysqli_query($res,$sqlMenu) or die ("Unable to load page about!");
+
+$index=5;
+
+while ($row = mysqli_fetch_array($resultMenu)) {
+
+	$titleService[$index]=$row['title'];
+	$index++;
+
+	if ($index > 11){
+		break;
+	}
+}
+
+
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -25,15 +47,15 @@
 			<li class="submenu">
 				<a href="index.php#sluzby">Služby</a>
 				<ul>
-					<li><a href="granty-a-dotace.php">Granty a dotace</a>
+					<li><a href="granty-a-dotace.php"><?php echo $titleService[5]; ?></a>
 						<ul>
-							<li><a href="granty-a-dotace-OPZP.php">Operační program životního prostředí</a></li><li>
-							<a href="granty-a-dotace-OPPIK.php">Operační program podnikání a inovace pro konkurenceschopnost</a></li>
+							<li><a href="granty-a-dotace-OPZP.php"><?php echo $titleService[6]; ?></a></li><li>
+							<a href="granty-a-dotace-OPPIK.php"><?php echo $titleService[7]; ?></a></li>
 						</ul>
 					</li><li>
-					<a href="projekcni-atelier.php">Projekční ateliér</a></li><li>
-					<a href="realitni-cinnost.php">Realitní činnost</a></li><li>
-					<a href="nakladni-autodoprava.php">Nákladní autodoprava</a></li>
+					<a href="projekcni-atelier.php"><?php echo $titleService[8];?></a></li><li>
+					<a href="realitni-cinnost.php"><?php echo $titleService[9];?></a></li><li>
+					<a href="nakladni-autodoprava.php"><?php echo $titleService[10];?></a></li>
 				</ul>
 			</li>
 			<li><a href="index.php#reference">Reference</a></li>
