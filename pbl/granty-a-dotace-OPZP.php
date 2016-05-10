@@ -1,3 +1,21 @@
+<?php 
+
+	require_once('admin/scripts/config.php'); 
+	require_once('scripts/articles.php');
+
+	$res = connect();
+	$sqlOPZP = "SELECT * from services WHERE ID = 6";
+	$resultOPZP = mysqli_query($res,$sqlOPZP) or die ("Unable to load page OPZP!");
+
+	while ($row = mysqli_fetch_array($resultOPZP)) {
+
+		$titleOPZP=$row['title'];
+		$subtitleOPZP=$row['subtitle'];
+		$contentOPZP=$row['content'];
+	}
+
+?>
+
 <?php include 'header.php'; ?>
 <div class="content">
 <div class="subpage granty">
@@ -5,11 +23,12 @@
 
 		<h1>
 			<a href="granty-a-dotace.php">Granty a dotace</a>
-			<span>Operační program životního prostředí - OPŽP</span>
+			<span><?php echo $titleOPZP; ?></span>
 		</h1>
 
 		<div id="opzp">
-		<p>
+			<?php echo $contentOPZP; ?>
+		<!-- <p>
 			Operační program Životní prostředí 2014–2020 navazuje na Operační program Životní prostředí
 			pro roky 2007–2013. Pro žadatele má v následujících letech přichystáno téměř 2,637 miliardy eur.
 			Řídicím orgánem je Ministerstvo životního prostředí (MŽP), zprostředkujícími subjekty jsou Státní
@@ -127,11 +146,12 @@
 			odlišuje např. průmyslový výzkum (50 % způsobilých nákladů), experimentální vývoj (25 % - 45 %
 			způsobilých nákladů), studie proveditelnosti (50 % způsobilých nákladů) či podporu výzkumné
 			infrastruktury (50%).
-			</p>
+			</p> -->
 
 			<div class="articles">
 				<h2>Articles</h2>
-				<div class="article">
+				<?php getArticles(6); ?>
+				<!-- <div class="article">
 					<p class="article-content">Ut enim ad minim veniam,	quis nostrud exercitation ullamco laboris</p>
 					<a class="file" href="#">
 						<div class="icon"></div>
@@ -163,7 +183,7 @@
 						<div class="icon"></div>
 						<span>Another file with long name</span>
 					</a>
-				</div>
+				</div> -->
 			</div>
 		</div>
 

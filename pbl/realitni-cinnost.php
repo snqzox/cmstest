@@ -1,22 +1,35 @@
+<?php 
+require_once('admin/scripts/config.php'); 
+require_once('scripts/references.php'); 
+
+$res = connect();
+$sqlAct = "SELECT * from services WHERE ID = 8";
+$resultAct = mysqli_query($res,$sqlAct) or die ("Unable to load page Act!");
+
+while ($row = mysqli_fetch_array($resultAct)) {
+
+	$titleAct=$row['title'];
+	$subtitleAct=$row['subtitle'];
+	$contentAct=$row['content'];
+}
+
+?>
+
 <?php include 'header.php'; ?>
 <div class="content">
 <div class="subpage rc">
 	<div class="wrapper">
-		<h1>Realitní činnost</h1>
-		<p class="subtitle">Společnost PBL Migliori Futuro s.r.o. se primárně zaměřuje na dotační programy Ministerstva životního prostředí a Ministerstva průmyslu a obchodu (CzechInvest), společně s nimi nabízíme podpůrné služby které jsou nutné k získání a udržení dotací v průběhu udržitelnosti projektu. </p>
-		<p>
-			<b>Co Vám v rámci naší práce zajistíme?</b><br/>
-			 Zkontrolujme, aby byl Vaš projekt v souladu s cíli příslušného dotačního programu. Pokud nebude, zjistíme možnosti jiného čerpání. Pokud bude Váš projekt v souladu s výzvou, tak pro Vás zajistíme veškerou komunikaci s poskytovatelem dotace včetně podání projektu, které probíhá v systému MS2014+. Za podnikatele podáme tzv. Celkovou žádost o poskytnutí dotace, která v sobě kombinuje ekonomické ukazatele žadatele (např. finanční výkazy), podnikatelský záměr a další povinné i nepovinné přílohy. Velmi důležité pro podání žádosti je načasování práce na projektu. Kompletní žádost by měla být podána nejpozději do 2 týdnů od zahájení příjmu projektů, poté totiž může být výzva kvůli překročení dostupné finanční alokace předčasně uzavřena. Po skončení celého projektu či po ukončení jeho etapy za Vás podáme tzv. Žádost o platbu, která je nutná k vyplacení dotace, to probíhá ex post (zpětně). Na naši podporu se můžete spolehnout i v průbehu udržitelnosti projektu, která je min. 5let, kdy poskytovatel dotace sleduje stav projektu prostřednictvím tzv. Monitorovacích zpráv. Tyto zprávy pravidelně předkládáte v systému MS2014+.
-		</p>
-		
-			
+		<h1><?php echo $titleAct; ?></h1>
+		<p class="subtitle"><?php echo $subtitleAct; ?></p>
+		<?php echo $contentAct; ?>
 	</div>
 </div>
 <div id="reference" class="subpage">
 <div class="wrapper">
 		<h1>Reference</h1>
 
-		<div class="ref rc">
+			<?php getReferences('activities'); ?>
+		<!-- <div class="ref rc">
 			<div class="ref-icon"></div>
 			<h3>Lorem ipsum dolor sit</h3>
 			<p class="sub">
@@ -45,8 +58,8 @@
 			<h4>Výše investice</h4>
 			<p class="sub">1.000.000 CZK</p>
 			<h4>Klient</h4>
-			<p class="sub">Janik Mrkva</p>
-		</div>
+			<p class="sub">Janik Mrkva</p>-->
+		</div> 
 </div>
 </div>
 <?php include 'footer.php'; ?>
