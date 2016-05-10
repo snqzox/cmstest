@@ -18,7 +18,7 @@ function connect(){
 
    return $data;
 }
-
+   
 function close_connection($connection, $resultSet){
 	mysqli_free_result($resultSet);
 	mysqli_close($connection);
