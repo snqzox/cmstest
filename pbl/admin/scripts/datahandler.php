@@ -651,7 +651,7 @@ function fileupload($article_id, $parentID, $uploadTimeFile){
                       		strcmp($extension, ".png") == 0 || 
                      	  	strcmp($extension, ".gif") == 0){
 
-                      	$thumbName = createThumb($name,$extension,$uploadImage,'200','160');
+                      	$thumbName = createThumb($name,$extension,$uploadImage,'100','100');
 
                       }
 
