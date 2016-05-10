@@ -11,10 +11,11 @@ function connect(){
 }
 
  function test_input($data) {
+ 
    $data = trim($data);
+   $data = str_replace(array("\\r","\\n"),"<br>",$data);
    $data = stripslashes($data);
-   //$data = htmlspecialchars($data);
-   $data = str_replace(array("\r","\n"),"",$data);
+
    return $data;
 }
 
