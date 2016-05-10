@@ -13,12 +13,12 @@ function connect(){
  function test_input($data) {
  
    $data = trim($data);
-   $data = str_replace(array("\\r","\\n"),"<br>",$data);
+   $data = str_replace(array("\\r","\\n"),"",$data);
    $data = stripslashes($data);
 
    return $data;
 }
-
+   
 function close_connection($connection, $resultSet){
 	mysqli_free_result($resultSet);
 	mysqli_close($connection);
