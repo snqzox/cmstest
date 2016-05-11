@@ -22,9 +22,11 @@ while ($row = mysqli_fetch_array($resultGrants)) {
 	<div class="wrapper">
 		<h1><?php echo $titleGrants; ?></h1>
 		<p class="subtitle"><?php echo $subtitleGrants; ?></p>
-		<p class="wysiwyg">
+		<div class="wysiwyg">
+		<p>
 			<?php echo $contentGrants; ?>
 		</p>
+		</div>
 		<div class="ref-btns">
 			<h3 class="dark">Lorem ipsum dolor sit</h3>
 			<a href="granty-a-dotace-OPZP.php" class="btn ghost reference-granty">
