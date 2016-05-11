@@ -24,7 +24,6 @@ if (isset($_POST['submit'])){
 
 	}
 
-	echo '<br>SUBMIT IS SET';	
 	unset($_POST['submit']);
 
 }

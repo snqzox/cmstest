@@ -136,7 +136,7 @@ function getAttach($article_id){
 			<textarea class="form-ctrl" rows="10" name="content" id="content"><?php echo $content; ?></textarea>
 		</div>
 		<div class="form-group">
-			<input type="file" name="files[]" id="fileToUpload" multiple=""/>		
+			<input type="file" name="files[]" id="fileToUploadStudios" multiple=""/>		
 		</div>
 		<?php attachSizeError(); ?>
 		<div class="form-group">
@@ -144,11 +144,11 @@ function getAttach($article_id){
 			<?php	getAttach($id); ?>
 		</table>
 		</div>
-		<button class="btn btn-submit" id="btn" data-id="about" name="submit" onclick='checkFileSize();'>Save</button>
+		<button class="btn btn-submit" id="btn" data-id="about" name="submit" onclick='checkFileType();'>Save</button>
 	  </div>
 	</form>
 
 </div>
-<script src="js/checkFileSize.js"></script>
+<script src="js/checkFileType.js"></script>
 </body>
 </html>
