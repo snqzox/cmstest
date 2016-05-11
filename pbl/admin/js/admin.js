@@ -36,11 +36,11 @@ $(document).ready(function(){
         closable: true,
         semantic: true,
         removeformatPasted: true,
-        resetCss: true,
+        resetCss: false,
         autogrow: true,
         lang: 'cs',
         btnsAdd: ['|', 'foreColor', 'backColor'],
-        btns: ['bold', 'italic', 'underline', 'formatting', '|','justifyLeft', 'justifyCenter', 'justifyRight','|', 'link', 'insertImage','|','viewHTML']
+        btns: ['bold', 'italic', 'underline', 'formatting', '|','justifyLeft', 'justifyCenter', 'justifyRight','unorderedList','orderedList','|', 'link', 'insertImage','|','viewHTML']
     });
 	
 });
