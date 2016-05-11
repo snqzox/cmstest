@@ -115,10 +115,11 @@ function getReferences(){
 	<div class="wrapper">
 		<h1><?php echo $titlePA ?></h1>
 		<p class="subtitle"><?php echo $subtitlePA ?></p>
-		<p class="wysiwyg">
+		<div class="wysiwyg small">
+		<p>
 			<?php echo $contentPA ?>
 		</p>
-
+		</div>
 	</div>
 </div>
 <div class="page" id="sluzby">
@@ -224,7 +225,7 @@ function getReferences(){
 				<b><?php echo $email;?></b>
 			</p>		
 		</div><div class="box three gf">
-			<div class="btn green big">Napište nám</div>
+			<a href="mailto:<?php echo $email;?>"><div class="btn green big">Napište nám</div></a>
 			<div class="social-icons">
 				<div class="icon facebook"></div>
 				<div class="icon linkedin"></div>

@@ -1,9 +1,9 @@
 <?//php require_once('scripts/datahandler.php');?>
 <a href="scripts/logout.php" class="logout"></a> 
 <div id="right-panel">
-	<div class="logo">
-		
-	</div>	
+	<a href="index.php">
+		<div class="logo"></div>
+	</a>
 	<ul id="menu">
 		<li><!-- 
 		 	<span>Stránky</span> -->
