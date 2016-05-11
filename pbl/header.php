@@ -53,8 +53,8 @@ while ($row = mysqli_fetch_array($resultMenu)) {
 							<a href="granty-a-dotace-OPPIK.php"><?php echo $titleService[7]; ?></a></li>
 						</ul>
 					</li><li>
-					<a href="projekcni-atelier.php"><?php echo $titleService[8];?></a></li><li>
-					<a href="realitni-cinnost.php"><?php echo $titleService[9];?></a></li><li>
+					<a href="realitni-cinnost.php"><?php echo $titleService[8];?></a></li><li>
+					<a href="projekcni-atelier.php"><?php echo $titleService[9];?></a></li><li>
 					<a href="nakladni-autodoprava.php"><?php echo $titleService[10];?></a></li>
 				</ul>
 			</li>
