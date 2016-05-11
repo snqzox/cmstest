@@ -125,6 +125,11 @@ html, body{
 		}
 	}
 	&#kontakt{
+		background-image: url('../img/bg-contact.jpg');
+		background-position: center bottom; 
+		min-height: 650px;
+		background-size: contain;
+    	background-repeat: no-repeat;
 		.subtitle{
 			margin-bottom: 60px;
 		}
@@ -259,7 +264,6 @@ html, body{
     	height: 50px;
     	&:extend(.image);
     	background-position: -150px -300px;
-
 		cursor: pointer;
 		.opacity(0.7);
 		.transition();
@@ -274,18 +278,20 @@ html, body{
     	ul{
     		margin: 0;
 
+    		& > li.submenu{
+				&:hover{
+					ul{
+						visibility: visible;
+						.opacity(1);
+					}
+				}
+			}
+
     		li{
     			display: inline-block;
     			margin: 0;
-    					list-style-type: none;
-    			&.submenu{
-					&:hover{
-						& > ul{
-							visibility: visible;
-							.opacity(1);
-						}
-					}
-				}
+    			list-style-type: none;
+    			
 				a{
 					font-size: 16px;
 					color:#666;
@@ -325,7 +331,6 @@ html, body{
 							display: inline-block;
 							position: relative;
 							border:none; 
-							visibility: visible;
 							.opacity(1);
 							li{
 								a{
@@ -337,6 +342,7 @@ html, body{
 								}
 							}
 						}
+
 						a{
 						    display: block;
 						    height: 50px;
@@ -352,6 +358,7 @@ html, body{
 	    						border-bottom: 1px solid #eee;  						
 	    					}
 						}
+						
 						&:last-child{
 							a{
 								border-bottom: 1px solid #ddd;
@@ -432,15 +439,48 @@ html, body{
 			float: right;
 		} 
 	}
+	&.granty{
+		.icon{
+			background-position:0px 0px;
+			&:hover{
+				background-position:-290px 0px;
+			}
+		}
+	}
+	&.reality{
+		.icon{
+			background-position:0px -290px;
+			&:hover{
+				background-position:-290px -290px;
+			}
+		}
+	}
+	&.atelier{
+		.icon{
+			background-position:0px -580px;
+			&:hover{
+				background-position:-290px -580px;
+			}
+		}
+	}
+	&.doprava{
+		.icon{
+			background-position:0px -870px;
+			&:hover{
+				background-position:-290px -870px;
+			}
+		}
+	}
 	.icon{
 		position: relative;
 		width:290px;
 		height: 290px;
 		cursor: pointer;
 		float:left;
+		background-image: url('../img/services.jpg');
+		background-size: 580px 1160px;
+		background-repeat: no-repeat;
 
-		background: #ddd;
-		.transition();
 		&:before, &:after{
 			&:extend(.image);
 			width: 100px;
@@ -466,7 +506,6 @@ html, body{
 			content: 'Zobrazit více';
 		}	
 		&:hover{
-			background-color: @lightGreen;
 			&:before{
 				visibility: hidden;
 				.opacity(0);
@@ -474,9 +513,9 @@ html, body{
 			&:after{
 				visibility: visible;
 				.opacity(1);
-			}
+			}			
 		}
-		}	
+	}	
 	
 	&.granty .icon{
 		&:before{ 
@@ -691,7 +730,13 @@ h4{
 	background-repeat: no-repeat;
 	background-size: 400px 400px; 
 }
-
+.logo-bw{
+	&:extend(.image);
+	width: 100px;
+	height: 40px;
+	float:right;
+	background-position: 0 -50px;
+}
 div.wysiwyg{
 	&.small{
 		max-width: 730px;

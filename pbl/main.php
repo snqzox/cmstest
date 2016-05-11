@@ -83,12 +83,12 @@ function getReferences(){
 		    			$class = 'ref pa';
 		    	}
 
-		  echo '<a href="#"><div class="'.$class.'">
+		  echo '<div class="'.$class.'">
 	      <div class="ref-icon"></div>
 		  <h3>'. $titleRef . '</h3>
 		  <p class="sub">
 		  '. $contentRef . '</p>
-		  </div></a>';
+		  </div>';
 		  $j++;
 		
 		  if ($j==6) {
@@ -119,6 +119,7 @@ function getReferences(){
 		<p>
 			<?php echo $contentPA ?>
 		</p>
+		<div class="logo-bw"></div>
 		</div>
 	</div>
 </div>
