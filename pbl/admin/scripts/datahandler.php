@@ -137,7 +137,9 @@ switch($page_name){
                $stmt->execute();
                $result = $stmt->get_result();
                fileupload('article','article_id', $uploadTime);
-               header('Location: ' . HOST . 'page-articles.php');         
+               $maxid = getMaxObjectID('articles');
+
+               header('Location: ' . HOST . 'article-detail.php?edit='.$maxid.'');         
                  
              }
    
@@ -227,7 +229,7 @@ switch($page_name){
              $stmt->bind_param('sssi', $title, $subtitle, $content,$id);
              $stmt->execute();
              $result = $stmt->get_result();
-             header('Location: ' . HOST . 'page-services.php');
+             header('Location: ' . HOST . 'service-detail.php?edit='. $id . '');
 
         
            }  
@@ -303,7 +305,7 @@ switch($page_name){
               $stmt -> execute();
               $result = $stmt -> get_result();
 
-              header('Location: ' . HOST . 'page-references.php');
+              header('Location: ' . HOST . 'reference-detail-subsidies.php?edit=' . $id . '');
               
           }
 
@@ -313,9 +315,8 @@ switch($page_name){
                 $stmt -> bind_param('sssssss',$title, $subject, $client, $price, $content, $page_name, $uploadTime) or die ('Unable to load data reference');
                 $stmt -> execute();
                 $result = $stmt -> get_result();
-
-                header('Location: ' . HOST . 'page-references.php');
-               
+                $maxid4 = getMaxObjectID('subsidies');
+                header('Location: ' . HOST . 'reference-detail-subsidies.php?edit=' . $maxid4 .'');              
               
                }
                 
@@ -363,7 +364,7 @@ switch($page_name){
             $stmt -> execute();
             $result = $stmt -> get_result(); 
 
-            header('Location: ' . HOST . 'page-references.php');
+            header('Location: ' . HOST . 'reference-detail-activities.php?edit=' . $id . '');
           
          }
 
@@ -383,8 +384,8 @@ switch($page_name){
                     $stmt -> bind_param('ssssss', $title, $client,$investition, $content, $page_name, $uploadTime);
                     $stmt -> execute();
                     $result = $stmt -> get_result(); 
-
-                    header('Location: ' . HOST . 'page-references.php');
+                    $maxid3 = getMaxObjectID('activities');
+                    header('Location: ' . HOST . 'reference-detail-activities.php?edit=' . $maxid3 .'');
                     
 
                  }   
@@ -443,7 +444,8 @@ switch($page_name){
                  $stmt -> execute();
                  $result = $stmt -> get_result(); 
                  fileupload('studio','studio_id', $uploadTime);
-                 header('Location: ' . HOST . 'page-references.php');
+                 $maxid2 = getMaxObjectID('studios');
+                 header('Location: ' . HOST . 'reference-detail-studios.php?edit='. $maxid2 .'');
 
              }
 

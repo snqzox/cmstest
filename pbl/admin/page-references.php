@@ -19,7 +19,7 @@ function getRefsTable($table_name){
 			  <td align="right"><a class="button small blue" href="' . HOST . 'reference-detail-'.$table_name.'.php?edit='. $id .'">Upravit</a> <a class="button small red" href=' . HOST . 'page-references.php?del'.$table_name.'='. $id .'>Odstranit</a></td>
 	         </tr>';
 		 }
-	}
+}
 
 
 $delsubsidies = isset($_GET['delsubsidies']) ? $_GET['delsubsidies'] : 'undefined';
@@ -32,22 +32,22 @@ if ($delsubsidies != 'undefined'){
 	$result = data_handler("subsidies","delete",$delsubsidies,'');
 	unset($_GET['delsubsidies']);
 
-} else if ($delstudios != 'undefined'){
+	} else if ($delstudios != 'undefined'){
 
-	$result = data_handler("studios","delete",$delstudios,'');
-	unset($_GET['delstudios']);
+		$result = data_handler("studios","delete",$delstudios,'');
+		unset($_GET['delstudios']);
 
-}else if ($delactivities != 'undefined'){
+	}else if ($delactivities != 'undefined'){
 
-	$result = data_handler("activities","delete",$delactivities,'');
-	unset($_GET['delactivities']);
+		$result = data_handler("activities","delete",$delactivities,'');
+		unset($_GET['delactivities']);
 
-} else if ($deldefaultrefs != 'defaultrefs'){
+	} else if ($deldefaultrefs != 'defaultrefs'){
 
-	$result = data_handler("defaultrefs","delete",$deldefaultrefs,'');
-	unset($_GET['defaultrefs']);
+		$result = data_handler("defaultrefs","delete",$deldefaultrefs,'');
+		unset($_GET['defaultrefs']);
 
-}
+	}
 
 if (isset($_POST['submit'])){
 
@@ -61,9 +61,21 @@ if (isset($_POST['submit'])){
 	else {
 		
 		require_once('scripts/datahandler.php');
-		
+		$res = connect();
+
 		$name="page_references";
 		$action="select";
+
+		$sqlServices = "SELECT * FROM services WHERE ID = 5 OR ID = 8 OR ID=9 ORDER BY ID";
+        $resultServices=mysqli_query($res, $sqlServices) or die ("Unable to name of services!");
+
+        $k = 0;
+        
+        while ($row = mysqli_fetch_array($resultServices)) {
+           
+            $serviceName[$k] = $row['title'];
+        	$k++;
+        }
 
 		$result_select = data_handler($name,$action,5,''); 
 		$checkedResult = checkResult($result_select);
@@ -74,6 +86,8 @@ if (isset($_POST['submit'])){
             $subtitle = $row['subtitle']; 
               
 	    }
+
+
 	}
 
 ?>
@@ -107,7 +121,7 @@ if (isset($_POST['submit'])){
 	<table>
 		<tr class="no-hover">
 			<td colspan="3">
-				<h2>Granty a dotace</h2>
+				<h2><?php echo $serviceName[0]; ?></h2>
 			</td>
 		</tr>
 		<?php  getRefsTable('subsidies'); ?>		
@@ -120,7 +134,7 @@ if (isset($_POST['submit'])){
 
 		<tr class="no-hover">
 			<td colspan="3">
-				<h2>Projekční ateliér</h2>
+				<h2><?php echo $serviceName[1]; ?></h2>
 			</td>
 		</tr>
 		<?php  getRefsTable('studios'); ?>		
@@ -133,7 +147,7 @@ if (isset($_POST['submit'])){
 
 		<tr class="no-hover">
 			<td colspan="3">
-				<h2>Realitní činnost</h2>
+				<h2><?php echo $serviceName[2]; ?></h2>
 			</td>
 		</tr>
 		<?php  getRefsTable('activities'); ?>		
