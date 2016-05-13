@@ -1,0 +1,93 @@
+<?php 
+require_once('scripts/datahandler.php');
+//require('scripts/config.php'); 
+$add = isset($_GET['add']) ? $_GET['add'] : '';
+$id = isset($_GET['edit']) ? $_GET['edit'] : '';
+
+$name="activities";
+
+if (isset($_POST['submit'])){
+
+$_SESSION['saved'] = $datasaved;
+	
+	if ($add != ''){
+
+	$action="create";
+	data_handler($name,$action,'',''); 
+	exit();
+	} else {
+
+	$action="update";
+	data_handler($name,$action,'',''); 
+	exit();
+	}
+}
+	else {
+		if ($add != ''){
+
+			$title='';
+			$investition='';
+			$client='';
+			$content='';
+
+		
+		} else {
+
+			$action="select";
+			$result_select = data_handler($name,$action,$id,''); 
+			$checkedResult = checkResult($result_select);
+			
+			while($row = mysqli_fetch_array($checkedResult)){ 
+	            
+	            $id = $row['ID']; 
+	            $title = $row['title']; 
+	            $investition = $row['investition']; 
+	            $client = $row['client']; 
+				$content = $row['content']; 
+
+            }
+	}
+	}
+
+
+?>
+
+
+<!DOCTYPE html>
+<html>
+<?php include 'meta.php'; ?>
+<body>	
+<?php include 'navigation.php'; ?>
+<div id="content">
+
+	<h1>upravit/pridat referenciu k Realitní činnosti</h1>
+	<?php
+		if(!empty($_SESSION['saved'])) { echo $_SESSION['saved']; }
+		$_SESSION['saved']='';
+	 ?>
+	<form method="POST" action="">
+	   	<div class="form-basic">
+			<div class="form-group">
+				<label>Titulek:</label>
+				<input type="text" class="form-ctrl title" <?php echo 'value="'.$title.'"'; ?> name="title" id="title">
+				<input type="hidden" name="id" <?php echo 'value="'.$id.'"'; ?> >
+			</div>
+			<div class="form-group">
+				<label>Klient:</label>
+				<input type="text" class="form-ctrl" name="client" <?php echo 'value="'.$client.'"'; ?> id="client">
+			</div>
+			<div class="form-group">
+				<label>Investicia:</label>
+				<input type="text" class="form-ctrl" name="investition" <?php echo 'value="'.$investition.'"'; ?> id="investition">
+			</div>
+			<div class="form-group">
+				<label>Obsah:</label>
+				<textarea class="form-ctrl" rows="10" name="content" id="content"><?php echo $content; ?></textarea>
+			</div>
+			<button class="btn btn-submit" id="btn" name="submit" data-id="about">Save</button>
+		  </div>
+	</form>
+
+</div>
+</body>
+</html>
